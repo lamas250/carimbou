@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Filtro para criar a borda irregular -->
+  <defs>
+    <filter id="distort" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- Círculo externo com borda irregular (selo de cera) -->
+  <circle cx="100" cy="100" r="80" fill="#E63946" filter="url(#distort)"/>
+
+  <!-- Círculo interno liso -->
+  <circle cx="100" cy="100" r="70" fill="#E63946"/>
+
+  <!-- Letra C no centro -->
+  <text x="100" y="120" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="#FFFFFF" text-anchor="middle">C</text>
+</svg>

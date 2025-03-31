@@ -9,6 +9,7 @@ import { useSession } from "@/lib/auth-client";
 import { UserMenu } from "./user-menu";
 import { User } from "@prisma/client";
 import { Session } from "better-auth";
+import Image from "next/image";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Header = ({ user }: { user: any }) => {
@@ -35,13 +36,16 @@ const Header = ({ user }: { user: any }) => {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link
-          href="/"
-          className="text-xl font-semibold tracking-tight transition-all duration-300"
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          Carimbou
-        </Link>
+        <div className="flex flex-row items-center">
+          <Image src="/logo-icone.png" alt="logo" width={50} height={50} />
+          <Link
+            href="/"
+            className="text-xl font-semibold tracking-tight transition-all duration-300"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Carimbou
+          </Link>
+        </div>
 
         {/* Desktop Navigation */}
         {user ? (
