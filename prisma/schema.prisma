@@ -1,0 +1,155 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id
+  name           String
+  email          String
+  emailVerified  Boolean
+  image          String?
+  createdAt      DateTime
+  updatedAt      DateTime
+  sessions       Session[]
+  accounts       Account[]
+  isAnonymous    Boolean?
+  companyUsers   CompanyUser[]
+  userPromotions UserPromotion[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+model Company {
+  id           String        @id @default(cuid()) @map("id")
+  name         String
+  description  String?
+  logoUrl      String?
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+  companyUsers CompanyUser[]
+  promotions   Promotion[]
+
+  @@map("company")
+}
+
+model CompanyUser {
+  id        String  @id @default(cuid()) @map("id")
+  companyId String
+  userId    String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("company_user")
+}
+
+model Promotion {
+  id             String          @id @default(cuid()) @map("id")
+  name           String
+  description    String?
+  imageUrl       String?
+  requiredStamps Int
+  reward         String?
+  isActive       Boolean         @default(true)
+  isArchived     Boolean         @default(false)
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  cardDuration   Int?
+  endDate        DateTime?
+  companyId      String
+  company        Company         @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  userPromotions UserPromotion[]
+  stamps         Stamp[]
+  @@map("promotion")
+}
+
+model UserPromotion {
+  id          String    @id @default(cuid()) @map("id")
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  promotionId String
+  promotion   Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
+  isCompleted Boolean
+  isClaimed   Boolean
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  stamps      Stamp[]
+
+  @@map("user_promotion")
+}
+
+enum StampStatus {
+  PENDING
+  EXPIRED
+  CLAIMED
+}
+
+model Stamp {
+  id              String        @id @default(cuid()) @map("id")
+  promotionId     String
+  promotion       Promotion     @relation(fields: [promotionId], references: [id], onDelete: Cascade)
+  status          StampStatus
+  expiresAt       DateTime?
+  userPromotionId String?
+  userPromotion   UserPromotion? @relation(fields: [userPromotionId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  @@map("stamp")
+}
