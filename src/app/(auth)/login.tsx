@@ -26,7 +26,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
           <CircleIcon className="h-12 w-12 text-orange-500" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          {mode === "signin" ? "Sign in to your account" : "Create your account"}
+          {mode === "signin" ? "Entrar na sua conta" : "Criar sua conta"}
         </h2>
       </div>
 
@@ -35,7 +35,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
           {mode === "signup" && (
             <div>
               <Label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Name
+                Nome
               </Label>
               <div className="mt-1">
                 <Input
@@ -47,8 +47,8 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                   value={name}
                   required
                   maxLength={50}
-                  className="appearance-none rounded-full relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
-                  placeholder="Enter your name"
+                  className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                  placeholder="Digite seu nome"
                 />
               </div>
             </div>
@@ -67,8 +67,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                 autoComplete="email"
                 required
                 maxLength={50}
-                className="appearance-none rounded-full relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your email"
+                placeholder="Digite seu email"
               />
             </div>
           </div>
@@ -76,10 +75,10 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
           <div>
             <div className="flex items-center justify-between">
               <Label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
+                Senha
               </Label>
               <Link href="/forgot-password" className="text-xs underline">
-                forgot password?
+                Esqueceu sua senha?
               </Link>
             </div>
             <div className="mt-1">
@@ -93,8 +92,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                 required
                 minLength={8}
                 maxLength={100}
-                className="appearance-none rounded-full relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your password"
+                placeholder="Digite sua senha"
               />
             </div>
           </div>
@@ -104,7 +102,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
           <div>
             <Button
               type="submit"
-              className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-sm shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               disabled={isPending}
               onClick={async () => {
                 if (mode === "signin") {
@@ -132,23 +130,24 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
               {isPending ? (
                 <>
                   <Loader2 className="animate-spin mr-2 h-4 w-4" />
-                  Loading...
+                  Carregando...
                 </>
               ) : mode === "signin" ? (
-                "Sign in"
+                "Entrar"
               ) : (
-                "Sign up"
+                "Criar conta"
               )}
             </Button>
 
-            <Button
+            {/* <Button
               onClick={async () => {
                 await signIn.social({
                   provider: "google",
                   callbackURL: "/dashboard",
                 });
               }}
-              className="w-full mt-2 flex justify-center items-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white gap-2"
+              disabled={isPending}
+              className="w-full mt-2 flex justify-center items-center py-2 px-4 border border-transparent rounded-sm shadow-sm text-sm font-medium text-white gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +161,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                 ></path>
               </svg>
               Continue with Google
-            </Button>
+            </Button> */}
           </div>
         </div>
 
@@ -173,7 +172,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-gray-50 text-gray-500">
-                {mode === "signin" ? "New to our platform?" : "Already have an account?"}
+                {mode === "signin" ? "Novo por aqui?" : "Já tem uma conta?"}
               </span>
             </div>
           </div>
@@ -183,9 +182,9 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
               href={`${mode === "signin" ? "/sign-up" : "/sign-in"}${
                 redirect ? `?redirect=${redirect}` : ""
               }${priceId ? `&priceId=${priceId}` : ""}`}
-              className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-sm shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             >
-              {mode === "signin" ? "Create an account" : "Sign in to existing account"}
+              {mode === "signin" ? "Criar conta" : "Entrar"}
             </Link>
           </div>
         </div>

@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+
 interface NavbarProps {
   user?: {
     name?: string;
@@ -38,14 +40,14 @@ export function UserMenu({ user }: NavbarProps) {
       .toUpperCase();
   };
 
-  const handleLogout = () => {
-    signOut({
+  const handleLogout = async () => {
+    await signOut({
       fetchOptions: {
         onError: (error) => {
           console.error("Error logging out", error);
         },
         onSuccess: () => {
-          router.push("/");
+          redirect("/");
         },
       },
     });
@@ -77,12 +79,12 @@ export function UserMenu({ user }: NavbarProps) {
             <DropdownMenuItem asChild>
               <Link href="/settings" className="flex w-full cursor-pointer items-center">
                 <Settings className="mr-2 h-4 w-4" />
-                <span>Settings</span>
+                <span>Configurações</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
-              <span>Logout</span>
+              <span>Sair</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

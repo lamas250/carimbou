@@ -42,20 +42,20 @@ export default function Component() {
       <main className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
         <Card className="w-[350px]">
           <CardHeader>
-            <CardTitle>Check your email</CardTitle>
-            <CardDescription>We&apos;ve sent a password reset link to your email.</CardDescription>
+            <CardTitle>Verifique seu email</CardTitle>
+            <CardDescription>
+              Enviamos um link de redefinição de senha para seu email.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Alert>
               <CheckCircle2 className="h-4 w-4" />
-              <AlertDescription>
-                If you don&apos;t see the email, check your spam folder.
-              </AlertDescription>
+              <AlertDescription>Se não ver o email, verifique sua pasta de spam.</AlertDescription>
             </Alert>
           </CardContent>
           <CardFooter>
             <Button variant="outline" className="w-full" onClick={() => setIsSubmitted(false)}>
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to reset password
+              <ArrowLeft className="mr-2 h-4 w-4" /> Voltar para redefinição de senha
             </Button>
           </CardFooter>
         </Card>
@@ -70,7 +70,7 @@ export default function Component() {
           <CircleIcon className="h-12 w-12 text-orange-500" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Forgot your password?
+          Esqueceu sua senha?
         </h2>
       </div>
       {/* Radial gradient for the container to give a faded look */}
@@ -84,11 +84,11 @@ export default function Component() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Digite seu email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="rounded-full"
+                  className="rounded-sm"
                 />
               </div>
             </div>
@@ -98,15 +98,15 @@ export default function Component() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            <Button className="w-full mt-4 rounded-full" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Sending..." : "Send reset link"}
+            <Button className="w-full mt-4 rounded-sm" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Enviando..." : "Enviar link de redefinição"}
             </Button>
           </form>
         </CardContent>
         <CardFooter className="flex justify-center">
           <Link href="/sign-in">
             <Button variant="link" className="px-0">
-              Back to sign in
+              Voltar para o login
             </Button>
           </Link>
         </CardFooter>

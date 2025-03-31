@@ -109,10 +109,10 @@ const RestaurantLogin = () => {
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
             <div>
               <h1 className="text-3xl font-bold">{restaurantName}</h1>
-              <p className="text-muted-foreground">Restaurant Dashboard</p>
+              <p className="text-muted-foreground">Painel de Controle</p>
             </div>
             <Button variant="outline" onClick={handleLogout}>
-              Logout
+              Sair
             </Button>
           </div>
 

@@ -158,9 +158,10 @@ const LandingPage = () => {
       <section className="py-16">
         <div className="container px-4 mx-auto">
           <div className="glass-card max-w-3xl mx-auto p-8 md:p-12 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Pronto para ir digital?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Pronto para o digital?</h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Comece a coletar carimbos digitais hoje e simplifique seu programa de fidelidade.
+              Comece a digitalizar os carimbos de seu cartão de fidelidade hoje e simplifique seu
+              programa de retenção de clientes.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" asChild>
