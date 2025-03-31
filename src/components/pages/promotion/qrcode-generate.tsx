@@ -55,8 +55,16 @@ export function QrCodeGenerator({ promotionId }: QrCodeGeneratorProps) {
     toast.success("ID do QR Code copiado para a área de transferência");
   };
 
-  const handleGenerateNew = () => {
-    setShowResultDialog(false);
+  const handleGenerateNew = async () => {
+    setIsGenerating(true);
+
+    const { stamp, url } = await createStamp(promotionId);
+    const qrImage = await generateQR(url);
+
+    setQrId(stamp.id);
+    setQrImage(qrImage || "");
+    setIsGenerating(false);
+    setShowResultDialog(true);
   };
 
   return (
