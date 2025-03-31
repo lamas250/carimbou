@@ -38,20 +38,20 @@ const LandingPage = () => {
               }`}
             >
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
-                Digital Loyalty Card
+                Cartão de Fidelidade Digital
                 <br />
-                <span className="text-primary">Simple and Elegant</span>
+                <span className="text-primary">Simples e Elegante</span>
               </h1>
               <p className="text-lg text-muted-foreground mb-8">
-                Transforming traditional restaurant loyalty cards into a seamless digital
-                experience. Collect 10 stamps and earn a free meal.
+                Transformando cartões de fidelidade tradicionais em uma experiência digital
+                perfeita. Colete 10 carimbos e ganhe uma refeição grátis.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild>
-                  <Link href="/card">My Loyalty Card</Link>
+                  <Link href="/card">Meus Cartões</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link href="/restaurant">Restaurant Login</Link>
+                  <Link href="/restaurant">Login</Link>
                 </Button>
               </div>
             </div>
@@ -64,8 +64,8 @@ const LandingPage = () => {
               <div className="loyalty-card aspect-[4/3] mx-auto max-w-md">
                 <div className="space-y-2">
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-semibold text-lg">Loyalty Card</h3>
-                    <span className="text-sm text-muted-foreground">3/10 meals</span>
+                    <h3 className="font-semibold text-lg">Cartão de Fidelidade</h3>
+                    <span className="text-sm text-muted-foreground">3/10 carimbos</span>
                   </div>
 
                   {/* Preview stamps */}
@@ -98,28 +98,28 @@ const LandingPage = () => {
               loaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
-            How It Works
+            Como funciona
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 icon: <User className="h-8 w-8" />,
-                title: "Customer Experience",
+                title: "Experiência do Cliente",
                 description:
-                  "Open the app, show your QR code to the restaurant, and collect your digital stamp.",
+                  "Comtabilize os carimbos de seu cartão de fidelidade digital e resgate sua refeição grátis.",
               },
               {
                 icon: <QrCode className="h-8 w-8" />,
-                title: "Restaurant Approval",
+                title: "Aprovado pelo colaborador",
                 description:
-                  "Restaurant scans customer QR code, or enters a PIN code to authorize a new stamp.",
+                  "O colaborador gera um QR code para cada cliente, que é escaneado pelo cliente para coletar o carimbo.",
               },
               {
                 icon: <CalendarCheck className="h-8 w-8" />,
-                title: "Claim Your Reward",
+                title: "Resgate sua recompensa",
                 description:
-                  "After collecting 10 stamps, redeem your free meal directly through the app.",
+                  "Depois de coletar o número necessário de carimbos, resgate sua recompensa.",
               },
             ].map((feature, index) => (
               <div
@@ -148,7 +148,7 @@ const LandingPage = () => {
               }`}
               style={{ transitionDelay: "900ms" }}
             >
-              Try a Demo
+              Experimente
             </Button>
           </div>
         </div>
@@ -158,16 +158,16 @@ const LandingPage = () => {
       <section className="py-16">
         <div className="container px-4 mx-auto">
           <div className="glass-card max-w-3xl mx-auto p-8 md:p-12 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Go Digital?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Pronto para ir digital?</h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Start collecting digital stamps today and simplify your loyalty program.
+              Comece a coletar carimbos digitais hoje e simplifique seu programa de fidelidade.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" asChild>
-                <Link href="/card">Get Started</Link>
+                <Link href="/card">Começar</Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <Link href="/restaurant">Restaurant Login</Link>
+                <Link href="/restaurant">Login</Link>
               </Button>
             </div>
           </div>
