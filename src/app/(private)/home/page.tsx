@@ -16,37 +16,7 @@ export default async function HomePage() {
       title="Meus Cartões de Fidelidade"
       description="Acompanhe seus progressos e resgate suas recompensas"
     >
-      <Tabs defaultValue="cards" className="w-full">
-        <div className="flex justify-center">
-          <TabsList className="mb-6 text-primary-foreground">
-            <TabsTrigger value="cards">Meus Cartões</TabsTrigger>
-            <TabsTrigger value="redemptions">Meus Resgates</TabsTrigger>
-            <TabsTrigger value="rewards">Expirados</TabsTrigger>
-          </TabsList>
-        </div>
-
-        <TabsContent value="cards" className="mt-0">
-          <LoyaltyCardsTab userPromotions={userPromotions} />
-        </TabsContent>
-
-        <TabsContent value="redemptions" className="mt-0">
-          <div className="rounded-lg border border-dashed border-gray-300 bg-white text-center">
-            <h3 className="text-lg font-medium text-gray-700">Nenhum resgate disponível</h3>
-            <p className="mt-2 text-gray-500">
-              Complete seus cartões de fidelidade para resgatar recompensas
-            </p>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="rewards" className="mt-0">
-          <div className="rounded-lg border border-dashed border-gray-300 bg-white text-center">
-            <h3 className="text-lg font-medium text-gray-700">Nenhum resgate disponível</h3>
-            <p className="mt-2 text-gray-500">
-              Complete seus cartões de fidelidade para resgatar recompensas
-            </p>
-          </div>
-        </TabsContent>
-      </Tabs>
+      <LoyaltyCardsTab userPromotions={userPromotions} />
     </Container>
   );
 }

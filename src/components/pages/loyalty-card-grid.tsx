@@ -24,8 +24,15 @@ import { UserPromotionWithStamps } from "@/features/user/actions/get-my-cards";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-export function LoyaltyCardGrid({ userPromotions }: { userPromotions: UserPromotionWithStamps[] }) {
-  const [searchQuery, setSearchQuery] = useState("");
+export function LoyaltyCardGrid({
+  userPromotions,
+  searchQuery,
+  setSearchQuery,
+}: {
+  userPromotions: UserPromotionWithStamps[];
+  searchQuery: string;
+  setSearchQuery: (searchQuery: string) => void;
+}) {
   const [activeTab, setActiveTab] = useState("todos");
   const [cards, setCards] = useState<UserPromotionWithStamps[]>(userPromotions);
 
@@ -42,31 +49,6 @@ export function LoyaltyCardGrid({ userPromotions }: { userPromotions: UserPromot
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-row flex-wrap justify-end items-center gap-4">
-        {/* <Tabs defaultValue="todos" className="" onValueChange={setActiveTab}>
-          <div className="flex justify-center">
-            <TabsList className="mb-4">
-              <TabsTrigger value="todos">Todos</TabsTrigger>
-              <TabsTrigger value="cafeterias">Cafeterias</TabsTrigger>
-              <TabsTrigger value="restaurantes">Restaurantes</TabsTrigger>
-              <TabsTrigger value="lojas">Lojas</TabsTrigger>
-            </TabsList>
-          </div>
-        </Tabs> */}
-        <div className="mb-4 relative">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
-            <Input
-              type="text"
-              placeholder="Buscar cartão por nome..."
-              className="pl-10"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-        </div>
-      </div>
-
       {cards.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => (
@@ -113,7 +95,13 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
       <CardHeader className="bg-white pb-2 border-b">
         <div className="flex items-center gap-3">
           {card.company.logoUrl && (
-            <Image src={card.company.logoUrl} alt={card.company.name} width={32} height={32} />
+            <Image
+              src={card.company.logoUrl}
+              alt={card.company.name}
+              width={40}
+              height={40}
+              className="rounded-sm"
+            />
           )}
           <div>
             <h3 className="font-semibold text-gray-800">{card.promotion.name}</h3>
