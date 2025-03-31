@@ -117,7 +117,7 @@ export function CalimStamp({ stampData }: CalimStampProps) {
               <Image
                 src={stampData.promotion.imageUrl || stampData.promotion.company.logoUrl || ""}
                 alt={stampData.promotion.name}
-                className="rounded-sm border-4 border-background shadow-md"
+                className="rounded-sm shadow-md"
                 width={80}
                 height={80}
               />

@@ -25,7 +25,7 @@ const CompanyPage = ({
 
   return (
     <div className="min-h-screen pb-16">
-      <div className="py-8 sm:py-12">
+      <div className="py-2 sm:py-4">
         <>
           {/* <CompanyDetails company={selectedCompany} onUpdate={handleUpdateCompany} /> */}
 

@@ -3,12 +3,13 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { Company, Promotion, UserPromotion } from "@prisma/client";
+import { Company, Promotion, UserPromotion, Stamp } from "@prisma/client";
 
 export type UserPromotionWithStamps = UserPromotion & {
   stamps: number;
   company: Company;
   promotion: Promotion;
+  history: Stamp[];
 };
 
 export async function getMyCards(): Promise<UserPromotionWithStamps[]> {

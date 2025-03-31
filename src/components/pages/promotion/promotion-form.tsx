@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,6 +19,10 @@ import {
   FormLabel,
   FormField,
 } from "@/components/ui/form";
+import Image from "next/image";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { ImageIcon } from "lucide-react";
+import { uploadImage } from "@/actions/upload-image";
 
 type PromotionFormProps = {
   company: CompanyType;
@@ -28,6 +32,7 @@ type PromotionFormProps = {
 const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
   const { addPromotion } = usePromotionStore();
   const [isPending, setIsPending] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof createPromotionSchema>>({
     resolver: zodResolver(createPromotionSchema),
@@ -37,6 +42,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
       description: "",
       requiredStamps: "0",
       reward: "",
+      image: undefined,
     },
   });
   const { handleSubmit } = form;
@@ -47,7 +53,19 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
     setIsPending(true);
 
     try {
-      const result = await createPromotion(promotion);
+      let imageUrl = null;
+      if (promotion.image && promotion.image instanceof File) {
+        const url = await uploadImage(promotion.image, {
+          name: promotion.name,
+        });
+        imageUrl = url;
+      }
+      const { image, ...data } = promotion;
+
+      const result = await createPromotion({
+        ...data,
+        imageUrl: imageUrl ?? undefined,
+      });
       addPromotion(result);
 
       toast.success("Promoção adicionada com sucesso", {
@@ -63,6 +81,13 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
       form.reset();
       onCancel?.();
       setIsPending(false);
+    }
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      form.setValue("image", file);
     }
   };
 
@@ -140,6 +165,64 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
                 O que os clientes receberão após completar o cartão
               </p>
             </div>
+          </div>
+
+          <div className="space-y-2">
+            <FormField
+              control={form.control}
+              name="image"
+              render={({ field }) => (
+                <div className="flex flex-col gap-y-2 mt-4">
+                  <div className="flex items-center gap-x-5">
+                    {field.value ? (
+                      <div className="size-[72px] relative rounded-md overflow-hidden">
+                        <Image
+                          src={
+                            field.value instanceof File
+                              ? URL.createObjectURL(field.value)
+                              : field.value
+                          }
+                          alt="Workspace image"
+                          className="object-cover"
+                          width={72}
+                          height={72}
+                        />
+                      </div>
+                    ) : (
+                      <Avatar className="size-[72px]">
+                        <AvatarFallback>
+                          <ImageIcon className="size-[36px] text-neutral-400" />
+                        </AvatarFallback>
+                      </Avatar>
+                    )}
+                    <div className="flex flex-col">
+                      <p className="text-sm font-medium">Logo da empresa</p>
+                      <p className="text-xs text-muted-foreground">
+                        JPG, PNG, SVG or JPEG, max 2mb
+                      </p>
+                      <input
+                        type="file"
+                        accept=".jpg, .png, .svg, .jpeg"
+                        className="hidden"
+                        onChange={handleImageChange}
+                        ref={inputRef}
+                        // disabled={isPending}
+                      />
+                      <Button
+                        variant="outline"
+                        onClick={() => inputRef.current?.click()}
+                        // disabled={isPending}
+                        type="button"
+                        className="w-fit mt-2"
+                        size="sm"
+                      >
+                        Upload
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            />
           </div>
 
           <div className="flex justify-end gap-2 pt-2">

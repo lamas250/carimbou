@@ -8,8 +8,8 @@ export const createPromotion = async (data: CreatePromotionType) => {
   const promotion = await prisma.promotion.create({
     data: {
       ...data,
-      companyId: data.companyId,
       requiredStamps: Number(data.requiredStamps),
+      imageUrl: data.imageUrl ?? undefined,
     },
   });
 

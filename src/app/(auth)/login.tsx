@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CircleIcon, Loader2 } from "lucide-react";
 import { signIn, signUp, signOut } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
   const searchParams = useSearchParams();
@@ -105,25 +106,38 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
               className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-sm shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               disabled={isPending}
               onClick={async () => {
+                setIsPending(true);
                 if (mode === "signin") {
-                  await signIn.email(
-                    {
-                      email,
-                      password,
-                      callbackURL: "/home",
-                    }
-                    // fetchCallback({ setIsPending })
-                  );
+                  await signIn.email({
+                    email,
+                    password,
+                    callbackURL: "/home",
+                    fetchOptions: {
+                      onSuccess: () => {
+                        toast.success("Login realizado com sucesso");
+                      },
+                      onError: () => {
+                        toast.error("Erro ao fazer login");
+                        setIsPending(false);
+                      },
+                    },
+                  });
                 } else {
-                  await signUp.email(
-                    {
-                      email,
-                      password,
-                      name,
-                      callbackURL: "/home",
-                    }
-                    // fetchCallback({ setIsPending })
-                  );
+                  await signUp.email({
+                    email,
+                    password,
+                    name,
+                    callbackURL: "/home",
+                    fetchOptions: {
+                      onSuccess: () => {
+                        toast.success("Conta criada com sucesso");
+                      },
+                      onError: () => {
+                        toast.error("Erro ao criar conta");
+                        setIsPending(false);
+                      },
+                    },
+                  });
                 }
               }}
             >

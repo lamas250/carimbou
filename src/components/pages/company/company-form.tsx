@@ -25,7 +25,7 @@ import { createCompany } from "@/features/companies/actions/create-company";
 import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useCompanyStore } from "@/store/companies";
-import { uploadImage } from "@/app/actions/upload-image";
+import { uploadImage } from "@/actions/upload-image";
 
 type CompanyFormProps = {
   company?: Partial<CompanyType>;

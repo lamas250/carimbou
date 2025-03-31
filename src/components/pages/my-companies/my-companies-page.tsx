@@ -37,7 +37,7 @@ const MyCompaniesPage = ({ companies }: { companies: CompanyType[] }) => {
 
   return (
     <div className="h-full">
-      <div className="py-8 sm:py-12">
+      <div className="py-4 sm:py-8">
         {companies.length > 0 ? (
           <div className="space-y-6">
             <CompanyList />

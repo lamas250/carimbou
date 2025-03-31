@@ -12,6 +12,7 @@ export const createPromotionSchema = z.object({
   requiredStamps: z.string().min(1, { message: "Carimbos necessários é obrigatório" }),
   reward: z.string().optional(),
   companyId: z.string().min(1, { message: "Empresa é obrigatório" }),
+  imageUrl: z.string().optional(),
 });
 
 export type CreatePromotionType = z.infer<typeof createPromotionSchema>;

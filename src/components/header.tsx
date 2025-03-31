@@ -36,16 +36,16 @@ const Header = ({ user }: { user: any }) => {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <div className="flex flex-row items-center">
-          <Image src="/logo-icone.png" alt="logo" width={50} height={50} />
-          <Link
-            href="/"
-            className="text-xl font-semibold tracking-tight transition-all duration-300"
-            onClick={() => setMobileMenuOpen(false)}
-          >
+        <Link
+          href="/"
+          className="text-xl font-semibold tracking-tight transition-all duration-300"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <div className="flex flex-row items-center">
+            <Image src="/logo-icone.png" alt="logo" width={50} height={50} />
             Carimbou
-          </Link>
-        </div>
+          </div>
+        </Link>
 
         {/* Desktop Navigation */}
         {user ? (

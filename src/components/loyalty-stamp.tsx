@@ -39,7 +39,8 @@ const LoyaltyStamp = ({
   return (
     <div
       className={cn(
-        "flex aspect-square items-center justify-center rounded-full transition-all duration-500",
+        // "flex aspect-square items-center justify-center rounded-full transition-all duration-500",
+        "flex items-center justify-center rounded-full transition-all duration-500",
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4",
         stamped ? "scale-100" : "scale-95"
       )}

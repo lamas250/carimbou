@@ -94,30 +94,38 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
 
       <CardHeader className="bg-white pb-2 border-b">
         <div className="flex items-center gap-3">
-          {card.company.logoUrl && (
-            <Image
-              src={card.company.logoUrl}
-              alt={card.company.name}
-              width={40}
-              height={40}
-              className="rounded-sm"
-            />
-          )}
+          <div className="h-12 w-12">
+            {card.promotion.imageUrl ? (
+              <Image
+                src={card.promotion.imageUrl}
+                alt={card.promotion.name}
+                width={50}
+                height={50}
+                className="rounded-md object-cover w-full h-full"
+              />
+            ) : (
+              <Image
+                src={card.company.logoUrl || "/placeholder.svg"}
+                alt={card.company.name}
+                width={50}
+                height={50}
+                className="rounded-md"
+              />
+            )}
+          </div>
           <div>
             <h3 className="font-semibold text-gray-800">{card.promotion.name}</h3>
-            <p className="text-sm text-gray-500">
-              {card.stamps}/{card.promotion.requiredStamps} carimbos
-            </p>
+            <p className="text-sm text-gray-500">{card.promotion.description}</p>
           </div>
         </div>
       </CardHeader>
 
       <CardContent className="flex-1">
-        <CardDescription className="mb-4">{card.promotion.description}</CardDescription>
-
         <div className="mb-4">
           <div className="mb-2 flex justify-between text-sm">
-            <span>Progresso</span>
+            <span>
+              Progresso: {card.stamps}/{card.promotion.requiredStamps}
+            </span>
             {cardDuration && <span>Expira: {new Date(cardDuration).toLocaleDateString()}</span>}
           </div>
           <Progress value={progressPercentage} className="h-2" />
@@ -173,7 +181,7 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
             <Button
               variant="secondary"
               className="w-full"
-              onClick={() => router.push(`/promotion/${card.promotion.id}`)}
+              onClick={() => router.push(`/home/${card.id}`)}
             >
               <Info className="mr-2 h-4 w-4" />
               Ver detalhes

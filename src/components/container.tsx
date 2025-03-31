@@ -26,13 +26,15 @@ const Container: React.FC<ContainerProps> = ({
           <div className="mb-1 flex flex-row gap-2 items-center">
             {image &&
               (typeof image === "string" && image.startsWith("https://") ? (
-                <Image
-                  src={image}
-                  alt={title || "Logo da empresa"}
-                  width={60}
-                  height={60}
-                  className="rounded-sm"
-                />
+                <div className="w-12 h-12 rounded bg-primary/10 flex items-center justify-center">
+                  <Image
+                    src={image}
+                    alt={title || "Logo da empresa"}
+                    width={60}
+                    height={60}
+                    className="rounded-sm w-full h-full object-cover"
+                  />
+                </div>
               ) : (
                 <div className="w-12 h-12 rounded bg-primary/10 flex items-center justify-center">
                   {image}

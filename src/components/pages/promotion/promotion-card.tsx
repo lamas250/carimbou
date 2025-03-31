@@ -39,23 +39,25 @@ export function PromotionCard({ promotion, company }: { promotion: Promotion; co
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-4">
-            {promotion.imageUrl ? (
-              <Image
-                src={promotion.imageUrl}
-                alt={promotion.name}
-                width={50}
-                height={50}
-                className="rounded-md"
-              />
-            ) : (
-              <Image
-                src={company.logoUrl || "/placeholder.svg"}
-                alt={company.name}
-                width={50}
-                height={50}
-                className="rounded-md"
-              />
-            )}
+            <div className="h-12 w-12">
+              {promotion.imageUrl ? (
+                <Image
+                  src={promotion.imageUrl}
+                  alt={promotion.name}
+                  width={50}
+                  height={50}
+                  className="rounded-md object-cover w-full h-full"
+                />
+              ) : (
+                <Image
+                  src={company.logoUrl || "/placeholder.svg"}
+                  alt={company.name}
+                  width={50}
+                  height={50}
+                  className="rounded-md"
+                />
+              )}
+            </div>
             <div>
               <CardTitle className="text-xl">{promotion.name}</CardTitle>
               <CardDescription>{promotion.description}</CardDescription>
