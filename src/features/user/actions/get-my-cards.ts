@@ -33,6 +33,8 @@ export async function getMyCards(): Promise<UserPromotionWithStamps[]> {
       ...userPromotion,
       stamps: userPromotion.stamps.length,
       company: userPromotion.promotion.company,
+      promotion: userPromotion.promotion,
+      history: userPromotion.stamps,
     };
   });
 
