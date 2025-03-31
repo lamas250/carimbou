@@ -9,6 +9,7 @@ import {
   Edit,
   Pause,
   Coins,
+  Fullscreen,
 } from "lucide-react";
 import {
   Card,
@@ -39,25 +40,31 @@ export function PromotionCard({ promotion, company }: { promotion: Promotion; co
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-4">
-            <div className="h-12 w-12">
-              {promotion.imageUrl ? (
-                <Image
-                  src={promotion.imageUrl}
-                  alt={promotion.name}
-                  width={50}
-                  height={50}
-                  className="rounded-md object-cover w-full h-full"
-                />
-              ) : (
-                <Image
-                  src={company.logoUrl || "/placeholder.svg"}
-                  alt={company.name}
-                  width={50}
-                  height={50}
-                  className="rounded-md"
-                />
-              )}
-            </div>
+            {!promotion.imageUrl && !company.logoUrl ? (
+              <div className="h-14 w-14 bg-muted rounded-md flex items-center justify-center">
+                <Fullscreen className="h-10 w-10 text-muted-foreground/80" />
+              </div>
+            ) : (
+              <div className="h-12 w-12">
+                {promotion.imageUrl ? (
+                  <Image
+                    src={promotion.imageUrl}
+                    alt={promotion.name}
+                    width={50}
+                    height={50}
+                    className="rounded-md object-cover w-full h-full"
+                  />
+                ) : (
+                  <Image
+                    src={company.logoUrl || "/placeholder.svg"}
+                    alt={company.name}
+                    width={50}
+                    height={50}
+                    className="rounded-md"
+                  />
+                )}
+              </div>
+            )}
             <div>
               <CardTitle className="text-xl">{promotion.name}</CardTitle>
               <CardDescription>{promotion.description}</CardDescription>

@@ -19,7 +19,7 @@ export type PromotionType = {
 };
 
 const MyCompaniesPage = ({ companies }: { companies: CompanyType[] }) => {
-  const { setCompanies } = useCompanyStore();
+  const { setCompanies, companies: companiesStore } = useCompanyStore();
 
   useEffect(() => {
     if (companies.length > 0) {
@@ -38,7 +38,7 @@ const MyCompaniesPage = ({ companies }: { companies: CompanyType[] }) => {
   return (
     <div className="h-full">
       <div className="py-4 sm:py-8">
-        {companies.length > 0 ? (
+        {companiesStore && companiesStore.length > 0 ? (
           <div className="space-y-6">
             <CompanyList />
           </div>

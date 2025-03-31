@@ -26,7 +26,7 @@ const Container: React.FC<ContainerProps> = ({
           <div className="mb-1 flex flex-row gap-2 items-center">
             {image &&
               (typeof image === "string" && image.startsWith("https://") ? (
-                <div className="w-12 h-12 rounded bg-primary/10 flex items-center justify-center">
+                <div className="w-12 h-12 rounded bg-muted flex items-center justify-center">
                   <Image
                     src={image}
                     alt={title || "Logo da empresa"}
@@ -36,7 +36,7 @@ const Container: React.FC<ContainerProps> = ({
                   />
                 </div>
               ) : (
-                <div className="w-12 h-12 rounded bg-primary/10 flex items-center justify-center">
+                <div className="w-12 h-12 rounded bg-primary/5 flex items-center justify-center">
                   {image}
                 </div>
               ))}

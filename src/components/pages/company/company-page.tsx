@@ -8,6 +8,7 @@ import { CompanyType } from "@/features/companies/types";
 import { usePromotionStore } from "@/store/promotions";
 import { Promotion } from "@prisma/client";
 import { PromotionCard } from "../promotion/promotion-card";
+
 const CompanyPage = ({
   company,
   promotions,
@@ -15,7 +16,7 @@ const CompanyPage = ({
   company: CompanyType;
   promotions: Promotion[];
 }) => {
-  const { setPromotions } = usePromotionStore();
+  const { setPromotions, promotions: promotionsStore } = usePromotionStore();
 
   useEffect(() => {
     if (promotions.length > 0) {
@@ -36,8 +37,8 @@ const CompanyPage = ({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {promotions && promotions.length > 0 ? (
-                promotions.map((promotion) => (
+              {promotionsStore && promotionsStore.length > 0 ? (
+                promotionsStore.map((promotion) => (
                   <PromotionCard key={promotion.id} promotion={promotion} company={company} />
                 ))
               ) : (

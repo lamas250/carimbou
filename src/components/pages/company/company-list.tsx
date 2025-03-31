@@ -52,8 +52,8 @@ const CompanyList = () => {
                 />
               </div>
             ) : (
-              <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center">
-                <Store className="h-6 w-6 text-primary" />
+              <div className="w-10 h-10 rounded bg-muted flex items-center justify-center">
+                <Store className="h-6 w-6 text-muted-foreground/80" />
               </div>
             )}
             <div>

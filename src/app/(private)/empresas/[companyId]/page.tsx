@@ -21,7 +21,9 @@ export default async function EmpresaPage({ params }: { params: Params }) {
     <Container
       title={company.name}
       description={company.description ?? undefined}
-      image={company.logoUrl ? company.logoUrl : <Store className="w-10 h-10" />}
+      image={
+        company.logoUrl ? company.logoUrl : <Store className="w-10 h-10 text-muted-foreground" />
+      }
       leftButton={<CompanyEditDialog />}
       button={<BackToCompaniesButton />}
     >

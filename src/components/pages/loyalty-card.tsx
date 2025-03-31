@@ -13,14 +13,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
-import SuccessModal from "../success-modal";
 import LoyaltyStamp from "../loyalty-stamp";
-import QRScanner from "../qrcode-scanner";
-import { Session, User } from "better-auth";
 import { StampStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
+
 type LoyaltyCardProps = {
   card: UserPromotionWithStamps;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: any;
 };
 
