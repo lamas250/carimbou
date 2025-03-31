@@ -38,13 +38,13 @@ const LandingPage = () => {
               }`}
             >
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
-                Cartão de Fidelidade Digital
+                Cartão Fidelidade Digital
                 <br />
                 <span className="text-primary">Simples e Elegante</span>
               </h1>
               <p className="text-lg text-muted-foreground mb-8">
                 Transformando cartões de fidelidade tradicionais em uma experiência digital
-                perfeita. Colete 10 carimbos e ganhe uma refeição grátis.
+                perfeita. Colete carimbos e resgate sua recompensa.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild>
