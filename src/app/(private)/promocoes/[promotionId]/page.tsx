@@ -13,6 +13,7 @@ type Params = Promise<{ promotionId: string }>;
 export default async function PromotionPage({ params }: { params: Params }) {
   const { promotionId } = await params;
   const promotion = await getPromotion(promotionId);
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
 
   if (!promotion) {
     return null;
@@ -39,13 +40,18 @@ export default async function PromotionPage({ params }: { params: Params }) {
         </Link>
       }
     >
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-1">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-1 order-2 lg:order-1">
           <PromotionDetails promotion={promotion} />
         </div>
 
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-2 order-1 lg:order-2">
           <QrCodeGenerator promotionId={promotion.id} />
+          <div className="lg:col-span-3 hidden lg:block">
+            <QrCodeList promotionId={promotion.id} />
+          </div>
+        </div>
+        <div className="lg:hidden order-3 lg:order-3">
           <QrCodeList promotionId={promotion.id} />
         </div>
       </div>

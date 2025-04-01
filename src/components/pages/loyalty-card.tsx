@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { CalendarCheck, ChevronLeft, History, Link, RefreshCw } from "lucide-react";
+import { CalendarCheck, ChevronLeft, Fullscreen, History, Link, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UserPromotionWithStamps } from "@/features/user/actions/get-my-cards";
 import {
@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import LoyaltyStamp from "../loyalty-stamp";
 import { StampStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 type LoyaltyCardProps = {
   card: UserPromotionWithStamps;
@@ -44,16 +45,43 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
     <div className="min-h-screen mt-4 md:mt-0 pb-16">
       <div className="container px-4 mx-auto max-w-4xl">
         <div className="py-8 sm:py-12">
-          <div className="flex flex-row justify-between items-center">
-            <div className="flex flex-col gap-2">
-              <h1 className="text-2xl font-bold">{card.promotion.name}</h1>
-              <p className="text-muted-foreground mb-8">
-                {card.promotion.description
-                  ? card.promotion.description
-                  : `Colete {card.promotion.requiredStamps} carimbos para ganhar uma recompensa`}
-              </p>
+          <div className="flex flex-col md:flex-row lg:flex-row items-start md:items-center justify-between mb-6">
+            <div className="flex items-center gap-4">
+              {!card.promotion.imageUrl && !card.company.logoUrl ? (
+                <div className="h-14 w-14 bg-muted rounded-md flex items-center justify-center">
+                  <Fullscreen className="h-10 w-10 text-muted-foreground/80" />
+                </div>
+              ) : (
+                <div className="h-12 w-12">
+                  {card.promotion.imageUrl ? (
+                    <Image
+                      src={card.promotion.imageUrl}
+                      alt={card.promotion.name}
+                      width={50}
+                      height={50}
+                      className="rounded-md object-cover w-full h-full"
+                    />
+                  ) : (
+                    <Image
+                      src={card.company.logoUrl || "/placeholder.svg"}
+                      alt={card.company.name}
+                      width={50}
+                      height={50}
+                      className="rounded-md"
+                    />
+                  )}
+                </div>
+              )}
+              <div className="flex flex-col">
+                <h1 className="text-2xl font-bold">{card.promotion.name}</h1>
+                <p className="text-muted-foreground">
+                  {card.promotion.description
+                    ? card.promotion.description
+                    : `Colete {card.promotion.requiredStamps} carimbos para ganhar uma recompensa`}
+                </p>
+              </div>
             </div>
-            <div>
+            <div className="mt-4 md:mt-0 mb-4 w-full md:w-auto text-right">
               <Button variant="ghost" size="sm" onClick={() => router.push("/home")}>
                 <ChevronLeft className="mr-2 h-4 w-4" />
                 Voltar para Meus Cartões
@@ -70,7 +98,7 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
                     {card.stamps}/{card.promotion.requiredStamps} carimbos coletados
                   </CardDescription>
                 </div>
-                <div className="text-right">
+                <div className="text-right md:block hidden">
                   <p className="text-sm font-medium">{user.name}</p>
                   <p className="text-xs text-muted-foreground">{user.email}</p>
                 </div>

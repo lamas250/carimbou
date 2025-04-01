@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+import { Edit, Pencil } from "lucide-react";
+
 export default function CompanyEditDialog() {
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+
   return (
     <Button>
-      <Pencil className="h-4 w-4" />
-      Editar
+      <Edit className="h-4 w-4" />
+      {isMobile ? "Editar" : "Editar"}
     </Button>
   );
 }

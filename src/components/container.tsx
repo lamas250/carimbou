@@ -20,7 +20,7 @@ const Container: React.FC<ContainerProps> = ({
   leftButton,
 }) => {
   return (
-    <div className={`h-auto ${title && "pt-16"} pb-16 flex-1`}>
+    <div className={`h-auto ${title && "pt-16"} flex-1`}>
       <div className="container px-4 py-8 sm:py-12 mx-auto w-full">
         <div className="flex flex-col md:flex-row lg:flex-row items-start md:items-center justify-between">
           <div className="mb-1 flex flex-row gap-2 items-center">
@@ -44,9 +44,13 @@ const Container: React.FC<ContainerProps> = ({
               <h1 className="text-2xl font-semibold">{title}</h1>
               {description && <p className="text-sm text-gray-500">{description}</p>}
             </div>
-            {leftButton && <div className="mt-4 md:mt-2 ml-4 mb-4">{leftButton}</div>}
+            {leftButton && (
+              <div className="mt-4 md:mt-2 ml-4 mb-4 md:ml-0 md:mr-auto flex-1 text-right">
+                {leftButton}
+              </div>
+            )}
           </div>
-          {button && <div className="mt-4 md:mt-0 mb-4">{button}</div>}
+          {button && <div className="mt-4 md:mt-0 mb-4 w-full md:w-auto text-right">{button}</div>}
         </div>
         {title && (
           <div className="mt-4 mb-4">

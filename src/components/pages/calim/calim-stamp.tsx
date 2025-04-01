@@ -109,7 +109,7 @@ export function CalimStamp({ stampData }: CalimStampProps) {
   }
 
   return (
-    <div className="h-[80vh] flex flex-col items-center justify-center bg-gradient-to-b from-background to-muted/50 p-4">
+    <div className="h-[80vh] pt-32 md:pt-16 flex flex-col items-center justify-center bg-gradient-to-b from-background to-muted/50 p-4">
       <div className="w-full max-w-md">
         <Card className="border-2 shadow-lg">
           <CardHeader className="pb-2 text-center">

@@ -19,11 +19,11 @@ export default function LoyaltyCardsTab({
   return (
     <>
       <Tabs defaultValue="cards" className="w-full">
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-col md:flex-row md:justify-between items-center mb-4">
           <TabsList className="mb-6 text-primary-foreground">
             <TabsTrigger value="cards">Cartões Ativos</TabsTrigger>
-            <TabsTrigger value="redemptions">Resgates</TabsTrigger>
-            <TabsTrigger value="expired">Expirados</TabsTrigger>
+            <TabsTrigger value="redemptions">Completos</TabsTrigger>
+            <TabsTrigger value="expired">Finalizados</TabsTrigger>
           </TabsList>
           <div className="flex flex-row flex-wrap justify-end items-center gap-4">
             <div className="mb-4 relative">
@@ -51,7 +51,7 @@ export default function LoyaltyCardsTab({
 
         <TabsContent value="redemptions" className="mt-0">
           <div className="rounded-lg border border-dashed border-gray-300 bg-white text-center p-8">
-            <h3 className="text-lg font-medium text-gray-700">Nenhum cartão resgatado</h3>
+            <h3 className="text-lg font-medium text-gray-700">Nenhum cartão completo</h3>
             <p className="mt-2 text-gray-500">
               Complete seus cartões de fidelidade para resgatar recompensas
             </p>
@@ -60,7 +60,7 @@ export default function LoyaltyCardsTab({
 
         <TabsContent value="expired" className="mt-0">
           <div className="rounded-lg border border-dashed border-gray-300 bg-white text-center p-8">
-            <h3 className="text-lg font-medium text-gray-700">Nenhum cartão expirado</h3>
+            <h3 className="text-lg font-medium text-gray-700">Nenhum cartão finalizado</h3>
             <p className="mt-2 text-gray-500">
               Complete seus cartões de fidelidade para resgatar recompensas
             </p>
