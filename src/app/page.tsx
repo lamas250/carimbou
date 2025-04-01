@@ -10,7 +10,7 @@
 
 import { LoyaltyCardDemo } from "@/components/new-landing-page/loyalt-card-demo";
 import { HowItWorks } from "@/components/new-landing-page/how-it-works";
-import { Testimonials } from "@/components/new-landing-page/testimonials";
+// import { Testimonials } from "@/components/new-landing-page/testimonials";
 import { Faq } from "@/components/new-landing-page/faq";
 import { Benefits } from "@/components/new-landing-page/benefits";
 // import { Header } from "@/components/new-landing-page/header"
