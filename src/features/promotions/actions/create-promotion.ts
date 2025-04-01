@@ -8,6 +8,7 @@ export const createPromotion = async (data: CreatePromotionType) => {
   const promotion = await prisma.promotion.create({
     data: {
       ...data,
+      cardDuration: Number(data.cardDuration),
       requiredStamps: Number(data.requiredStamps),
       imageUrl: data.imageUrl ?? undefined,
     },

@@ -46,25 +46,23 @@ export function Footer() {
             <h3 className="mb-4 text-lg font-semibold text-white">Produto</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
+                <Link
+                  href="#how-it-works"
+                  className="text-gray-400 transition-colors hover:text-white"
+                >
                   Recursos
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
+                <Link href="#pricing" className="text-gray-400 transition-colors hover:text-white">
                   Preços
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="#" className="text-gray-400 transition-colors hover:text-white">
                   Casos de uso
                 </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
-                  Integrações
-                </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -76,16 +74,11 @@ export function Footer() {
                   Sobre nós
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="#" className="text-gray-400 transition-colors hover:text-white">
                   Blog
                 </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
-                  Carreiras
-                </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="#" className="text-gray-400 transition-colors hover:text-white">
                   Contato
@@ -95,26 +88,16 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Suporte</h3>
+            <h3 className="mb-4 text-lg font-semibold text-white">Políticas</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="#" className="text-gray-400 transition-colors hover:text-white">
-                  Central de ajuda
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
-                  Documentação
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
-                  Status
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
                   Política de privacidade
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
+                  Termos de uso
                 </Link>
               </li>
             </ul>

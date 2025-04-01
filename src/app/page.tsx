@@ -1,3 +1,5 @@
+"use client";
+
 // import LandingPage from "@/components/landing-page/page";
 
 // export default function Home() {
@@ -18,6 +20,7 @@ import { Footer } from "@/components/new-landing-page/footer";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Header from "@/components/header";
+import { motion, useInView } from "framer-motion";
 
 export default function Home() {
   return (
@@ -26,20 +29,39 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-16 md:py-24">
           <div className="container relative z-10 mx-auto px-4 md:px-6">
-            <div className="grid gap-12 md:grid-cols-2 md:items-center">
+            <div className="grid gap-12 md:grid-cols-2 md:items-center md:mt-0 mt-4">
               <div className="flex flex-col space-y-6">
-                <div className="flex w-full items-start md:mt-0 mt-4">
-                  <div className="inline-flex items-center rounded-full border border-red-200 bg-red-50 px-3 py-1 text-sm font-medium text-red-600">
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div
+                    id="badge"
+                    className="inline-flex items-center rounded-full border border-red-200 bg-red-50 px-3 py-1 text-sm font-medium text-red-600"
+                  >
                     Aumente sua retenção de clientes
                   </div>
-                </div>
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+                </motion.div>
+                <motion.h1
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.3 }}
+                  id="heading"
+                  className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl lg:text-6xl"
+                >
                   Cartão Fidelidade Digital <span className="text-red-600">Simples e Elegante</span>
-                </h1>
-                <p className="max-w-lg text-lg text-gray-600 md:text-xl">
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.7 }}
+                  id="subtitle"
+                  className="max-w-lg text-lg text-gray-600 md:text-xl"
+                >
                   Transformando cartões de fidelidade tradicionais em uma experiência digital
                   perfeita. Colete carimbos e resgate sua recompensa com apenas alguns cliques.
-                </p>
+                </motion.p>
                 <div className="flex flex-col space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Button size="lg" className="bg-red-600 hover:bg-red-700">
                     Começar agora

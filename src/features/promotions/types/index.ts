@@ -13,6 +13,7 @@ export const createPromotionSchema = z.object({
   reward: z.string().optional(),
   companyId: z.string().min(1, { message: "Empresa é obrigatório" }),
   imageUrl: z.string().optional(),
+  cardDuration: z.string().min(1, { message: "Validade é obrigatório" }),
 });
 
 export type CreatePromotionType = z.infer<typeof createPromotionSchema>;

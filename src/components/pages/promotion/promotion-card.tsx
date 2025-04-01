@@ -100,7 +100,7 @@ export function PromotionCard({ promotion, company }: { promotion: Promotion; co
       <CardFooter className="flex justify-between border-t px-6 py-3">
         <div className="grid grid-cols-2 gap-2 w-full">
           <Button
-            variant="secondary"
+            variant="secondary70"
             className="w-full"
             onClick={() => handleDeletePromotion(promotion.id)}
           >

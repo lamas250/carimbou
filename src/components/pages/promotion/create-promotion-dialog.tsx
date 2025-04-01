@@ -27,7 +27,6 @@ export default function CreatePromotionDialog({ company }: { company: CompanyTyp
         <DialogHeader>
           <DialogTitle>Adicionar Promoção</DialogTitle>
         </DialogHeader>
-        <DialogDescription>Adicione uma nova promoção para a empresa.</DialogDescription>
         <PromotionForm company={company} onCancel={() => setOpen(false)} />
       </DialogContent>
     </Dialog>

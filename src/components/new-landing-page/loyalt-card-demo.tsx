@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import confetti from "canvas-confetti";
+
 export function LoyaltyCardDemo() {
   const [stamps, setStamps] = useState(6);
   const [isAnimating, setIsAnimating] = useState(false);

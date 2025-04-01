@@ -115,7 +115,10 @@ const NavLinks = ({ onClick, authenticated }: { onClick: () => void; authenticat
           }`}
           onClick={onClick}
         >
-          <Button variant="outline" className="p-1 px-2">
+          <Button
+            variant={link.name === "Cadastrar" ? "secondary" : "outline"}
+            className="p-1 px-2"
+          >
             {link.name}
           </Button>
         </Link>

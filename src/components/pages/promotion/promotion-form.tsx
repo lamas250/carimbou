@@ -43,6 +43,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
       requiredStamps: "0",
       reward: "",
       image: undefined,
+      cardDuration: "0",
     },
   });
   const { handleSubmit } = form;
@@ -101,9 +102,9 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome da Empresa *</FormLabel>
+                  <FormLabel>Nome da promoção*</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Nome da empresa" />
+                    <Input {...field} placeholder="Nome da promoção" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -153,7 +154,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
                 name="reward"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Reward*</FormLabel>
+                    <FormLabel>Recompensa</FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="Recompensa" />
                     </FormControl>
@@ -165,6 +166,46 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
                 O que os clientes receberão após completar o cartão
               </p>
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <FormField
+                control={form.control}
+                name="cardDuration"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Validade dos cartões (dias)*</FormLabel>
+                    <FormControl>
+                      <Input {...field} type="number" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <p className="text-xs text-muted-foreground">
+                Número de dias que o cartão será válido
+              </p>
+            </div>
+
+            {/* <div className="space-y-2">
+              <FormField
+                control={form.control}
+                name="reward"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Termino da promoção*</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Recompensa" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <p className="text-xs text-muted-foreground">
+                O que os clientes receberão após completar o cartão
+              </p>
+            </div> */}
           </div>
 
           <div className="space-y-2">
@@ -196,7 +237,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
                       </Avatar>
                     )}
                     <div className="flex flex-col">
-                      <p className="text-sm font-medium">Logo da empresa</p>
+                      <p className="text-sm font-medium">Imagem da promoção</p>
                       <p className="text-xs text-muted-foreground">
                         JPG, PNG, SVG or JPEG, max 2mb
                       </p>
