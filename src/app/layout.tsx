@@ -32,6 +32,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       lang="en"
       className={`bg-white dark:bg-gray-950 text-black dark:text-white ${manrope.className}`}
     >
+      <head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons2/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons2/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/icons2/favicon-16x16.png" />
+      </head>
       <body className="min-h-[100dvh] bg-gray-50">
         <Toaster richColors closeButton />
         <Header user={session?.user} />

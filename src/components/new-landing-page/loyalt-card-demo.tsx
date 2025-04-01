@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 import confetti from "canvas-confetti";
 
 export function LoyaltyCardDemo() {
@@ -159,6 +159,12 @@ export function LoyaltyCardDemo() {
             </Button>
           </div>
         )}
+        {/* {!showReward && (
+          <div className="absolute md:bottom-2 bottom-1 md:right-6 right-4 flex items-center">
+            <ArrowLeft className="h-6 w-6 text-red-600" />
+            <span className="ml-2">Clique</span>
+          </div>
+        )} */}
       </div>
     </div>
   );
