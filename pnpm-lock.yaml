@@ -56,6 +56,9 @@ importers:
       canvas-confetti:
         specifier: ^1.9.3
         version: 1.9.3
+      carimbou:
+        specifier: 'link:'
+        version: 'link:'
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1

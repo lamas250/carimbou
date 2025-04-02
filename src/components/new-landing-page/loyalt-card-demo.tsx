@@ -19,8 +19,9 @@ export function LoyaltyCardDemo() {
 
       if (stamps + 1 === totalStamps) {
         setTimeout(() => {
+          triggerConfetti();
           setShowReward(true);
-        }, 1000);
+        }, 500);
       }
     }
   };
@@ -59,7 +60,6 @@ export function LoyaltyCardDemo() {
   };
 
   const handleResetCard = () => {
-    triggerConfetti();
     setShowReward(false);
     setStamps(0);
   };
@@ -67,7 +67,7 @@ export function LoyaltyCardDemo() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsAnimating(false);
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [isAnimating]);
