@@ -32,11 +32,11 @@ export default function Pricing() {
       features: [
         { text: "Criação de até 2 programas de fidelidade", included: true },
         { text: "QR Codes ilimitados para clientes acumularem selos", included: true },
-        { text: "Gestão de até 150 clientes ativos por mês", included: true },
+        { text: "Gestão de até 500 clientes ativos por mês", included: true },
         { text: "Relatórios básicos de uso", included: true },
       ],
       limitations: [
-        "Máximo de 150 clientes ativos por mês (clientes que escanearam o QR Code pelo menos 1 vez no mês)",
+        "Máximo de 500 clientes ativos por mês (clientes que escanearam o QR Code pelo menos 1 vez no mês)",
         "Sem personalização de design ou marca",
         "Sem suporte prioritário",
       ],
@@ -241,7 +241,7 @@ export default function Pricing() {
         </div>
 
         <div className="mt-16 text-center">
-          <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-6 py-3 shadow-sm">
+          <div className="flex flex-col md:flex-row items-center rounded-full border border-slate-200 bg-white px-6 py-3 shadow-sm">
             <span className="text-sm font-medium text-slate-700">
               Precisa de um plano personalizado para sua rede?
             </span>
