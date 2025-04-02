@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/form";
 import Image from "next/image";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, ChevronDown, ChevronUp } from "lucide-react";
 import { uploadImage } from "@/actions/upload-image";
 
 type PromotionFormProps = {
@@ -33,6 +33,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
   const { addPromotion } = usePromotionStore();
   const [isPending, setIsPending] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [showAdvancedSettings, setShowAdvancedSettings] = useState(false);
 
   const form = useForm<z.infer<typeof createPromotionSchema>>({
     resolver: zodResolver(createPromotionSchema),
@@ -44,6 +45,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
       reward: "",
       image: undefined,
       cardDuration: "0",
+      rule: "",
     },
   });
   const { handleSubmit } = form;
@@ -104,7 +106,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
                 <FormItem>
                   <FormLabel>Nome da promoção*</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Nome da promoção" />
+                    <Input {...field} placeholder="Nome da promoção" className="text-sm" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -120,7 +122,11 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
                 <FormItem>
                   <FormLabel>Descrição</FormLabel>
                   <FormControl>
-                    <Textarea {...field} placeholder="Descrição da promoção" />
+                    <Textarea
+                      {...field}
+                      className="text-sm"
+                      placeholder="Descrição da promoção. Ex. Compre 10 coisas para ganhar algo."
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -156,7 +162,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
                   <FormItem>
                     <FormLabel>Recompensa</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Recompensa" />
+                      <Input {...field} placeholder="Recompensa" className="text-sm" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -168,44 +174,72 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <FormField
-                control={form.control}
-                name="cardDuration"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Validade dos cartões (dias)*</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="number" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <p className="text-xs text-muted-foreground">
-                Número de dias que o cartão será válido
-              </p>
-            </div>
+          <div>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setShowAdvancedSettings((prev) => !prev)}
+              className="mb-4"
+            >
+              {showAdvancedSettings ? (
+                <div className="flex items-center gap-x-2 text-sm">
+                  <ChevronUp className="size-4" />
+                  Esconder Configurações Avançadas
+                </div>
+              ) : (
+                <div className="flex items-center gap-x-2 text-sm">
+                  <ChevronDown className="size-4" />
+                  Mostrar Configurações Avançadas
+                </div>
+              )}
+            </Button>
 
-            {/* <div className="space-y-2">
-              <FormField
-                control={form.control}
-                name="reward"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Termino da promoção*</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Recompensa" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <p className="text-xs text-muted-foreground">
-                O que os clientes receberão após completar o cartão
-              </p>
-            </div> */}
+            {showAdvancedSettings && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <FormField
+                    control={form.control}
+                    name="cardDuration"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Validade dos cartões (dias)*</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Número de dias que o cartão será válido Ex. 30, 90 dias, etc.
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <FormField
+                    control={form.control}
+                    name="rule"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Regras</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            placeholder="Não é obrigatório preencher. Ex. A recompensa so pode ser resgatada aos finais de semana. Válido apenas para o prato pequeno. "
+                            className="text-sm"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Caso haja requisitos para resgatar ou detalhes sobre a recompensa
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="space-y-2">

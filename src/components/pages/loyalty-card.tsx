@@ -17,6 +17,7 @@ import LoyaltyStamp from "../loyalty-stamp";
 import { StampStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { Badge } from "../ui/badge";
 
 type LoyaltyCardProps = {
   card: UserPromotionWithStamps;
@@ -25,21 +26,12 @@ type LoyaltyCardProps = {
 };
 
 const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
-  const [stamps, setStamps] = useState<boolean[]>([]);
   const [isCardCompleted, setIsCardCompleted] = useState(false);
   const router = useRouter();
 
-  // Check if card is completed
   useEffect(() => {
-    const completed = stamps.every((stamp) => stamp);
-    setIsCardCompleted(completed && stamps.length === 10);
-  }, [stamps]);
-
-  const handleResetCard = () => {
-    setStamps(Array(10).fill(false));
-
-    toast("Cartão de fidelidade reiniciado com sucesso!");
-  };
+    setIsCardCompleted(card.isCompleted && card.history.length === card.promotion.requiredStamps);
+  }, [card]);
 
   return (
     <div className="min-h-screen mt-4 md:mt-0 pb-16">
@@ -89,7 +81,12 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
             </div>
           </div>
 
-          <Card className={`loyalty-card mb-8 ${isCardCompleted ? "animate-card-complete" : ""}`}>
+          <Card
+            className={`loyalty-card mb-8 ${isCardCompleted ? "border-emerald-500" : ""} relative`}
+          >
+            <Badge className="overflow-hidden absolute right-8 top-0 z-10000 translate-y-[-50%] bg-emerald-500 px-3 py-1 text-xs font-semibold hover:bg-emerald-600">
+              Completo
+            </Badge>
             <CardHeader>
               <div className="flex justify-between items-center">
                 <div className="flex flex-col gap-1">
@@ -112,6 +109,7 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
                     isStamped={isStamped.status === StampStatus.CLAIMED}
                     index={index}
                     delay={index}
+                    isCompleted={card.isCompleted}
                   />
                 ))}
                 {Array.from({ length: card.promotion.requiredStamps - card.history.length }).map(
@@ -130,6 +128,9 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
                   <QRScanner onSuccess={handleAddStamp} />
                 </CardFooter> */}
           </Card>
+          <div className="flex justify-end -mt-7 mb-4 mr-4">
+            <span className="text-muted-foreground text-xs">Card ID: {card.id}</span>
+          </div>
 
           <Card className="glass-card">
             <CardHeader>

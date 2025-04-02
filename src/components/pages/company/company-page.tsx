@@ -8,6 +8,7 @@ import { CompanyType } from "@/features/companies/types";
 import { usePromotionStore } from "@/store/promotions";
 import { Promotion } from "@prisma/client";
 import { PromotionCard } from "../promotion/promotion-card";
+import { useGetPromotionStats } from "@/features/promotions/api/get-promotion-stats";
 
 const CompanyPage = ({
   company,
@@ -17,6 +18,9 @@ const CompanyPage = ({
   promotions: Promotion[];
 }) => {
   const { setPromotions, promotions: promotionsStore } = usePromotionStore();
+  const { data, isLoading, error } = useGetPromotionStats(company.id);
+
+  console.log(data);
 
   useEffect(() => {
     if (promotions.length > 0) {
@@ -39,7 +43,13 @@ const CompanyPage = ({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {promotionsStore && promotionsStore.length > 0 ? (
                 promotionsStore.map((promotion) => (
-                  <PromotionCard key={promotion.id} promotion={promotion} company={company} />
+                  <PromotionCard
+                    key={promotion.id}
+                    promotion={promotion}
+                    company={company}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    stats={data?.find((stat: any) => stat.promotionId === promotion.id)}
+                  />
                 ))
               ) : (
                 <div className="col-span-full text-center py-8 border rounded-lg bg-muted/30">

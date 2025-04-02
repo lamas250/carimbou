@@ -25,15 +25,28 @@ import { Promotion, Company } from "@prisma/client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-
-export function PromotionCard({ promotion, company }: { promotion: Promotion; company: Company }) {
-  const router = useRouter();
-
+import { useGetPromotionStats } from "@/features/promotions/api/get-promotion-stats";
+import { Skeleton } from "@/components/ui/skeleton";
+export function PromotionCard({
+  promotion,
+  company,
+  stats,
+}: {
+  promotion: Promotion;
+  company: Company;
+  stats: {
+    totalUserPromotions: number;
+    activeUserPromotions: number;
+    completedUserPromotions: number;
+  };
+}) {
   const handleDeletePromotion = async (promotionId: string) => {
     // await deletePromotion(promotionId);
     // router.push("/promocoes");
     console.log(promotionId);
   };
+
+  const router = useRouter();
 
   return (
     <Card key={promotion.id} className="overflow-hidden transition-all hover:shadow-md">
@@ -84,17 +97,39 @@ export function PromotionCard({ promotion, company }: { promotion: Promotion; co
             <span className="text-sm font-medium">Recompensa:</span>
             <span className="text-sm">{promotion.reward}</span>
           </div>
-          <div className="space-y-1">
-            <div className="flex justify-between text-xs">
-              <span className="flex items-center gap-1">
-                <Users className="h-3 w-3" /> 39 participantes
-              </span>
-              <span className="flex items-center gap-1">
-                <TrendingUp className="h-3 w-3" /> 11% taxa de conclusão
-              </span>
+          {stats ? (
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs">
+                <span className="flex items-center gap-1">
+                  <Users className="h-3 w-3" /> {stats?.activeUserPromotions}{" "}
+                  {stats?.activeUserPromotions === 1 ? "cartão ativo" : "cartões ativos"}
+                </span>
+                <span className="flex items-center gap-1">
+                  <TrendingUp className="h-3 w-3" />{" "}
+                  {stats?.completedUserPromotions === 0
+                    ? 0
+                    : (stats?.completedUserPromotions / stats?.totalUserPromotions) * 100}
+                  % taxa de conclusão
+                </span>
+              </div>
+              <Progress
+                value={
+                  stats?.completedUserPromotions === 0
+                    ? 0
+                    : (stats?.completedUserPromotions / stats?.totalUserPromotions) * 100
+                }
+                className="h-2"
+              />
             </div>
-            <Progress value={11} className="h-2" />
-          </div>
+          ) : (
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs">
+                <Skeleton className="w-20 h-3" />
+                <Skeleton className="w-20 h-3" />
+              </div>
+              <Skeleton className="h-2" />
+            </div>
+          )}
         </div>
       </CardContent>
       <CardFooter className="flex justify-between border-t px-6 py-3">

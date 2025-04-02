@@ -112,6 +112,7 @@ model Promotion {
   updatedAt      DateTime        @updatedAt @map("updated_at")
   cardDuration   Int?
   endDate        DateTime?
+  rule           String?
   companyId      String
   company        Company         @relation(fields: [companyId], references: [id], onDelete: Cascade)
   userPromotions UserPromotion[]
@@ -150,6 +151,7 @@ model Stamp {
   userPromotion   UserPromotion? @relation(fields: [userPromotionId], references: [id], onDelete: Cascade)
   createdAt       DateTime      @default(now()) @map("created_at")
   updatedAt       DateTime      @updatedAt @map("updated_at")
+  usedAt          DateTime?
 
   @@map("stamp")
 }

@@ -10,23 +10,23 @@ export async function claimStamp(stampId: string, userId: string) {
   });
 
   if (!stamp) {
-    throw new Error("Stamp not found");
+    throw new Error("Selo não encontrado");
   }
 
   if (stamp.status === StampStatus.CLAIMED) {
-    throw new Error("Stamp already claimed");
+    throw new Error("Selo já resgatado");
   }
 
   if (!stamp.promotion.isActive || stamp.promotion.isArchived) {
-    throw new Error("Promotion is not active");
+    throw new Error("Promoção não está ativa");
   }
 
   if (stamp.expiresAt && stamp.expiresAt < new Date()) {
-    throw new Error("Stamp expired");
+    throw new Error("Selo expirado");
   }
 
   if (stamp.promotion.endDate && stamp.promotion.endDate < new Date()) {
-    throw new Error("Promotion ended");
+    throw new Error("Promoção encerrada");
   }
 
   const userPromotion = await prisma.userPromotion.findFirst({
@@ -51,23 +51,35 @@ export async function claimStamp(stampId: string, userId: string) {
 
     await prisma.stamp.update({
       where: { id: stampId },
-      data: { userPromotionId: newUserPromotion.id },
+      data: { userPromotionId: newUserPromotion.id, status: StampStatus.CLAIMED },
     });
 
-    return { success: true, message: "Stamp claimed successfully" };
+    return { success: true, message: "Selo resgatado com sucesso" };
   }
 
   const cardDuration = userPromotion.createdAt.getTime() + (stamp.promotion.cardDuration ?? 0);
 
   if (stamp.promotion.cardDuration && cardDuration < new Date().getTime()) {
-    throw new Error("Card expired");
+    throw new Error("Cartão expirado");
   }
 
   if (userPromotion?.stamps.length >= stamp.promotion.requiredStamps) {
-    throw new Error("Stamp limit reached");
+    throw new Error("Cartão já está completo");
   }
 
-  await prisma.stamp.update({ where: { id: stampId }, data: { status: StampStatus.CLAIMED } });
+  await prisma.$transaction(async (prisma) => {
+    await prisma.stamp.update({
+      where: { id: stampId },
+      data: { status: StampStatus.CLAIMED, userPromotionId: userPromotion.id },
+    });
 
-  return { success: true, message: "Stamp claimed successfully" };
+    if (userPromotion.stamps.length + 1 >= stamp.promotion.requiredStamps) {
+      await prisma.userPromotion.update({
+        where: { id: userPromotion.id },
+        data: { isCompleted: true },
+      });
+    }
+  });
+
+  return { success: true, message: "Selo resgatado com sucesso" };
 }

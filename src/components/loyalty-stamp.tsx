@@ -8,6 +8,7 @@ type LoyaltyStampProps = {
   addStamp?: () => void;
   isEditable?: boolean;
   delay?: number;
+  isCompleted?: boolean;
 };
 
 const LoyaltyStamp = ({
@@ -16,6 +17,7 @@ const LoyaltyStamp = ({
   addStamp,
   isEditable = false,
   delay = 0,
+  isCompleted = false,
 }: LoyaltyStampProps) => {
   const [visible, setVisible] = useState(false);
   const [stamped, setStamped] = useState(false);
@@ -56,13 +58,15 @@ const LoyaltyStamp = ({
             : "cursor-default",
           isStamped
             ? "bg-primary/10 border-primary shadow-inner"
-            : "bg-white/80 dark:bg-white/5 border-border shadow-sm"
+            : "bg-white/80 dark:bg-white/5 border-border shadow-sm",
+          isCompleted && "bg-emerald-500/10 border-emerald-500 shadow-inner"
         )}
       >
         <div
           className={cn(
             "absolute inset-0 flex items-center justify-center text-primary rounded-full transition-all duration-500",
-            isStamped ? "opacity-100 animate-stamp" : "opacity-0"
+            isStamped ? "opacity-100 animate-stamp" : "opacity-0",
+            isCompleted && "text-emerald-500"
           )}
         >
           <Check className="w-8 h-8" strokeWidth={3} />

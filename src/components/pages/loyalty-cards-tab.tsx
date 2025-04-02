@@ -22,7 +22,7 @@ export default function LoyaltyCardsTab({
         <div className="flex flex-col md:flex-row md:justify-between items-center mb-4">
           <TabsList className="mb-6 text-primary-foreground">
             <TabsTrigger value="cards">Cartões Ativos</TabsTrigger>
-            <TabsTrigger value="redemptions">Completos</TabsTrigger>
+            <TabsTrigger value="redemptions">Resgates</TabsTrigger>
             <TabsTrigger value="expired">Finalizados</TabsTrigger>
           </TabsList>
           <div className="flex flex-row flex-wrap justify-end items-center gap-4">

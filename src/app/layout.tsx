@@ -6,6 +6,8 @@ import { headers } from "next/headers";
 import { Toaster } from "sonner";
 import { redirect } from "next/navigation";
 import Header from "@/components/header";
+import Providers from "./providers";
+
 export const metadata: Metadata = {
   title: "Carimbou",
   description: "Programa de fidelização de clientes",
@@ -26,7 +28,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       console.error("Error getting session", error);
       throw redirect("/sign-in");
     });
-
   return (
     <html
       lang="en"
@@ -39,9 +40,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="icon" type="image/png" sizes="16x16" href="/icons2/favicon-16x16.png" />
       </head>
       <body className="min-h-[100dvh] bg-gray-50">
-        <Toaster richColors closeButton />
-        <Header user={session?.user} />
-        {children}
+        <Providers>
+          <Toaster richColors closeButton />
+          <Header user={session?.user} />
+          {children}
+        </Providers>
       </body>
     </html>
   );

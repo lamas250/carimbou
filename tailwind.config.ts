@@ -72,6 +72,11 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        stamp: "stamp 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+        "fade-in": "fade-in 0.5s ease-out",
+        "slide-up": "slide-up 0.5s ease-out",
+        "pulse-soft": "pulse-soft 2s infinite ease-in-out",
+        "card-complete": "card-complete 1.5s ease-in-out",
       },
     },
   },

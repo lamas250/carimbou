@@ -87,7 +87,7 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
   return (
     <Card className="relative flex h-full flex-col border shadow-sm transition-all hover:shadow-md">
       {isComplete && (
-        <Badge className="overflow-hidden absolute right-8 top-0 z-10000 translate-y-[-50%] bg-green-500 px-3 py-1 text-xs font-semibold hover:bg-green-600">
+        <Badge className="overflow-hidden absolute right-8 top-0 z-10000 translate-y-[-50%] bg-emerald-500 px-3 py-1 text-xs font-semibold hover:bg-emerald-600">
           Completo
         </Badge>
       )}
@@ -158,7 +158,7 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
                 key={index}
                 className={`flex h-10 w-10 items-center justify-center rounded-full border ${
                   index < card.stamps
-                    ? "bg-blue-100 border-blue-200 text-blue-600"
+                    ? "bg-red-100 border-red-300 text-red-600"
                     : "bg-gray-50 border-gray-200 text-gray-400"
                 }`}
               >
@@ -171,7 +171,7 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
 
       <CardFooter className="mt-auto border-t px-6 py-3 w-full">
         {isComplete ? (
-          <Button className="w-full">
+          <Button className="w-full cursor-pointer" onClick={() => router.push(`/home/${card.id}`)}>
             <Gift className="mr-2 h-4 w-4" />
             Resgatar Recompensa
           </Button>
@@ -180,7 +180,7 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
           <div className=" gap-2 w-full">
             <Button
               variant="secondary"
-              className="w-full"
+              className="w-full cursor-pointer"
               onClick={() => router.push(`/home/${card.id}`)}
             >
               <Info className="mr-2 h-4 w-4" />

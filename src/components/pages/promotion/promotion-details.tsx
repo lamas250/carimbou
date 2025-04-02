@@ -1,37 +1,30 @@
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Promotion } from "@prisma/client";
+import { Promotion, UserPromotion } from "@prisma/client";
 import Image from "next/image";
 import { Calendar, ScrollText, Users, TrendingUp } from "lucide-react";
 
-export default function PromotionDetails({ promotion }: { promotion: Promotion }) {
+export default function PromotionDetails({
+  promotion,
+  userPromotions,
+}: {
+  promotion: Promotion;
+  userPromotions: {
+    total: number;
+    active: number;
+    completed: number;
+  };
+}) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat("pt-BR").format(date);
   };
 
+  const progress = (userPromotions.completed / userPromotions.total) * 100;
+
   return (
     <Card>
-      {/* <CardHeader className="pb-2">
-        <div className="flex items-start gap-4">
-          {promotion.imageUrl ? (
-            <Image
-              src={promotion.imageUrl}
-              alt={promotion.name}
-              width={100}
-              height={100}
-              className="rounded-md"
-            />
-          ) : (
-            <div className="w-12 h-12 bg-gray-200 rounded-md" />
-          )}
-          <div>
-            <CardTitle className="text-2xl">{promotion.name}</CardTitle>
-            <CardDescription>{promotion.description}</CardDescription>
-          </div>
-        </div>
-      </CardHeader> */}
       <CardContent className="space-y-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
@@ -55,10 +48,12 @@ export default function PromotionDetails({ promotion }: { promotion: Promotion }
               <span className="text-muted-foreground">Início:</span>
               <p>{formatDate(promotion.createdAt.toISOString())}</p>
             </div>
-            {/* <div>
-              <span className="text-muted-foreground">Término:</span>
-              <p>{formatDate(promotion.)}</p>
-            </div> */}
+            {promotion.endDate && (
+              <div>
+                <span className="text-muted-foreground">Término:</span>
+                <p>{formatDate(promotion.endDate.toISOString())}</p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -74,13 +69,14 @@ export default function PromotionDetails({ promotion }: { promotion: Promotion }
           <div className="space-y-3">
             <div className="flex justify-between text-xs">
               <span className="flex items-center gap-1">
-                <Users className="h-3 w-3" /> 23 participantes
+                <Users className="h-3 w-3" /> {userPromotions.active}{" "}
+                {userPromotions.active === 1 ? "cartão ativo" : "cartões ativos"}
               </span>
               <span className="flex items-center gap-1">
-                <TrendingUp className="h-3 w-3" /> 11% taxa de conclusão
+                <TrendingUp className="h-3 w-3" /> {progress}% taxa de conclusão
               </span>
             </div>
-            <Progress value={11} className="h-2" />
+            <Progress value={progress} />
           </div>
         </div>
       </CardContent>

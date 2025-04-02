@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-
+import { useGetPromotionStamps } from "@/features/stamp/api/get-promotion-stamps";
+import { Stamp, StampStatus } from "@prisma/client";
 interface QrCodeListProps {
   promotionId: string;
 }
@@ -28,71 +29,22 @@ interface QrCodeItem {
 }
 
 export function QrCodeList({ promotionId }: QrCodeListProps) {
-  const [qrCodes, setQrCodes] = useState<QrCodeItem[]>([]);
+  // const [qrCodes, setQrCodes] = useState<QrCodeItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Simulando o carregamento de dados da API
-    const loadQrCodes = () => {
-      setIsLoading(true);
-
-      // Em um sistema real, você buscaria esses dados de uma API
-      setTimeout(() => {
-        const mockQrCodes: QrCodeItem[] = [
-          {
-            id: "qr-1234567890",
-            timestamp: "2023-05-15T10:30:00Z",
-            points: "1",
-            status: "used",
-            usedBy: "João Silva",
-            usedAt: "2023-05-15T14:22:00Z",
-          },
-          {
-            id: "qr-2345678901",
-            timestamp: "2023-05-15T11:45:00Z",
-            points: "2",
-            status: "used",
-            usedBy: "Maria Oliveira",
-            usedAt: "2023-05-15T16:05:00Z",
-          },
-          {
-            id: "qr-3456789012",
-            timestamp: "2023-05-16T09:15:00Z",
-            points: "5",
-            status: "pending",
-          },
-          {
-            id: "qr-4567890123",
-            timestamp: "2023-05-16T14:30:00Z",
-            points: "1",
-            status: "pending",
-          },
-          {
-            id: "qr-5678901234",
-            timestamp: "2023-05-14T16:20:00Z",
-            points: "10",
-            status: "expired",
-          },
-        ];
-
-        setQrCodes(mockQrCodes);
-        setIsLoading(false);
-      }, 1000);
-    };
-
-    loadQrCodes();
-  }, [promotionId]);
+  const { data, isLoading, error } = useGetPromotionStamps(promotionId);
 
   // Filtrar QR codes com base no termo de pesquisa
-  const filteredQrCodes = qrCodes.filter(
-    (qrCode) =>
+  const filteredQrCodes = data?.filter(
+    (qrCode: Stamp & { userPromotion: { user: { name: string } } }) =>
       qrCode.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (qrCode.usedBy && qrCode.usedBy.toLowerCase().includes(searchTerm.toLowerCase()))
+      (qrCode.userPromotionId &&
+        qrCode.userPromotionId.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      qrCode.userPromotion?.user?.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Formatar data e hora
-  const formatDateTime = (dateString: string) => {
+  const formatDateTime = (dateString: string | Date) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat("pt-BR", {
       day: "2-digit",
@@ -106,7 +58,7 @@ export function QrCodeList({ promotionId }: QrCodeListProps) {
   // Renderizar o status com ícone e cor apropriados
   const renderStatus = (status: string) => {
     switch (status) {
-      case "used":
+      case StampStatus.CLAIMED:
         return (
           <Badge
             variant="outline"
@@ -116,7 +68,7 @@ export function QrCodeList({ promotionId }: QrCodeListProps) {
             Utilizado
           </Badge>
         );
-      case "pending":
+      case StampStatus.PENDING:
         return (
           <Badge
             variant="outline"
@@ -126,7 +78,7 @@ export function QrCodeList({ promotionId }: QrCodeListProps) {
             Pendente
           </Badge>
         );
-      case "expired":
+      case StampStatus.EXPIRED:
         return (
           <Badge
             variant="outline"
@@ -144,7 +96,7 @@ export function QrCodeList({ promotionId }: QrCodeListProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl">QR Codes Gerados</CardTitle>
+        <CardTitle className="text-lg">QR Codes Gerados</CardTitle>
         <CardDescription>
           Histórico de QR codes gerados para esta promoção e seu status de utilização.
         </CardDescription>
@@ -171,28 +123,30 @@ export function QrCodeList({ promotionId }: QrCodeListProps) {
                 <TableRow>
                   <TableHead>ID</TableHead>
                   <TableHead>Gerado em</TableHead>
-                  <TableHead>Pontos</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Utilizado por</TableHead>
                   <TableHead>Utilizado em</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredQrCodes.map((qrCode) => (
-                  <TableRow key={qrCode.id}>
-                    <TableCell className="font-mono text-xs">
-                      <div className="flex items-center gap-2">
-                        <QrCode className="h-4 w-4 text-muted-foreground" />
-                        {qrCode.id}
-                      </div>
-                    </TableCell>
-                    <TableCell>{formatDateTime(qrCode.timestamp)}</TableCell>
-                    <TableCell>{qrCode.points}</TableCell>
-                    <TableCell>{renderStatus(qrCode.status)}</TableCell>
-                    <TableCell>{qrCode.usedBy || "-"}</TableCell>
-                    <TableCell>{qrCode.usedAt ? formatDateTime(qrCode.usedAt) : "-"}</TableCell>
-                  </TableRow>
-                ))}
+                {filteredQrCodes.map(
+                  (qrCode: Stamp & { userPromotion: { user: { name: string } } }) => (
+                    <TableRow key={qrCode.id}>
+                      <TableCell className="font-mono text-xs">
+                        <div className="flex items-center gap-2">
+                          <QrCode className="h-4 w-4 text-muted-foreground" />
+                          {qrCode.id}
+                        </div>
+                      </TableCell>
+                      <TableCell>{formatDateTime(qrCode.createdAt)}</TableCell>
+                      <TableCell>{renderStatus(qrCode.status)}</TableCell>
+                      <TableCell>
+                        {qrCode.userPromotion?.user?.name || qrCode.userPromotionId || "-"}
+                      </TableCell>
+                      <TableCell>{qrCode.usedAt ? formatDateTime(qrCode.usedAt) : "-"}</TableCell>
+                    </TableRow>
+                  )
+                )}
               </TableBody>
             </Table>
           </div>
