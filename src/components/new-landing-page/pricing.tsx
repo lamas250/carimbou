@@ -31,15 +31,10 @@ export default function Pricing() {
       currency: "R$",
       features: [
         { text: "Criação de até 2 programas de fidelidade", included: true },
-        { text: "QR Codes ilimitados para clientes acumularem selos", included: true },
-        { text: "Gestão de até 500 clientes ativos por mês", included: true },
+        { text: "QR Codes 500 por mês para clientes acumularem selos", included: true },
         { text: "Relatórios básicos de uso", included: true },
       ],
-      limitations: [
-        "Máximo de 500 clientes ativos por mês (clientes que escanearam o QR Code pelo menos 1 vez no mês)",
-        "Sem personalização de design ou marca",
-        "Sem suporte prioritário",
-      ],
+      limitations: ["Sem personalização de design ou marca", "Sem suporte prioritário"],
       buttonText: "Começar agora",
       buttonVariant: "outline" as const,
     },
@@ -54,7 +49,7 @@ export default function Pricing() {
       },
       currency: "R$",
       features: [
-        { text: "Clientes ilimitados (sem limite de escaneamento)", included: true },
+        { text: "Clientes e QR Codes ilimitados (sem limite de escaneamento)", included: true },
         { text: "Personalização com logo e cores da marca", included: true },
         { text: "Relatórios detalhados com insights sobre clientes fiéis", included: true },
         { text: "Campanhas automatizadas (WhatsApp ou e-mail para reengajamento)", included: true },
@@ -241,7 +236,7 @@ export default function Pricing() {
         </div>
 
         <div className="mt-16 text-center">
-          <div className="flex flex-col md:flex-row items-center rounded-full border border-slate-200 bg-white px-6 py-3 shadow-sm">
+          <div className="inline-flex flex-col md:flex-row items-center w-full md:w-auto rounded-full border border-slate-200 bg-white px-6 py-3 shadow-sm">
             <span className="text-sm font-medium text-slate-700">
               Precisa de um plano personalizado para sua rede?
             </span>
