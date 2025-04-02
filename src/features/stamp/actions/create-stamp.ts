@@ -34,6 +34,6 @@ export const createStamp = async (promotionId: string, userPromotionId: string) 
       status: stamp.status,
       promotionId: stamp.promotionId,
     },
-    url: `${process.env.NEXT_PUBLIC_APP_URL}/claim/${stamp.id}`,
+    url: `${process.env.NEXT_PUBLIC_APP_URL}/validar/${stamp.id}`,
   };
 };
