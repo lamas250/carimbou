@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Header from "@/components/header";
 import { motion, useInView } from "framer-motion";
+import Pricing from "@/components/new-landing-page/pricing";
 
 export default function Home() {
   return (
@@ -158,6 +159,9 @@ export default function Home() {
 
         {/* Depoimentos */}
         {/* <Testimonials /> */}
+
+        {/* Pricing */}
+        <Pricing />
 
         {/* FAQ */}
         <Faq />
