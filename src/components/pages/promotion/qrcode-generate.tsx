@@ -75,7 +75,7 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
 
     if (type === QR_CODE_TYPES.PROMOTION_REDIRECT && promotionId) {
       id = promotionId;
-      urlGenerated = `${process.env.NEXT_PUBLIC_APP_URL}/ingressar/${promotionId}`;
+      urlGenerated = `${process.env.NEXT_PUBLIC_APP_URL}/participar/${promotionId}`;
     }
 
     if (type === QR_CODE_TYPES.REDEEM_REDIRECT && promotionId && userPromotionId) {
