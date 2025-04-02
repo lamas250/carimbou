@@ -7,7 +7,7 @@ import { ArrowLeft, Check } from "lucide-react";
 import confetti from "canvas-confetti";
 
 export function LoyaltyCardDemo() {
-  const [stamps, setStamps] = useState(6);
+  const [stamps, setStamps] = useState(7);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showReward, setShowReward] = useState(false);
   const totalStamps = 10;
