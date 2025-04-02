@@ -149,7 +149,7 @@ export function LoyaltyCardDemo() {
         </AnimatePresence>
 
         {!showReward && (
-          <div className="mt-6 flex justify-center">
+          <div className="mt-6 flex flex-col items-center justify-center gap-1 -mb-2">
             <Button
               onClick={handleAddStamp}
               className="bg-red-600 hover:bg-red-700 cursor-pointer"
@@ -157,6 +157,7 @@ export function LoyaltyCardDemo() {
             >
               Adicionar carimbo
             </Button>
+            <span className="text-xs text-gray-500">Clique no botão</span>
           </div>
         )}
         {/* {!showReward && (
