@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 type SuccessModalProps = {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  onClaim: () => void;
+  onClaim?: () => void;
   userPromotionId: string;
 };
 

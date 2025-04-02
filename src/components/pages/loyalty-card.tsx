@@ -18,6 +18,8 @@ import { StampStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
+import { QR_CODE_TYPES, QrCodeGenerator } from "./promotion/qrcode-generate";
+import { motion } from "framer-motion";
 
 type LoyaltyCardProps = {
   card: UserPromotionWithStamps;
@@ -84,9 +86,11 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
           <Card
             className={`loyalty-card mb-8 ${isCardCompleted ? "border-emerald-500" : ""} relative`}
           >
-            <Badge className="overflow-hidden absolute right-8 top-0 z-10000 translate-y-[-50%] bg-emerald-500 px-3 py-1 text-xs font-semibold hover:bg-emerald-600">
-              Completo
-            </Badge>
+            {isCardCompleted && (
+              <Badge className="absolute right-8 top-0 translate-y-[-50%] bg-emerald-500 px-3 py-1 text-xs font-semibold hover:bg-emerald-600">
+                Completo
+              </Badge>
+            )}
             <CardHeader>
               <div className="flex justify-between items-center">
                 <div className="flex flex-col gap-1">
@@ -101,6 +105,7 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
                 </div>
               </div>
             </CardHeader>
+
             <CardContent>
               <div className="grid grid-cols-5 gap-2 sm:gap-4">
                 {card.history.map((isStamped, index) => (
@@ -131,6 +136,19 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
           <div className="flex justify-end -mt-7 mb-4 mr-4">
             <span className="text-muted-foreground text-xs">Card ID: {card.id}</span>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex justify-center items-center mb-4"
+          >
+            <QrCodeGenerator
+              promotionId={card.promotion.id}
+              type={isCardCompleted ? QR_CODE_TYPES.REDEEM_REDIRECT : QR_CODE_TYPES.STAMP}
+              userPromotionId={card.id}
+            />
+          </motion.div>
 
           <Card className="glass-card">
             <CardHeader>

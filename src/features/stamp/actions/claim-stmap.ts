@@ -36,25 +36,11 @@ export async function claimStamp(stampId: string, userId: string) {
       isCompleted: false,
       isClaimed: false,
     },
-    include: { stamps: true },
+    include: { stamps: { where: { status: StampStatus.CLAIMED } } },
   });
 
   if (!userPromotion) {
-    const newUserPromotion = await prisma.userPromotion.create({
-      data: {
-        userId: userId,
-        promotionId: stamp.promotion.id,
-        isCompleted: false,
-        isClaimed: false,
-      },
-    });
-
-    await prisma.stamp.update({
-      where: { id: stampId },
-      data: { userPromotionId: newUserPromotion.id, status: StampStatus.CLAIMED },
-    });
-
-    return { success: true, message: "Selo resgatado com sucesso" };
+    throw new Error("Cartão não encontrado");
   }
 
   const cardDuration = userPromotion.createdAt.getTime() + (stamp.promotion.cardDuration ?? 0);
@@ -70,7 +56,7 @@ export async function claimStamp(stampId: string, userId: string) {
   await prisma.$transaction(async (prisma) => {
     await prisma.stamp.update({
       where: { id: stampId },
-      data: { status: StampStatus.CLAIMED, userPromotionId: userPromotion.id },
+      data: { status: StampStatus.CLAIMED },
     });
 
     if (userPromotion.stamps.length + 1 >= stamp.promotion.requiredStamps) {

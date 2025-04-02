@@ -10,7 +10,7 @@ import { CircleIcon, Loader2 } from "lucide-react";
 import { signIn, signUp, signOut } from "@/lib/auth-client";
 import { toast } from "sonner";
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
 export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
@@ -20,7 +20,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-
+  const router = useRouter();
   return (
     <div className="min-h-[100dvh] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -112,10 +112,11 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                   await signIn.email({
                     email,
                     password,
-                    callbackURL: "/home",
+                    // callbackURL: "/home",
                     fetchOptions: {
                       onSuccess: () => {
                         toast.success("Login realizado com sucesso");
+                        router.push("/home");
                       },
                       onError: () => {
                         toast.error("Erro ao fazer login");
@@ -128,10 +129,11 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                     email,
                     password,
                     name,
-                    callbackURL: "/home",
+                    // callbackURL: "/home",
                     fetchOptions: {
                       onSuccess: () => {
                         toast.success("Conta criada com sucesso");
+                        router.push("/home");
                       },
                       onError: () => {
                         toast.error("Erro ao criar conta");

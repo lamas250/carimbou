@@ -68,9 +68,9 @@ export default function Home() {
                     Começar agora
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button variant="outline" size="lg">
+                  {/* <Button variant="outline" size="lg">
                     Ver demonstração
-                  </Button>
+                  </Button> */}
                 </div>
                 <div className="flex items-center space-x-4 text-sm text-gray-500">
                   <div className="flex items-center">

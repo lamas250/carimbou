@@ -2,14 +2,17 @@
 
 import { signOut } from "@/lib/auth-client";
 import { Button } from "./ui/button";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function SignOut() {
+  const router = useRouter();
+
   const signOutHandler = async () => {
     await signOut({
       fetchOptions: {
         onSuccess: () => {
-          redirect("/");
+          window.location.reload();
+          router.push("/");
         },
       },
     });

@@ -106,7 +106,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
                 <FormItem>
                   <FormLabel>Nome da promoção*</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Nome da promoção" className="text-sm" />
+                    <Input {...field} placeholder="Nome da promoção" className="text-xs" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -124,7 +124,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
                   <FormControl>
                     <Textarea
                       {...field}
-                      className="text-sm"
+                      className="text-xs"
                       placeholder="Descrição da promoção. Ex. Compre 10 coisas para ganhar algo."
                     />
                   </FormControl>
@@ -196,7 +196,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
             </Button>
 
             {showAdvancedSettings && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div className="space-y-2">
                   <FormField
                     control={form.control}
