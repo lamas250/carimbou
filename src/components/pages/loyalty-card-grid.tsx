@@ -87,7 +87,7 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
   return (
     <Card className="relative flex h-full flex-col border shadow-sm transition-all hover:shadow-md">
       {isComplete && (
-        <Badge className="overflow-hidden absolute right-8 top-0 z-10000 translate-y-[-50%] bg-emerald-500 px-3 py-1 text-xs font-semibold hover:bg-emerald-600">
+        <Badge className="overflow-hidden absolute right-8 top-0 translate-y-[-50%] bg-emerald-500 px-3 py-1 text-xs font-semibold hover:bg-emerald-600">
           Completo
         </Badge>
       )}

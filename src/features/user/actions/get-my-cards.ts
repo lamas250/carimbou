@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Company, Promotion, UserPromotion, Stamp } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 export type UserPromotionWithStamps = UserPromotion & {
   stamps: number;
@@ -20,11 +21,11 @@ export async function getMyCards(): Promise<UserPromotionWithStamps[]> {
   const user = await prisma.user.findUnique({ where: { id: session?.user.id } });
 
   if (!user) {
-    throw new Error("User not found");
+    redirect("/sign-in");
   }
 
   const userPromotions = await prisma.userPromotion.findMany({
-    where: { userId: user.id },
+    where: { userId: user.id, isClaimed: false },
     include: { stamps: true, promotion: { include: { company: true } } },
   });
 

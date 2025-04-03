@@ -2,17 +2,21 @@
 
 import Container from "../container";
 import { LoyaltyCardGrid } from "./loyalty-card-grid";
-import { UserPromotion } from "@prisma/client";
+import { UserPromotion, Promotion, Company } from "@prisma/client";
 import { UserPromotionWithStamps } from "@/features/user/actions/get-my-cards";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { useState } from "react";
-
+import { LoyaltyCompleted } from "./loyalty-completed";
 export default function LoyaltyCardsTab({
   userPromotions,
+  completedCards,
+  expiredCards,
 }: {
   userPromotions: UserPromotionWithStamps[];
+  completedCards: UserPromotion & { promotion: Promotion & { company: Company } }[];
+  expiredCards: UserPromotion & { promotion: Promotion & { company: Company } }[];
 }) {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -50,12 +54,11 @@ export default function LoyaltyCardsTab({
         </TabsContent>
 
         <TabsContent value="redemptions" className="mt-0">
-          <div className="rounded-lg border border-dashed border-gray-300 bg-white text-center p-8">
-            <h3 className="text-lg font-medium text-gray-700">Nenhum cartão completo</h3>
-            <p className="mt-2 text-gray-500">
-              Complete seus cartões de fidelidade para resgatar recompensas
-            </p>
-          </div>
+          <LoyaltyCompleted
+            userPromotions={completedCards}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
         </TabsContent>
 
         <TabsContent value="expired" className="mt-0">

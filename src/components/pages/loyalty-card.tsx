@@ -86,9 +86,14 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
           <Card
             className={`loyalty-card mb-8 ${isCardCompleted ? "border-emerald-500" : ""} relative`}
           >
-            {isCardCompleted && (
+            {isCardCompleted && !card.isClaimed && (
               <Badge className="absolute right-8 top-0 translate-y-[-50%] bg-emerald-500 px-3 py-1 text-xs font-semibold hover:bg-emerald-600">
                 Completo
+              </Badge>
+            )}
+            {isCardCompleted && card.isClaimed && (
+              <Badge className="absolute right-8 top-0 translate-y-[-50%] bg-red-500 px-3 py-1 text-xs font-semibold hover:bg-red-600">
+                Resgatado
               </Badge>
             )}
             <CardHeader>
@@ -137,18 +142,20 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
             <span className="text-muted-foreground text-xs">Card ID: {card.id}</span>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex justify-center items-center mb-4"
-          >
-            <QrCodeGenerator
-              promotionId={card.promotion.id}
-              type={isCardCompleted ? QR_CODE_TYPES.REDEEM_REDIRECT : QR_CODE_TYPES.STAMP}
-              userPromotionId={card.id}
-            />
-          </motion.div>
+          {!card.isClaimed && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex justify-center items-center mb-4"
+            >
+              <QrCodeGenerator
+                promotionId={card.promotion.id}
+                type={isCardCompleted ? QR_CODE_TYPES.REDEEM_REDIRECT : QR_CODE_TYPES.STAMP}
+                userPromotionId={card.id}
+              />
+            </motion.div>
+          )}
 
           <Card className="glass-card">
             <CardHeader>

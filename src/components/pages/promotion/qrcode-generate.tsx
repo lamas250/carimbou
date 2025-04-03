@@ -61,7 +61,7 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
     if (type === QR_CODE_TYPES.REDEEM_REDIRECT && promotionId) {
       generateQrCode();
     }
-  }, [type, promotionId, isOpen, userPromotionId]);
+  }, [type, promotionId, isOpen, userPromotionId, userPromotionId]);
 
   const generateQrCode = async () => {
     let id = "";
