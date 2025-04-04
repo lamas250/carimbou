@@ -72,7 +72,7 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
     }
 
     if (type === QR_CODE_TYPES.REDEEM_REDIRECT && promotionId && userPromotionId) {
-      urlGenerated = `${process.env.NEXT_PUBLIC_APP_URL}/promocoes/${promotionId}`;
+      urlGenerated = `${process.env.NEXT_PUBLIC_APP_URL}/resgatar/${promotionId}`;
       id = userPromotionId;
     }
 
@@ -132,9 +132,7 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
               type === QR_CODE_TYPES.REDEEM_REDIRECT
                 ? "bg-emerald-500 hover:bg-emerald-600"
                 : "bg-primary hover:bg-primary/90"
-            } ${
-              type === QR_CODE_TYPES.REDEEM_REDIRECT ? "text-white" : "text-black"
-            } font-medium py-6 text-lg shadow-lg hover:shadow-xl transition-all`}
+            } text-white font-medium py-6 text-lg shadow-lg hover:shadow-xl transition-all`}
           >
             <QrCode className="mr-2 h-5 w-5" />
             {type === QR_CODE_TYPES.REDEEM_REDIRECT ? "Resgatar" : "Gerar QR Code"}
