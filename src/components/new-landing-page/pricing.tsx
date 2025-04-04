@@ -33,7 +33,7 @@ export default function Pricing() {
       currency: "R$",
       features: [
         { text: "Criação de até 2 programas de fidelidade", included: true },
-        { text: "QR Codes 500 por mês para clientes acumularem selos", included: true },
+        { text: "750 QR Codes por mês para clientes acumularem selos", included: true },
         { text: "Relatórios básicos de uso", included: true },
       ],
       limitations: ["Sem personalização de design ou marca", "Sem suporte prioritário"],
@@ -47,8 +47,8 @@ export default function Pricing() {
       description:
         "Para negócios que querem crescer e ter mais controle sobre seu programa de fidelidade.",
       price: {
-        monthly: 49.9,
-        annually: 41.9,
+        monthly: 39.9,
+        annually: 33.3,
       },
       currency: "R$",
       features: [
@@ -84,7 +84,7 @@ export default function Pricing() {
               variant="outline"
               className="border-red-600/20 bg-red-50 text-red-600 px-4 py-1 text-sm rounded-full"
             >
-              Preços simples e transparentes
+              Experimente grátis por 7 dias
             </Badge>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Escolha o plano ideal para o seu negócio
@@ -161,11 +161,16 @@ export default function Pricing() {
                     {tier.description}
                   </CardDescription>
                   <div className="mt-4 flex items-baseline text-slate-900">
-                    <span className="text-4xl font-extrabold tracking-tight">
-                      {tier.currency}
-                      {price.toFixed(2).replace(".", ",")}
-                    </span>
-                    <span className="ml-1 text-xl font-semibold">/mês</span>
+                    <div className="flex flex-col">
+                      <div>
+                        <span className="text-4xl font-extrabold tracking-tight">
+                          {tier.currency}
+                          {price.toFixed(2).replace(".", ",")}
+                        </span>
+                        <span className="ml-1 text-xl font-semibold">/mês</span>
+                      </div>
+                      <span className="text-sm text-slate-500">Teste grátis por 7 dias*</span>
+                    </div>
 
                     {billingCycle === "annually" && (
                       <div className="ml-2 rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 border border-red-700">

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AlertCircle, Meh, Sparkles } from "lucide-react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useCallback, useState } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe-js";
 import { auth } from "@/lib/auth";
 import { useSession } from "@/lib/auth-client";
@@ -58,13 +58,16 @@ export function PaymentButton({ tier, billingCycle }: PaymentButtonProps) {
           {tier.buttonText}
         </Button>
       </DialogTrigger>
-      <DialogContent id="checkout">
-        <>
-          {session.data?.user ? (
+      <DialogContent className={`overflow-y-auto ${session.data?.user ? "h-full" : ""}`}>
+        <DialogTitle>{""}</DialogTitle>
+        {session.data?.user ? (
+          <div id="checkout">
             <EmbeddedCheckoutProvider options={options} stripe={stripePromise}>
               <EmbeddedCheckout />
             </EmbeddedCheckoutProvider>
-          ) : (
+          </div>
+        ) : (
+          <div className="w-full">
             <Card className="max-w-lg text-center justify-center items-center border-none shadow-none">
               <CardHeader className="w-full">
                 <Meh className="w-12 h-12 text-red-500 mx-auto mb-4" />
@@ -81,8 +84,8 @@ export function PaymentButton({ tier, billingCycle }: PaymentButtonProps) {
                 </Link>
               </CardContent>
             </Card>
-          )}
-        </>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

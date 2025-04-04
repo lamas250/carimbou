@@ -22,6 +22,7 @@ import { ChevronRight } from "lucide-react";
 import Header from "@/components/header";
 import { motion, useInView } from "framer-motion";
 import Pricing from "@/components/new-landing-page/pricing";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -64,10 +65,12 @@ export default function Home() {
                   perfeita. Colete carimbos e resgate sua recompensa com apenas alguns cliques.
                 </motion.p>
                 <div className="flex flex-col space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <Button size="lg" className="bg-red-600 hover:bg-red-700">
-                    Começar agora
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <Link href="/#pricing">
+                    <Button size="lg" className="bg-red-600 hover:bg-red-700">
+                      Começar agora
+                      <ChevronRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                   {/* <Button variant="outline" size="lg">
                     Ver demonstração
                   </Button> */}
@@ -176,17 +179,22 @@ export default function Home() {
                 programa de retenção de clientes.
               </p>
               <div className="mt-8 flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  className="bg-white text-red-600 hover:bg-gray-100"
-                >
-                  Começar agora
-                </Button>
+                <Link href="/#pricing">
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    className="bg-white text-red-600 hover:bg-gray-100"
+                  >
+                    Começar agora
+                  </Button>
+                </Link>
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-white text-white bg-red-600 hover:bg-red-700"
+                  onClick={() => {
+                    window.open("mailto:igor@carimbou.com", "_blank");
+                  }}
                 >
                   Falar com um consultor
                 </Button>
