@@ -12,23 +12,24 @@ export async function claimStamp(stampId: string, userId: string) {
     throw new Error("Usuário não encontrado");
   }
 
+  const stamp = await prisma.stamp.findUnique({
+    where: { id: stampId },
+    include: { promotion: { include: { company: true } } },
+  });
+
+  if (!stamp) {
+    throw new Error("Selo não encontrado");
+  }
+
   const userCompanies = await prisma.companyUser.findMany({
     where: {
       userId: userId,
+      companyId: stamp.promotion.company.id,
     },
   });
 
   if (userCompanies.length > 1) {
     throw new Error("Usuário não tem permissão para resgatar selos");
-  }
-
-  const stamp = await prisma.stamp.findUnique({
-    where: { id: stampId },
-    include: { promotion: true },
-  });
-
-  if (!stamp) {
-    throw new Error("Selo não encontrado");
   }
 
   if (stamp.status === StampStatus.CLAIMED) {
@@ -49,8 +50,7 @@ export async function claimStamp(stampId: string, userId: string) {
 
   const userPromotion = await prisma.userPromotion.findFirst({
     where: {
-      userId: userId,
-      promotionId: stamp.promotion.id,
+      id: stamp.userPromotionId ?? "",
       isCompleted: false,
       isClaimed: false,
     },

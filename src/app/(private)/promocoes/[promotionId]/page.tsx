@@ -54,8 +54,8 @@ export default async function PromotionPage({ params }: { params: Params }) {
           <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
             <CardHeader>
               <CardTitle className="text-xl flex items-center gap-2">
-                <QrCode className="h-5 w-5 text-primary" />
-                Geração de QR Code
+                <QrCode className="h-5 w-5" />
+                Convide clientes para esta promoção
               </CardTitle>
               <CardDescription>
                 Gere um QR Code para que os clientes possam ingressar nesta promoção.

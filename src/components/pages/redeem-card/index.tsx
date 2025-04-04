@@ -196,7 +196,7 @@ export function RedeemCard({ userId, userPromotion }: RedeemCardProps) {
                 <Button
                   className="w-full py-6"
                   variant="default"
-                  onClick={() => router.push(`/empresas/${promotion.id}`)}
+                  onClick={() => router.push(`/promocoes/${promotion.id}`)}
                 >
                   Acesse a página da promoção
                 </Button>

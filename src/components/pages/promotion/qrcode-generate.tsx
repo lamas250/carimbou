@@ -1,7 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { QrCode, RefreshCw, Plus, Download, Printer, Copy, QrCodeIcon } from "lucide-react";
+import {
+  QrCode,
+  RefreshCw,
+  Plus,
+  Download,
+  Printer,
+  Copy,
+  QrCodeIcon,
+  Loader2,
+} from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -152,13 +161,19 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
                 type === QR_CODE_TYPES.REDEEM_REDIRECT ? "border-emerald-500" : "border-primary"
               }`}
             >
-              <Image
-                src={qrImage || "/placeholder.svg"}
-                alt="QR Code gerado"
-                className="mx-auto"
-                width={300}
-                height={300}
-              />
+              {qrImage ? (
+                <Image
+                  src={qrImage}
+                  alt="QR Code gerado"
+                  className="mx-auto"
+                  width={300}
+                  height={300}
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <Loader2 className="h-10 w-10 animate-spin" />
+                </div>
+              )}
             </div>
             <span className="text-sm text-muted-foreground">
               {type === QR_CODE_TYPES.STAMP

@@ -69,12 +69,14 @@ export default function PromotionDetails({
           <div className="space-y-3">
             <div className="flex justify-between text-xs">
               <span className="flex items-center gap-1">
-                <Users className="h-3 w-3" /> {userPromotions.active}{" "}
+                <Users className="h-3 w-3" /> {userPromotions.active}/{userPromotions.total}{" "}
                 {userPromotions.active === 1 ? "cartão ativo" : "cartões ativos"}
               </span>
-              <span className="flex items-center gap-1">
-                <TrendingUp className="h-3 w-3" /> {progress}% taxa de conclusão
-              </span>
+              {progress > 0 && (
+                <span className="flex items-center gap-1">
+                  <TrendingUp className="h-3 w-3" /> {progress}% taxa de conclusão
+                </span>
+              )}
             </div>
             <Progress value={progress} />
           </div>

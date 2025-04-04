@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { CalendarCheck, ChevronLeft, Fullscreen, History, Link, RefreshCw } from "lucide-react";
+import {
+  CalendarCheck,
+  ChevronLeft,
+  Fullscreen,
+  History,
+  Link,
+  QrCode,
+  RefreshCw,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UserPromotionWithStamps } from "@/features/user/actions/get-my-cards";
 import {
@@ -149,11 +157,30 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="flex justify-center items-center mb-4"
             >
-              <QrCodeGenerator
-                promotionId={card.promotion.id}
-                type={isCardCompleted ? QR_CODE_TYPES.REDEEM_REDIRECT : QR_CODE_TYPES.STAMP}
-                userPromotionId={card.id}
-              />
+              <Card
+                className={`${
+                  !isCardCompleted
+                    ? "bg-primary/10 border-primary/20"
+                    : "bg-emerald-500/10 border-emerald-500/20"
+                } w-full`}
+              >
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <QrCode className={"h-5 w-5"} />
+                    Receba um carimbo
+                  </CardTitle>
+                  <CardDescription>
+                    Gere um QR Code para que o comerciante possa te dar um carimbo.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <QrCodeGenerator
+                    promotionId={card.promotion.id}
+                    type={isCardCompleted ? QR_CODE_TYPES.REDEEM_REDIRECT : QR_CODE_TYPES.STAMP}
+                    userPromotionId={card.id}
+                  />
+                </CardContent>
+              </Card>
             </motion.div>
           )}
 

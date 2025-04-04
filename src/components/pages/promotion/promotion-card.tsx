@@ -108,7 +108,9 @@ export function PromotionCard({
                   <TrendingUp className="h-3 w-3" />{" "}
                   {stats?.completedUserPromotions === 0
                     ? 0
-                    : (stats?.completedUserPromotions / stats?.totalUserPromotions) * 100}
+                    : ((stats?.completedUserPromotions / stats?.totalUserPromotions) * 100).toFixed(
+                        2
+                      )}
                   % taxa de conclusão
                 </span>
               </div>
