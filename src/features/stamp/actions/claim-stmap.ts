@@ -4,6 +4,24 @@ import prisma from "@/lib/prisma";
 import { StampStatus } from "@prisma/client";
 
 export async function claimStamp(stampId: string, userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    throw new Error("Usuário não encontrado");
+  }
+
+  const userCompanies = await prisma.companyUser.findMany({
+    where: {
+      userId: userId,
+    },
+  });
+
+  if (userCompanies.length > 1) {
+    throw new Error("Usuário não tem permissão para resgatar selos");
+  }
+
   const stamp = await prisma.stamp.findUnique({
     where: { id: stampId },
     include: { promotion: true },
@@ -56,7 +74,7 @@ export async function claimStamp(stampId: string, userId: string) {
   await prisma.$transaction(async (prisma) => {
     await prisma.stamp.update({
       where: { id: stampId },
-      data: { status: StampStatus.CLAIMED },
+      data: { status: StampStatus.CLAIMED, usedAt: new Date() },
     });
 
     if (userPromotion.stamps.length + 1 >= stamp.promotion.requiredStamps) {
