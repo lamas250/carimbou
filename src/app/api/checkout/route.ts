@@ -32,6 +32,9 @@ export async function POST(req: Request) {
       ],
       return_url: `${process.env.NEXT_PUBLIC_APP_URL}/pagamento-efetuado?session_id={CHECKOUT_SESSION_ID}`,
       customer_email: session.user.email,
+      subscription_data: {
+        trial_period_days: 7,
+      },
     });
 
     return NextResponse.json({
