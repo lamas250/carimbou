@@ -66,10 +66,16 @@ const errorMessage = (code: string) => {
   }
 };
 
-export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
+export function Login({
+  mode = "signin",
+  redirect,
+}: {
+  mode?: "signin" | "signup";
+  redirect?: string;
+}) {
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect");
   const priceId = searchParams.get("priceId");
+  const redirectValue = searchParams.get("redirect");
   const [isPending, setIsPending] = useState(false);
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -106,7 +112,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
         fetchOptions: {
           onSuccess: () => {
             toast.success("Login realizado com sucesso");
-            router.push("/home");
+            router.push(redirectValue || "/home");
           },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onError: (error: any) => {
@@ -129,7 +135,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
       fetchOptions: {
         onSuccess: () => {
           toast.success("Conta criada com sucesso");
-          router.push("/home");
+          router.push(redirectValue || "/home");
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error: any) => {

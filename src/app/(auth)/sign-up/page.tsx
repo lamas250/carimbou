@@ -1,5 +1,11 @@
 import { Login } from "../login";
 
-export default function SignUpPage() {
-  return <Login mode="signup" />;
+interface SignUpPageProps {
+  searchParams: Promise<{ redirect?: string }>;
+}
+
+export default async function SignUpPage({ searchParams }: SignUpPageProps) {
+  const redirect = (await searchParams).redirect;
+
+  return <Login mode="signup" redirect={redirect} />;
 }

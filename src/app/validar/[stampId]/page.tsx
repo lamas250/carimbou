@@ -20,7 +20,7 @@ export default async function ValidateStampPage({ params }: ValidateStampPagePro
   });
 
   if (!session) {
-    redirect("/login");
+    redirect("/sign-in");
   }
 
   const stamp = await prisma.stamp.findUnique({

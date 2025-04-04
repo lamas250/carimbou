@@ -9,6 +9,7 @@ import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { LoyaltyCompleted } from "./loyalty-completed";
+
 export default function LoyaltyCardsTab({
   userPromotions,
   completedCards,

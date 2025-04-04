@@ -25,10 +25,15 @@ export default async function ParticipatePage({ params }: ParticipatePageProps) 
       throw redirect("/sign-in");
     });
 
+  if (!session) {
+    redirect("/sign-in?redirect=/participar/" + promotionId);
+  }
+
   const { promotion, userPromotion } = await getPromotionOnParticipate(
     promotionId,
     session?.user.id ?? ""
   );
+
   const progressCount = await getUserProgress(session?.user.id ?? "", promotionId);
 
   if (!promotion) {

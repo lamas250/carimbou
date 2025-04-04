@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { Company, Promotion, UserPromotion, Stamp } from "@prisma/client";
+import { Company, Promotion, UserPromotion, Stamp, StampStatus } from "@prisma/client";
 import { redirect } from "next/navigation";
 
 export type UserPromotionWithStamps = UserPromotion & {
@@ -26,7 +26,10 @@ export async function getMyCards(): Promise<UserPromotionWithStamps[]> {
 
   const userPromotions = await prisma.userPromotion.findMany({
     where: { userId: user.id, isClaimed: false },
-    include: { stamps: true, promotion: { include: { company: true } } },
+    include: {
+      stamps: { where: { status: StampStatus.CLAIMED } },
+      promotion: { include: { company: true } },
+    },
   });
 
   const userPromotionsWithStamps = userPromotions.map((userPromotion) => {
