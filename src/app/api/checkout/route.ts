@@ -35,6 +35,7 @@ export async function POST(req: Request) {
       subscription_data: {
         trial_period_days: 7,
       },
+      locale: "pt-BR",
     });
 
     return NextResponse.json({
