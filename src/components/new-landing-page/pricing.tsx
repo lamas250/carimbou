@@ -15,18 +15,20 @@ import {
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
+import { PaymentButton } from "../payment-button";
 
 export default function Pricing() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annually">("monthly");
 
   const pricingTiers = [
     {
+      id: "basic",
       name: "Plano Básico",
       emoji: "📦",
       description: "Ideal para pequenos comércios que querem fidelizar clientes sem complicação.",
       price: {
         monthly: 19.9,
-        annually: 16.9,
+        annually: 16.7,
       },
       currency: "R$",
       features: [
@@ -39,6 +41,7 @@ export default function Pricing() {
       buttonVariant: "outline" as const,
     },
     {
+      id: "advanced",
       name: "Plano Avançado",
       emoji: "🚀",
       description:
@@ -73,7 +76,7 @@ export default function Pricing() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-slate-50">
+    <section id="pricing" className="py-20 bg-gradient-to-b from-white to-slate-50">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <div className="space-y-2">
@@ -215,21 +218,7 @@ export default function Pricing() {
                 </CardContent>
 
                 <CardFooter className="pt-6">
-                  <Button
-                    asChild
-                    variant={tier.buttonVariant}
-                    className={`w-full ${
-                      tier.highlighted
-                        ? "bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white shadow-md"
-                        : ""
-                    }`}
-                    size="lg"
-                  >
-                    <Link href="#">
-                      {tier.highlighted && <Sparkles className="mr-2 h-4 w-4" />}
-                      {tier.buttonText}
-                    </Link>
-                  </Button>
+                  <PaymentButton tier={tier} billingCycle={billingCycle} />
                 </CardFooter>
               </Card>
             );

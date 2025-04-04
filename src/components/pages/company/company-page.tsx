@@ -20,8 +20,6 @@ const CompanyPage = ({
   const { setPromotions, promotions: promotionsStore } = usePromotionStore();
   const { data, isLoading, error } = useGetPromotionStats(company.id);
 
-  console.log(data);
-
   useEffect(() => {
     if (promotions.length > 0) {
       setPromotions(promotions);

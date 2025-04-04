@@ -5,14 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
-import { useSession } from "@/lib/auth-client";
 import { UserMenu } from "./user-menu";
-import { User } from "@prisma/client";
-import { Session } from "better-auth";
 import Image from "next/image";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Header = ({ user }: { user: any }) => {
+const Header = ({ user, subscription }: { user: any; subscription: boolean }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -50,12 +47,12 @@ const Header = ({ user }: { user: any }) => {
         {/* Desktop Navigation */}
         {user ? (
           <nav className="hidden md:flex items-center space-x-4">
-            <NavLinks onClick={() => {}} authenticated={true} />
+            <NavLinks onClick={() => {}} authenticated={true} subscription={subscription} />
             <UserMenu user={user} />
           </nav>
         ) : (
           <nav className="hidden md:flex items-center space-x-4">
-            <NavLinks onClick={() => {}} authenticated={false} />
+            <NavLinks onClick={() => {}} authenticated={false} subscription={subscription} />
           </nav>
         )}
 
@@ -80,11 +77,19 @@ const Header = ({ user }: { user: any }) => {
       >
         {user ? (
           <nav className="flex flex-col space-y-4 px-4">
-            <NavLinks onClick={() => setMobileMenuOpen(false)} authenticated={true} />
+            <NavLinks
+              onClick={() => setMobileMenuOpen(false)}
+              authenticated={true}
+              subscription={subscription}
+            />
           </nav>
         ) : (
           <nav className="flex flex-col space-y-4 px-4">
-            <NavLinks onClick={() => setMobileMenuOpen(false)} authenticated={false} />
+            <NavLinks
+              onClick={() => setMobileMenuOpen(false)}
+              authenticated={false}
+              subscription={subscription}
+            />
           </nav>
         )}
       </div>
@@ -92,13 +97,21 @@ const Header = ({ user }: { user: any }) => {
   );
 };
 
-const NavLinks = ({ onClick, authenticated }: { onClick: () => void; authenticated: boolean }) => {
+const NavLinks = ({
+  onClick,
+  authenticated,
+  subscription,
+}: {
+  onClick: () => void;
+  authenticated: boolean;
+  subscription: boolean;
+}) => {
   const pathname = usePathname();
 
   const links = authenticated
     ? [
         { name: "Meus Cartões", path: "/home" },
-        { name: "Minhas Empresas", path: "/empresas" },
+        ...(subscription ? [{ name: "Minhas Empresas", path: "/empresas" }] : []),
       ]
     : [
         { name: "Entrar", path: "/sign-in" },

@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { redirect } from "next/navigation";
 import Header from "@/components/header";
 import Providers from "./providers";
+import { fetchSubscriptionByEmail } from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Carimbou",
@@ -28,9 +29,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       console.error("Error getting session", error);
       throw redirect("/sign-in");
     });
+
+  let subscription = "";
+  if (session?.user?.email) {
+    const result = await fetchSubscriptionByEmail(session?.user?.email);
+    subscription = result?.id || "";
+  }
+
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       className={`bg-white dark:bg-gray-950 text-black dark:text-white ${manrope.className}`}
     >
       <head>
@@ -42,7 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-[100dvh] bg-gray-50">
         <Providers>
           <Toaster richColors closeButton />
-          <Header user={session?.user} />
+          <Header user={session?.user} subscription={subscription ? true : false} />
           {children}
         </Providers>
       </body>

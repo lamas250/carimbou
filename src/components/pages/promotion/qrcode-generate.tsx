@@ -47,22 +47,6 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
   const [qrId, setQrId] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    if (type === QR_CODE_TYPES.STAMP && promotionId && userPromotionId) {
-      generateQrCode();
-    }
-
-    if (type === QR_CODE_TYPES.PROMOTION_REDIRECT && promotionId) {
-      generateQrCode();
-    }
-
-    if (type === QR_CODE_TYPES.REDEEM_REDIRECT && promotionId) {
-      generateQrCode();
-    }
-  }, [type, promotionId, isOpen, userPromotionId, userPromotionId]);
-
   const generateQrCode = async () => {
     let id = "";
     let urlGenerated = "";
@@ -88,6 +72,22 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
     setQrId(id);
     setQrImage(qrImage || "");
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    if (type === QR_CODE_TYPES.STAMP && promotionId && userPromotionId) {
+      generateQrCode();
+    }
+
+    if (type === QR_CODE_TYPES.PROMOTION_REDIRECT && promotionId) {
+      generateQrCode();
+    }
+
+    if (type === QR_CODE_TYPES.REDEEM_REDIRECT && promotionId) {
+      generateQrCode();
+    }
+  }, [type, promotionId, isOpen, userPromotionId, generateQrCode]);
 
   const handleCopyQrId = () => {
     navigator.clipboard.writeText(qrId);

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut, Settings, CreditCard } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -80,6 +80,12 @@ export function UserMenu({ user }: NavbarProps) {
               <Link href="/settings" className="flex w-full cursor-pointer items-center">
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Configurações</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/assinatura" className="flex w-full cursor-pointer items-center">
+                <CreditCard className="mr-2 h-4 w-4" />
+                <span>Assinatura</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleLogout}>
