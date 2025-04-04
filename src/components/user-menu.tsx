@@ -76,12 +76,12 @@ export function UserMenu({ user }: NavbarProps) {
               <span className="text-xs text-muted-foreground">{user.email}</span>
             </div>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
+            {/* <DropdownMenuItem asChild>
               <Link href="/settings" className="flex w-full cursor-pointer items-center">
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Configurações</span>
               </Link>
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
             <DropdownMenuItem asChild>
               <Link href="/assinatura" className="flex w-full cursor-pointer items-center">
                 <CreditCard className="mr-2 h-4 w-4" />

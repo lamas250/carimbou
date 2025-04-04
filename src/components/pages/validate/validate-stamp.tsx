@@ -76,7 +76,6 @@ export function ValidateStamp({ stampData, progressCount }: ValidateStampProps) 
       setUserProgress(userProgress + 1);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.error(error);
       toast.error("Erro ao resgatar o selo", {
         description: error.message,
       });

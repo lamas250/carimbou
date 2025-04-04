@@ -34,9 +34,10 @@ export default function Pricing() {
       features: [
         { text: "Criação de até 2 programas de fidelidade", included: true },
         { text: "750 QR Codes por mês para clientes acumularem selos", included: true },
+        { text: "Suporte uma unica empresa por conta", included: true },
         { text: "Relatórios básicos de uso", included: true },
       ],
-      limitations: ["Sem personalização de design ou marca", "Sem suporte prioritário"],
+      limitations: ["Sem personalização de design ou marca"],
       buttonText: "Começar agora",
       buttonVariant: "outline" as const,
     },
