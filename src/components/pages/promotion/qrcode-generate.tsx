@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   QrCode,
   RefreshCw,
@@ -75,7 +75,7 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
   const [qrId, setQrId] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const generateQrCode = async () => {
+  const generateQrCode = useCallback(async () => {
     let id = "";
     let urlGenerated = "";
 
@@ -99,23 +99,13 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
 
     setQrId(id);
     setQrImage(qrImage || "");
-  };
+  }, [promotionId, type, userPromotionId]);
 
   useEffect(() => {
     if (!isOpen) return;
 
-    if (type === QR_CODE_TYPES.STAMP && promotionId && userPromotionId) {
-      generateQrCode();
-    }
-
-    if (type === QR_CODE_TYPES.PROMOTION_REDIRECT && promotionId) {
-      generateQrCode();
-    }
-
-    if (type === QR_CODE_TYPES.REDEEM_REDIRECT && promotionId) {
-      generateQrCode();
-    }
-  }, [type, promotionId, isOpen, userPromotionId, generateQrCode]);
+    generateQrCode();
+  }, [isOpen, generateQrCode]);
 
   const handleCopyQrId = () => {
     navigator.clipboard.writeText(qrId);
