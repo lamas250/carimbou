@@ -73,7 +73,7 @@ export default function PromotionDetails({
                 <Users className="h-3 w-3" /> {userPromotions.active}/{userPromotions.total}{" "}
                 {userPromotions.active === 1 ? "cartão ativo" : "cartões ativos"}
               </span>
-              {progress && (
+              {progress !== "NaN" && (
                 <span className="flex items-center gap-1">
                   <TrendingUp className="h-3 w-3" /> {progress}% taxa de conclusão
                 </span>

@@ -19,15 +19,6 @@ interface QrCodeListProps {
   promotionId: string;
 }
 
-interface QrCodeItem {
-  id: string;
-  timestamp: string;
-  points: string;
-  status: "used" | "pending" | "expired";
-  usedBy?: string;
-  usedAt?: string;
-}
-
 export function QrCodeList({ promotionId }: QrCodeListProps) {
   // const [qrCodes, setQrCodes] = useState<QrCodeItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");

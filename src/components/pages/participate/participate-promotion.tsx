@@ -74,35 +74,50 @@ export function ParticipatePromotion({
           <CardHeader className="pb-2 text-center">
             <div className="flex justify-center mb-2">
               <Image
-                src={promotion.imageUrl || promotion.company.logoUrl || ""}
+                src={promotion.company.logoUrl || ""}
                 alt={promotion.name}
                 className="rounded-sm shadow-md"
                 width={80}
                 height={80}
               />
             </div>
-            {/* <CardTitle className="text-2xl">{promotionData.company.name}</CardTitle> */}
             <CardTitle className="text-2xl">{promotion.company.name}</CardTitle>
-            <CardDescription>Programa de Fidelidade</CardDescription>
+            <CardDescription>{promotion.company.description}</CardDescription>
           </CardHeader>
 
           <CardContent className="space-y-6">
             <div className="px-4 -mt-2 -mb-1">
               <Separator />
             </div>
-            <div className=" p-4">
-              <div className="flex justify-between items-center mb-1">
+            <div className="flex flex-row gap-2 px-4 mt-8">
+              {promotion.imageUrl && (
+                <div className="flex justify-center mb-2">
+                  <Image
+                    src={promotion.imageUrl}
+                    alt={promotion.name}
+                    className="rounded-sm shadow-md"
+                    width={60}
+                    height={60}
+                  />
+                </div>
+              )}
+              <div>
                 <h3 className="font-semibold text-lg">{promotion.name}</h3>
               </div>
-              <p className="text-sm mb-2">{promotion.description}</p>
+            </div>
 
+            <div className="px-4">
+              <p className="text-sm mb-2">{promotion.description}</p>
               {promotion.reward && (
-                <div className="flex items-center gap-1 border-primary border rounded-md p-2">
+                <div className="flex items-center gap-1 border-primary/60 border rounded-md p-2">
                   <span className="text-sm">Recompensa: {promotion.reward}</span>
                 </div>
               )}
             </div>
-            <div className="px-4 -mt-6">
+            <div className="px-4 ">
+              <span className="text-sm text-muted-foreground">{promotion.rule}</span>
+            </div>
+            <div className="px-4">
               <Separator />
             </div>
 
