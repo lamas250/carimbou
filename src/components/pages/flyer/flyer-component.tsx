@@ -35,8 +35,8 @@ export default function FlyerComponent({ promotion, promotionId }: DigitalFlyerP
   }, [promotionId]);
 
   return (
-    <div id="flyer-promotion">
-      <Card className="max-w-md mx-auto overflow-hidden border-2 shadow-lg p-0 mt-8">
+    <div id="flyer-promotion" className="w-full">
+      <Card className="max-w-md overflow-hidden border-2 shadow-lg p-0 mt-8 min-w-[300px]">
         <div className="bg-gradient-to-br from-primary/90 to-primary/70 text-white p-6">
           <div className="flex items-center gap-4">
             <div className=" rounded-md shadow-md">

@@ -81,9 +81,9 @@ export default function FlyerPrinterWrapper({
   };
 
   return (
-    <div className="overflow-y-auto h-full">
+    <div className="overflow-y-auto h-full min-w-[400px]">
       <div id="flyer-promotion" className="flex justify-center">
-        <div className="flex justify-center">
+        <div className="flex justify-center w-full">
           <FlyerComponent promotion={promotion} promotionId={promotionId} />
         </div>
       </div>

@@ -30,7 +30,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-[100dvh] bg-gray-50">
         <Providers>
           <Toaster richColors closeButton />
-
           {children}
         </Providers>
       </body>
