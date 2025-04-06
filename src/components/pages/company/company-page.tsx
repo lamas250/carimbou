@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import CreatePromotionDialog from "@/components/pages/promotion/create-promotion-dialog";
 import { CompanyType } from "@/features/companies/types";
 import { usePromotionStore } from "@/store/promotions";
-import { Promotion } from "@prisma/client";
+import { Company, Promotion } from "@prisma/client";
 import { PromotionCard } from "../promotion/promotion-card";
 import { useGetPromotionStats } from "@/features/promotions/api/get-promotion-stats";
+import CompanyDetails from "./company-details";
 
 const CompanyPage = ({
   company,
@@ -26,11 +27,15 @@ const CompanyPage = ({
     }
   }, [promotions, setPromotions]);
 
+  const handleUpdateCompany = (company: Company) => {
+    console.log(company);
+  };
+
   return (
     <div className="min-h-screen pb-16">
       <div className="py-2 sm:py-4">
         <>
-          {/* <CompanyDetails company={selectedCompany} onUpdate={handleUpdateCompany} /> */}
+          <CompanyDetails company={company} onUpdate={handleUpdateCompany} />
 
           <div className="space-y-6 mt-4">
             <div className="flex items-center justify-between">

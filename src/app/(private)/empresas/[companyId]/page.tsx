@@ -24,7 +24,6 @@ export default async function EmpresaPage({ params }: { params: Params }) {
       image={
         company.logoUrl ? company.logoUrl : <Store className="w-10 h-10 text-muted-foreground" />
       }
-      leftButton={<CompanyEditDialog />}
       button={<BackToCompaniesButton />}
     >
       <CompanyPage company={company} promotions={promotions} />

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Edit, Pencil } from "lucide-react";
-
-export default function CompanyEditDialog() {
+import { Company } from "@prisma/client";
+export default function CompanyEditDialog({ company }: { company: Company }) {
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
 
   return (

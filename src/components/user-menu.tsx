@@ -47,6 +47,7 @@ export function UserMenu({ user }: NavbarProps) {
           console.error("Error logging out", error);
         },
         onSuccess: () => {
+          window.location.reload();
           redirect("/");
         },
       },

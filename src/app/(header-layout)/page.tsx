@@ -1,25 +1,12 @@
 "use client";
 
-// import LandingPage from "@/components/landing-page/page";
-
-// export default function Home() {
-//   return (
-//     <div>
-//       <LandingPage />
-//     </div>
-//   );
-// }
-
 import { LoyaltyCardDemo } from "@/components/new-landing-page/loyalt-card-demo";
 import { HowItWorks } from "@/components/new-landing-page/how-it-works";
-// import { Testimonials } from "@/components/new-landing-page/testimonials";
 import { Faq } from "@/components/new-landing-page/faq";
 import { Benefits } from "@/components/new-landing-page/benefits";
-// import { Header } from "@/components/new-landing-page/header"
 import { Footer } from "@/components/new-landing-page/footer";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
-import Header from "@/components/header";
 import { motion, useInView } from "framer-motion";
 import Pricing from "@/components/new-landing-page/pricing";
 import Link from "next/link";

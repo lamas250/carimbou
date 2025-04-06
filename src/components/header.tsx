@@ -9,7 +9,7 @@ import { UserMenu } from "./user-menu";
 import Image from "next/image";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Header = ({ user, subscription }: { user: any; subscription: boolean }) => {
+const Header = ({ subscription, user }: { subscription: boolean; user: any }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

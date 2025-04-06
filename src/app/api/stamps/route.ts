@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { StampStatus } from "@prisma/client";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -39,6 +40,7 @@ export async function GET(request: Request) {
   const stamps = await prisma.stamp.findMany({
     where: {
       promotionId: promotionId,
+      status: StampStatus.CLAIMED,
     },
     include: {
       userPromotion: {

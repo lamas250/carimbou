@@ -1,16 +1,4 @@
-import {
-  Calendar,
-  Coffee,
-  Gift,
-  Award,
-  Users,
-  TrendingUp,
-  ScrollText,
-  Edit,
-  Pause,
-  Coins,
-  Fullscreen,
-} from "lucide-react";
+import { Users, TrendingUp, Edit, Pause, Fullscreen } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -25,8 +13,8 @@ import { Promotion, Company } from "@prisma/client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useGetPromotionStats } from "@/features/promotions/api/get-promotion-stats";
 import { Skeleton } from "@/components/ui/skeleton";
+
 export function PromotionCard({
   promotion,
   company,

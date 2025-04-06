@@ -1,6 +1,14 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Building, ChevronLeft, Info, QrCode, Users } from "lucide-react";
+import {
+  ArrowBigRightDash,
+  Building,
+  ChevronLeft,
+  ExternalLink,
+  Info,
+  QrCode,
+  Users,
+} from "lucide-react";
 import PromotionDetails from "@/components/pages/promotion/promotion-details";
 import { getPromotion } from "@/features/promotions/actions/get-promotion";
 import Container from "@/components/container";
@@ -55,14 +63,20 @@ export default async function PromotionPage({ params }: { params: Params }) {
             <CardHeader>
               <CardTitle className="text-xl flex items-center gap-2">
                 <QrCode className="h-5 w-5" />
-                Convide clientes para esta promoção
+                Convide para esta promoção
               </CardTitle>
               <CardDescription>
                 Gere um QR Code para que os clientes possam ingressar nesta promoção.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-2">
               <QrCodeGenerator promotionId={promotion.id} type={"promotion-redirect"} />
+              <Link href={`/flyer/${promotion.id}`} target="_blank">
+                <Button variant="outline" className="w-full text-lg" size="lg">
+                  <ExternalLink className="mr-2 h-5 w-5" />
+                  Folheto da promoção
+                </Button>
+              </Link>
             </CardContent>
           </Card>
 

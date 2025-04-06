@@ -6,6 +6,9 @@ type CreateCompanyType = {
   logoUrl: string | null;
   name: string;
   description: string | null;
+  phone: string | null;
+  instagram: string | null;
+  facebook: string | null;
 };
 
 export const createCompany = async (company: CreateCompanyType, userId: string) => {

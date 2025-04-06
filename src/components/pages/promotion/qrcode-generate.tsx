@@ -23,11 +23,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import QRCode from "qrcode";
 import { createStamp } from "@/features/stamp/actions/create-stamp";
 import Image from "next/image";
+import { createCanvas, loadImage } from "canvas";
 
 export const QR_CODE_TYPES = {
   STAMP: "stamp",
@@ -46,6 +46,25 @@ interface QrCodeGeneratorProps {
 const generateQR = async (url: string) => {
   try {
     return QRCode.toDataURL(url);
+    // const codeWidth = 46;
+    // const iconWidth = codeWidth / 4;
+    // const canvas = createCanvas(codeWidth, codeWidth);
+    // const ctx = canvas.getContext("2d");
+
+    // return QRCode.toCanvas(canvas, url, {
+    //   width: codeWidth,
+    //   margin: 1,
+    //   color: { dark: "#6666" },
+    // }).then(() => {
+    //   loadImage(
+    //     "https://0ogf1xn2aphrgxmo.public.blob.vercel-storage.com/logo-512-eidkjW8dIRem7VjADbkudPq2a2na07.png"
+    //   ).then((image) => {
+    //     const iconPos = (codeWidth - iconWidth) / 2;
+    //     ctx.drawImage(image, iconPos, iconPos, iconWidth, iconWidth);
+
+    //     return canvas.toDataURL();
+    //   });
+    // });
   } catch (err) {
     console.error(err);
   }

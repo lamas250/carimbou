@@ -44,6 +44,9 @@ const CompanyForm = ({ company, onCancel }: CompanyFormProps) => {
       name: company?.name ?? "",
       description: company?.description ?? "",
       logoUrl: company?.logoUrl ?? undefined,
+      phone: company?.phone ?? "",
+      instagram: company?.instagram ?? "",
+      facebook: company?.facebook ?? "",
     },
   });
   const { handleSubmit } = form;
@@ -70,6 +73,9 @@ const CompanyForm = ({ company, onCancel }: CompanyFormProps) => {
         name: data.name,
         description: data.description ?? null,
         logoUrl: imageUrl,
+        phone: data.phone ?? null,
+        instagram: data.instagram ?? null,
+        facebook: data.facebook ?? null,
       },
       session?.user.id
     );
@@ -99,7 +105,7 @@ const CompanyForm = ({ company, onCancel }: CompanyFormProps) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome da Empresa *</FormLabel>
+                  <FormLabel className="text-sm font-medium">Nome da Empresa *</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Nome da empresa" />
                   </FormControl>
@@ -115,9 +121,56 @@ const CompanyForm = ({ company, onCancel }: CompanyFormProps) => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Descrição</FormLabel>
+                  <FormLabel className="text-sm font-medium">Descrição</FormLabel>
                   <FormControl>
                     <Textarea {...field} placeholder="Descrição da empresa" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="flex gap-2 w-full">
+            <div className="w-full">
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel className="text-sm font-medium">Telefone</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="(DDD)99999-9999" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <FormField
+              control={form.control}
+              name="instagram"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className="text-sm font-medium">Instagram</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Ex.@carimbou" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="flex gap-2 w-full">
+            <FormField
+              control={form.control}
+              name="facebook"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className="text-sm font-medium">Facebook</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Ex. fb.com/carimbou" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

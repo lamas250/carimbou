@@ -10,6 +10,9 @@ export const createCompanySchema = z.object({
       z.instanceof(File),
     ])
     .optional(),
+  phone: z.string().optional(),
+  instagram: z.string().optional(),
+  facebook: z.string().optional(),
 });
 
 export type CreateCompanyType = z.infer<typeof createCompanySchema>;

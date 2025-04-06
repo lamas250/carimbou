@@ -1,13 +1,8 @@
-import { auth } from "@/lib/auth";
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
-import { headers } from "next/headers";
 import { Toaster } from "sonner";
-import { redirect } from "next/navigation";
-import Header from "@/components/header";
 import Providers from "./providers";
-import { fetchSubscriptionByEmail } from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Carimbou",
@@ -21,21 +16,6 @@ export const viewport: Viewport = {
 const manrope = Manrope({ subsets: ["latin"] });
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth.api
-    .getSession({
-      headers: await headers(),
-    })
-    .catch((error) => {
-      console.error("Error getting session", error);
-      throw redirect("/sign-in");
-    });
-
-  let subscription = "";
-  if (session?.user?.email) {
-    const result = await fetchSubscriptionByEmail(session?.user?.email);
-    subscription = result?.id || "";
-  }
-
   return (
     <html
       lang="pt-BR"
@@ -50,7 +30,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-[100dvh] bg-gray-50">
         <Providers>
           <Toaster richColors closeButton />
-          <Header user={session?.user} subscription={subscription ? true : false} />
+
           {children}
         </Providers>
       </body>

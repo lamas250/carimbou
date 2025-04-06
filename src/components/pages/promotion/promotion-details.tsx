@@ -2,7 +2,6 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Promotion, UserPromotion } from "@prisma/client";
-import Image from "next/image";
 import { Calendar, ScrollText, Users, TrendingUp } from "lucide-react";
 
 export default function PromotionDetails({
@@ -21,7 +20,7 @@ export default function PromotionDetails({
     return new Intl.DateTimeFormat("pt-BR").format(date);
   };
 
-  const progress = (userPromotions.completed / userPromotions.total) * 100;
+  const progress = ((userPromotions.completed / userPromotions.total) * 100).toFixed(2);
 
   return (
     <Card>
@@ -57,12 +56,14 @@ export default function PromotionDetails({
           </div>
         </div>
 
-        <div className="space-y-2">
-          <h3 className="text-sm font-medium flex items-center gap-2">
-            <ScrollText className="h-4 w-4" /> Regras
-          </h3>
-          <p className="text-sm text-muted-foreground">Criar regras no schema</p>
-        </div>
+        {promotion.rule && (
+          <div className="space-y-2">
+            <h3 className="text-sm font-medium flex items-center gap-2">
+              <ScrollText className="h-4 w-4" /> Regras
+            </h3>
+            <p className="text-sm text-muted-foreground">{promotion.rule}</p>
+          </div>
+        )}
 
         <div className="space-y-2">
           <h3 className="text-sm font-medium">Estatísticas</h3>
@@ -72,13 +73,13 @@ export default function PromotionDetails({
                 <Users className="h-3 w-3" /> {userPromotions.active}/{userPromotions.total}{" "}
                 {userPromotions.active === 1 ? "cartão ativo" : "cartões ativos"}
               </span>
-              {progress > 0 && (
+              {progress && (
                 <span className="flex items-center gap-1">
                   <TrendingUp className="h-3 w-3" /> {progress}% taxa de conclusão
                 </span>
               )}
             </div>
-            <Progress value={progress} />
+            <Progress value={Number(progress)} />
           </div>
         </div>
       </CardContent>

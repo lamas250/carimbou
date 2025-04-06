@@ -110,7 +110,7 @@ export function Login({
         password: data.password,
         // callbackURL: "/home",
         fetchOptions: {
-          onSuccess: () => {
+          onSuccess: (data) => {
             toast.success("Login realizado com sucesso");
             router.push(redirectValue || "/home");
           },
@@ -133,7 +133,7 @@ export function Login({
       name: data.name,
       // callbackURL: "/home",
       fetchOptions: {
-        onSuccess: () => {
+        onSuccess: (data) => {
           toast.success("Conta criada com sucesso");
           router.push(redirectValue || "/home");
         },

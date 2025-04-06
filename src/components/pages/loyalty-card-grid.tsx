@@ -170,28 +170,20 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
       </CardContent>
 
       <CardFooter className="mt-auto border-t px-6 py-3 w-full">
-        {isComplete ? (
-          <Button className="w-full cursor-pointer" onClick={() => router.push(`/home/${card.id}`)}>
-            <Gift className="mr-2 h-4 w-4" />
-            Resgatar Recompensa
+        <div className=" gap-2 w-full">
+          <Button
+            variant="secondary"
+            className="w-full cursor-pointer"
+            onClick={() => router.push(`/home/${card.id}`)}
+          >
+            <Info className="mr-2 h-4 w-4" />
+            Ver detalhes
           </Button>
-        ) : (
-          // <div className="grid grid-cols-2 gap-2 w-full">
-          <div className=" gap-2 w-full">
-            <Button
-              variant="secondary"
-              className="w-full cursor-pointer"
-              onClick={() => router.push(`/home/${card.id}`)}
-            >
-              <Info className="mr-2 h-4 w-4" />
-              Ver detalhes
-            </Button>
-            {/* <Button variant="outline" className="w-full">
+          {/* <Button variant="outline" className="w-full">
               <QrCode className="mr-2 h-4 w-4" />
               Escanear QR Code
             </Button> */}
-          </div>
-        )}
+        </div>
       </CardFooter>
     </Card>
   );
