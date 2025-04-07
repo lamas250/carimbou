@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { forgetPassword } from "@/lib/auth-client";
 import { AlertCircle, ArrowLeft, CheckCircle2, CircleIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -67,14 +68,14 @@ export default function Component() {
     <main className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] gap-4">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-          <CircleIcon className="h-12 w-12 text-orange-500" />
+          <Image src="/logo-icone.png" alt="Logo" width={100} height={100} />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Esqueceu sua senha?
         </h2>
       </div>
       {/* Radial gradient for the container to give a faded look */}
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      {/* <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div> */}
       <Card className="border-none shadow-none bg-transparent sm:mx-auto sm:w-full sm:max-w-md">
         <CardContent>
           <form onSubmit={handleSubmit}>

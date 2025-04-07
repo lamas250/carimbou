@@ -32,12 +32,12 @@ export default function Pricing() {
       },
       currency: "R$",
       features: [
-        { text: "Criação de até 2 programas de fidelidade", included: true },
-        { text: "750 QR Codes por mês para clientes acumularem selos", included: true },
-        { text: "Suporte uma unica empresa por conta", included: true },
-        { text: "Relatórios básicos de uso", included: true },
+        { text: "Criação de até 2 programas de fidelidade.", included: true },
+        { text: "Limite de 1000 carimbos por mês.", included: true },
+        { text: "Uma única empresa por conta.", included: true },
+        { text: "Relatórios básicos de uso.", included: true },
       ],
-      limitations: ["Sem personalização de design ou marca"],
+      limitations: ["Sem personalização de design ou marca."],
       buttonText: "Começar agora",
       buttonVariant: "outline" as const,
     },
@@ -53,18 +53,40 @@ export default function Pricing() {
       },
       currency: "R$",
       features: [
-        { text: "Clientes e QR Codes ilimitados (sem limite de escaneamento)", included: true },
-        { text: "Personalização com logo e cores da marca", included: true },
-        { text: "Relatórios detalhados com insights sobre clientes fiéis", included: true },
-        { text: "Suporta mais de uma empresa por conta", included: true },
-        { text: "Pode criar programas de fidelidade ilimitados", included: true },
-        { text: "Suporte prioritário", included: true },
+        { text: "Pode criar programas de fidelidade ilimitados.", included: true },
+        { text: "Limite de 5000 carimbos por mês.", included: true },
+        { text: "Limite de 5 empresas por conta.", included: true },
+        { text: "Personalização com logo e cores da marca.", included: true },
+        { text: "Relatórios detalhados com insights sobre clientes fiéis.", included: true },
+        { text: "Suporte prioritário.", included: true },
       ],
       highlighted: true,
       badge: "Recomendado",
       buttonText: "Escolher este plano",
       buttonVariant: "default" as const,
-      noSurprises: true,
+      // noSurprises: true,
+    },
+    {
+      id: "custom ",
+      name: "Plano Personalizado",
+      emoji: "💼",
+      description:
+        "Para negócios que querem um programa de fidelidade personalizado e para alta demanda.",
+      price: {
+        monthly: 0,
+        annually: 0,
+      },
+      currency: "R$",
+      features: [
+        { text: "Quantidade de QR Codes personalizada.", included: true },
+        { text: "Personalização com logo e cores da marca.", included: true },
+        { text: "Até 10 empresas por conta.", included: true },
+        { text: "Suporte prioritário.", included: true },
+      ],
+      // highlighted: true,
+      buttonText: "Fale conosco",
+      buttonVariant: "default" as const,
+      isCustom: true,
     },
   ];
 
@@ -127,7 +149,7 @@ export default function Pricing() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-6 max-w-6xl mx-auto">
           {pricingTiers.map((tier, index) => {
             const price = billingCycle === "monthly" ? tier.price.monthly : tier.price.annually;
             const discount = getDiscountPercentage(tier.price.monthly, tier.price.annually);
@@ -163,17 +185,25 @@ export default function Pricing() {
                   </CardDescription>
                   <div className="mt-4 flex items-baseline text-slate-900">
                     <div className="flex flex-col">
-                      <div>
-                        <span className="text-4xl font-extrabold tracking-tight">
-                          {tier.currency}
-                          {price.toFixed(2).replace(".", ",")}
+                      {!tier.isCustom ? (
+                        <>
+                          <div>
+                            <span className="text-4xl font-extrabold tracking-tight">
+                              {tier.currency}
+                              {price?.toFixed(2).replace(".", ",")}
+                            </span>
+                            <span className="ml-1 text-xl font-semibold">/mês</span>
+                          </div>
+                          <span className="text-sm text-slate-500">Teste grátis por 7 dias*</span>
+                        </>
+                      ) : (
+                        <span className="text-4xl font-extrabold tracking-tight mb-4">
+                          Personalizado
                         </span>
-                        <span className="ml-1 text-xl font-semibold">/mês</span>
-                      </div>
-                      <span className="text-sm text-slate-500">Teste grátis por 7 dias*</span>
+                      )}
                     </div>
 
-                    {billingCycle === "annually" && (
+                    {billingCycle === "annually" && !tier.isCustom && (
                       <div className="ml-2 rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 border border-red-700">
                         Economize {discount}%
                       </div>
@@ -213,14 +243,14 @@ export default function Pricing() {
                     </>
                   )}
 
-                  {tier.noSurprises && (
+                  {/* {tier.noSurprises && (
                     <div className="mt-2 bg-emerald-50 p-3 rounded-lg border border-emerald-100">
                       <p className="text-sm text-emerald-700 flex items-center">
                         <Zap className="h-4 w-4 mr-2 text-emerald-500" />
                         Promoções e carimbos ilimitados.
                       </p>
                     </div>
-                  )}
+                  )} */}
                 </CardContent>
 
                 <CardFooter className="pt-6">

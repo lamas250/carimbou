@@ -2,10 +2,11 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "./prisma";
 import { anonymous } from "better-auth/plugins";
+import { sendEmail } from "@/features/send-email";
 
-const sendEmail = async ({ to, subject, text }: { to: string; subject: string; text: string }) => {
-  console.log("Sending email to", to, "with subject", subject, "and text", text);
-};
+// const sendEmail = async ({ to, subject, text }: { to: string; subject: string; text: string }) => {
+//   console.log("Sending email to", to, "with subject", subject, "and text", text);
+// };
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -14,11 +15,11 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     sendResetPassword: async ({ user, url, token }, request) => {
-      await sendEmail({
-        to: user.email,
-        subject: "Reset your password",
-        text: `Click the link to reset your password: ${url}`,
-      });
+      await sendEmail(
+        user.email,
+        "Redefinir senha",
+        `Clique no link para redefinir sua senha: ${url}`
+      );
     },
   },
   plugins: [

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { resetPassword } from "@/lib/auth-client";
 import { AlertCircle, CircleIcon, Loader2 } from "lucide-react";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
 import { toast } from "sonner";
@@ -41,10 +42,10 @@ export default function ResetPassword() {
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <div className="flex justify-center">
-            <CircleIcon className="h-12 w-12 text-orange-500" />
+            <Image src="/logo-icone.png" alt="Logo" width={100} height={100} />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Reset your password
+            Redefina sua senha
           </h2>
         </div>
         <Card className="border-none bg-transparent rounded-none shadow-none sm:mx-auto sm:w-full sm:max-w-md mt-4">
@@ -52,25 +53,25 @@ export default function ResetPassword() {
             <form onSubmit={handleSubmit}>
               <div className="grid w-full items-center gap-2">
                 <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="email">New password</Label>
+                  <Label htmlFor="email">Nova senha</Label>
                   <Input
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="password"
-                    placeholder="Password"
+                    placeholder="Senha"
                     className="rounded-full"
                     type="password"
                   />
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="email">Confirm password</Label>
+                  <Label htmlFor="email">Confirmar senha</Label>
                   <Input
                     id="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     autoComplete="password"
-                    placeholder="Password"
+                    placeholder="Senha"
                     className="rounded-full"
                     type="password"
                   />
@@ -83,7 +84,7 @@ export default function ResetPassword() {
                 </Alert>
               )}
               <Button className="w-full mt-4 rounded-full" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Resetting..." : "Reset password"}
+                {isSubmitting ? "Redefinindo..." : "Redefinir senha"}
               </Button>
             </form>
           </CardContent>
