@@ -89,7 +89,7 @@ export function ParticipatePromotion({
             <div className="px-4 -mt-2 -mb-1">
               <Separator />
             </div>
-            <div className="flex flex-row items-center justify-start gap-2 px-4 mt-8 bg-red-50">
+            <div className="flex flex-row items-center justify-start gap-2 px-4 mt-8">
               {promotion.imageUrl && (
                 <div className="flex justify-center mb-2">
                   <Image
