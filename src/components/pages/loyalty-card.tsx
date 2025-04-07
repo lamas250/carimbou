@@ -20,7 +20,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { toast } from "sonner";
 import LoyaltyStamp from "../loyalty-stamp";
 import { StampStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
@@ -28,7 +27,7 @@ import Image from "next/image";
 import { Badge } from "../ui/badge";
 import { QR_CODE_TYPES, QrCodeGenerator } from "./promotion/qrcode-generate";
 import { motion } from "framer-motion";
-
+import { participatePromotion } from "@/features/user/actions/participate-promotion";
 type LoyaltyCardProps = {
   card: UserPromotionWithStamps;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,6 +41,13 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
   useEffect(() => {
     setIsCardCompleted(card.isCompleted && card.history.length === card.promotion.requiredStamps);
   }, [card]);
+
+  const createNewCard = async () => {
+    const newCard = await participatePromotion(card.promotion.id, user.id);
+    if (newCard) {
+      router.push(`/home/${newCard.id}`);
+    }
+  };
 
   return (
     <div className="min-h-screen mt-4 md:mt-0 pb-16">
@@ -92,15 +98,21 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
           </div>
 
           <Card
-            className={`loyalty-card mb-8 ${isCardCompleted ? "border-emerald-500" : ""} relative`}
+            className={`loyalty-card mb-8 ${
+              isCardCompleted && !card.isClaimed
+                ? "border-emerald-500"
+                : card.isClaimed
+                ? "border-secondary"
+                : ""
+            } relative`}
           >
             {isCardCompleted && !card.isClaimed && (
-              <Badge className="absolute right-8 top-0 translate-y-[-50%] bg-emerald-500 px-3 py-1 text-xs font-semibold hover:bg-emerald-600">
+              <Badge className="absolute right-8 top-0 translate-y-[-50%] bg-emerald-500 px-3 py-1 text-xs font-semibold">
                 Completo
               </Badge>
             )}
             {isCardCompleted && card.isClaimed && (
-              <Badge className="absolute right-8 top-0 translate-y-[-50%] bg-red-500 px-3 py-1 text-xs font-semibold hover:bg-red-600">
+              <Badge className="absolute right-8 top-0 translate-y-[-50%] bg-secondary px-3 py-1 text-xs font-semibold">
                 Resgatado
               </Badge>
             )}
@@ -146,8 +158,41 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
                   <QRScanner onSuccess={handleAddStamp} />
                 </CardFooter> */}
           </Card>
-          <div className="flex justify-end -mt-7 mb-4 mr-4">
-            <span className="text-muted-foreground text-xs">Card ID: {card.id}</span>
+          <div className="flex items-center gap-2 justify-between -mt-7 mb-4 mr-4">
+            <span className="text-xs text-muted-foreground">
+              Iniciado: <br />
+              {new Date(card.createdAt).toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
+            {card.promotion.endDate && !card.isClaimed && (
+              <span className="text-xs text-muted-foreground">
+                Expira: <br />
+                {new Date(card.promotion.endDate).toLocaleDateString("pt-BR", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+            )}
+            {card.isClaimedAt && (
+              <span className="text-xs text-muted-foreground">
+                Resgatado: <br />
+                {new Date(card.isClaimedAt).toLocaleDateString("pt-BR", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+            )}
           </div>
 
           {!card.isClaimed && (
@@ -184,6 +229,26 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
             </motion.div>
           )}
 
+          {card.isClaimed && (!card.promotion.endDate || card.promotion.endDate < new Date()) && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex justify-center items-center mb-4"
+            >
+              <Card className="w-full">
+                <CardHeader>
+                  <CardTitle>Inicie um novo cartão da promoção</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Button className="w-full" variant="secondary" onClick={createNewCard}>
+                    Iniciar novo cartão
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
+
           <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -214,12 +279,32 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
                       </div>
                     </div>
                   ))}
+                  {card.isClaimedAt && (
+                    <div className="flex justify-between items-center border-b pb-3 border-border last:border-0">
+                      <div className="flex items-center gap-3">
+                        <CalendarCheck className="h-5 w-5 text-muted-foreground" />
+                        <span>Resgatado</span>
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {card.isClaimedAt.toLocaleDateString("pt-BR", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <p className="text-center py-8 text-muted-foreground">Nenhum carimbo ainda</p>
               )}
             </CardContent>
           </Card>
+        </div>
+        <div className="flex justify-end -mt-7 mb-4 mr-4">
+          <span className="text-muted-foreground text-xs">Card ID: {card.id}</span>
         </div>
       </div>
     </div>

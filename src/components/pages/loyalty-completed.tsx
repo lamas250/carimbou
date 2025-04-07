@@ -81,7 +81,7 @@ function LoyaltyCard({
     <Card className="relative flex h-full flex-col border shadow-sm transition-all hover:shadow-md">
       <CardHeader className="bg-white pb-2 border-b">
         {card.isClaimed && (
-          <Badge className="overflow-hidden absolute right-8 top-0 translate-y-[-50%] bg-red-500 px-3 py-1 text-xs font-semibold hover:bg-red-600">
+          <Badge className="overflow-hidden absolute right-8 top-0 translate-y-[-50%] bg-secondary px-3 py-1 text-xs font-semibold">
             Resgatado
           </Badge>
         )}
@@ -122,6 +122,30 @@ function LoyaltyCard({
             <Info className="mr-2 h-4 w-4" />
             Ver detalhes
           </Button>
+          <div className="flex items-center gap-2 mt-2 justify-between px-1">
+            <span className="text-xs text-muted-foreground">
+              Iniciado: <br />
+              {new Date(card.createdAt).toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
+            {card.isClaimedAt && (
+              <span className="text-xs text-muted-foreground">
+                Resgatado: <br />
+                {new Date(card.isClaimedAt).toLocaleDateString("pt-BR", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+            )}
+          </div>
         </div>
       </CardContent>
     </Card>

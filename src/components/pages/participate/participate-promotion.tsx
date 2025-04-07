@@ -89,7 +89,7 @@ export function ParticipatePromotion({
             <div className="px-4 -mt-2 -mb-1">
               <Separator />
             </div>
-            <div className="flex flex-row gap-2 px-4 mt-8">
+            <div className="flex flex-row items-center justify-start gap-2 px-4 mt-8 bg-red-50">
               {promotion.imageUrl && (
                 <div className="flex justify-center mb-2">
                   <Image
@@ -101,7 +101,7 @@ export function ParticipatePromotion({
                   />
                 </div>
               )}
-              <div>
+              <div className="flex items-center justify-center">
                 <h3 className="font-semibold text-lg">{promotion.name}</h3>
               </div>
             </div>
@@ -110,7 +110,10 @@ export function ParticipatePromotion({
               <p className="text-sm mb-2">{promotion.description}</p>
               {promotion.reward && (
                 <div className="flex items-center gap-1 border-primary/60 border rounded-md p-2">
-                  <span className="text-sm">Recompensa: {promotion.reward}</span>
+                  <span className="text-sm">
+                    Recompensa:{" "}
+                    <span className="font-bold text-primary capitalize">{promotion.reward}</span>
+                  </span>
                 </div>
               )}
             </div>

@@ -116,6 +116,7 @@ model Promotion {
   cardDuration   Int?
   endDate        DateTime?
   rule           String?
+  pausedAt       DateTime?
   companyId      String
   company        Company         @relation(fields: [companyId], references: [id], onDelete: Cascade)
   userPromotions UserPromotion[]
@@ -133,6 +134,7 @@ model UserPromotion {
   isClaimed   Boolean
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
+  isClaimedAt DateTime?
   stamps      Stamp[]
 
   @@map("user_promotion")

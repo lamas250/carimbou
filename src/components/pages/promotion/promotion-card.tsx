@@ -14,6 +14,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PausePromotionDialog } from "./pause-promotion-dialog";
 
 export function PromotionCard({
   promotion,
@@ -124,14 +125,7 @@ export function PromotionCard({
       </CardContent>
       <CardFooter className="flex justify-between border-t px-6 py-3">
         <div className="grid grid-cols-2 gap-2 w-full">
-          <Button
-            variant="secondary70"
-            className="w-full"
-            onClick={() => handleDeletePromotion(promotion.id)}
-          >
-            <Pause className="h-4 w-4 mr-1" />
-            Pausar
-          </Button>
+          <PausePromotionDialog promotion={promotion} />
           <Button
             variant="default"
             className="w-full"

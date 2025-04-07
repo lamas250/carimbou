@@ -59,7 +59,7 @@ export function UserMenu({ user }: NavbarProps) {
       {user ? (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+            <Button variant="ghostw" className="relative h-8 w-8 rounded-full">
               <Avatar className="h-8 w-8">
                 {user.imageUrl ? (
                   <AvatarImage src={user.imageUrl} alt={user.name || "User"} />

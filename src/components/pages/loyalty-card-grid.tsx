@@ -183,6 +183,30 @@ function LoyaltyCard({ card }: { card: UserPromotionWithStamps }) {
               <QrCode className="mr-2 h-4 w-4" />
               Escanear QR Code
             </Button> */}
+          <div className="flex items-center gap-2 mt-2 justify-between px-1">
+            <span className="text-xs text-muted-foreground">
+              Iniciado: <br />
+              {new Date(card.createdAt).toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
+            {card.promotion.endDate && (
+              <span className="text-xs text-muted-foreground">
+                Expira: <br />
+                {new Date(card.promotion.endDate).toLocaleDateString("pt-BR", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+            )}
+          </div>
         </div>
       </CardFooter>
     </Card>

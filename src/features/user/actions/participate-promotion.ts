@@ -16,6 +16,22 @@ export async function participatePromotion(
     throw new Error("Promoção não encontrada");
   }
 
+  if (promotion.pausedAt) {
+    throw new Error("Promoção pausada");
+  }
+
+  const exisistingActiveCard = await prisma.userPromotion.findFirst({
+    where: {
+      userId,
+      promotionId,
+      isClaimed: false,
+    },
+  });
+
+  if (exisistingActiveCard) {
+    return exisistingActiveCard;
+  }
+
   const promotionUser = await prisma.userPromotion.create({
     data: {
       userId,
