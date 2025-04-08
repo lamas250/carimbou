@@ -6,10 +6,11 @@ import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: {
-    default: "Carimbou",
+    default: "Carimbou - Programa de Fidelidade",
     template: "%s | Carimbou",
   },
-  description: "Programa de fidelização de clientes",
+  description:
+    "Transforme seu programa de fidelidade digital com Carimbou. Fidelize seus clientes, aumente a retenção e impulsione suas vendas com soluções personalizadas de fidelização.",
   twitter: {
     card: "summary_large_image",
     title: "Carimbou",
