@@ -20,7 +20,7 @@ import { redirect } from "next/navigation";
 interface NavbarProps {
   user?: {
     name?: string;
-    imageUrl?: string;
+    image?: string;
     email?: string;
   };
 }
@@ -61,8 +61,8 @@ export function UserMenu({ user }: NavbarProps) {
           <DropdownMenuTrigger asChild>
             <Button variant="ghostw" className="relative h-8 w-8 rounded-full">
               <Avatar className="h-8 w-8">
-                {user.imageUrl ? (
-                  <AvatarImage src={user.imageUrl} alt={user.name || "User"} />
+                {user.image ? (
+                  <AvatarImage src={user.image} alt={user.name || "User"} />
                 ) : (
                   <AvatarFallback className="bg-primary text-primary-foreground">
                     {getInitials(user.name || "User")}
