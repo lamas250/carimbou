@@ -91,12 +91,18 @@ export function Footer() {
             <h3 className="mb-4 text-lg font-semibold text-white">Políticas</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
+                <Link
+                  href="/politica-de-privacidade"
+                  className="text-gray-400 transition-colors hover:text-white"
+                >
                   Política de privacidade
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 transition-colors hover:text-white">
+                <Link
+                  href="/termos-de-uso"
+                  className="text-gray-400 transition-colors hover:text-white"
+                >
                   Termos de uso
                 </Link>
               </li>
