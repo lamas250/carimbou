@@ -5,6 +5,10 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import CreateCompanyDialog from "@/components/pages/company/create-company-dialog";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Empresas",
+};
 
 export default async function EmpresasPage() {
   const session = await auth.api

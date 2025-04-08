@@ -5,8 +5,17 @@ import { Toaster } from "sonner";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  title: "Carimbou",
+  title: {
+    default: "Carimbou",
+    template: "%s | Carimbou",
+  },
   description: "Programa de fidelização de clientes",
+  twitter: {
+    card: "summary_large_image",
+    title: "Carimbou",
+    description: "Programa de fidelização de clientes",
+    images: ["/icons2/apple-touch-icon.png"],
+  },
 };
 
 export const viewport: Viewport = {

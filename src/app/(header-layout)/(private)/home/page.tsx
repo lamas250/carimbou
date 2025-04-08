@@ -2,6 +2,11 @@ import Container from "@/components/container";
 import LoyaltyCardsTab from "@/components/pages/loyalty-cards-tab";
 import { getCompletedAndExpiredPromotions } from "@/features/user/actions/get-completed-and expired";
 import { getMyCards } from "@/features/user/actions/get-my-cards";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+};
 
 export default async function HomePage() {
   const userPromotions = await getMyCards();
