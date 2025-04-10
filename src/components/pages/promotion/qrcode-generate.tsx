@@ -91,7 +91,7 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
     }
 
     if (type === QR_CODE_TYPES.REDEEM_REDIRECT && promotionId && userPromotionId) {
-      urlGenerated = `${process.env.NEXT_PUBLIC_APP_URL}/resgatar/${promotionId}`;
+      urlGenerated = `${process.env.NEXT_PUBLIC_APP_URL}/resgatar/${userPromotionId}`;
       id = userPromotionId;
     }
 
@@ -153,15 +153,15 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
               {type === QR_CODE_TYPES.REDEEM_REDIRECT
                 ? "Resgatar Recompensa"
                 : type === QR_CODE_TYPES.STAMP
-                ? "Carimbar Cartão"
-                : "Acessar Promoção"}
+                  ? "Carimbar Cartão"
+                  : "Acessar Promoção"}
             </DialogTitle>
             <DialogDescription>
               {type === QR_CODE_TYPES.REDEEM_REDIRECT
                 ? "Escaneie o QR Code para resgatar sua recompensa"
                 : type === QR_CODE_TYPES.STAMP
-                ? "Escaneie o QR Code para coletar seu carimbo"
-                : "Escaneie o QR Code para acessar a promoção"}
+                  ? "Escaneie o QR Code para coletar seu carimbo"
+                  : "Escaneie o QR Code para acessar a promoção"}
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col items-center justify-center py-4 ">
@@ -188,8 +188,8 @@ export function QrCodeGenerator({ promotionId, type, userPromotionId }: QrCodeGe
               {type === QR_CODE_TYPES.STAMP
                 ? "ID do Carimbo"
                 : type === QR_CODE_TYPES.PROMOTION_REDIRECT
-                ? "ID da Promoção"
-                : "ID do Cartão"}
+                  ? "ID da Promoção"
+                  : "ID do Cartão"}
             </span>
             <div className="w-full bg-muted p-2 rounded-md flex items-center justify-between">
               <code className="text-xs font-mono truncate">{qrId}</code>
