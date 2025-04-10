@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CompanyType } from "@/features/companies/types";
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, Router } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createCompanySchema } from "@/features/companies/types";
@@ -21,12 +21,12 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import { createCompany } from "@/features/companies/actions/create-company";
+import { upsertCompany } from "@/features/companies/actions/create-company";
 import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useCompanyStore } from "@/store/companies";
 import { uploadImage } from "@/actions/upload-image";
-
+import { useRouter } from "next/navigation";
 type CompanyFormProps = {
   company?: Partial<CompanyType>;
   onCancel: () => void;
@@ -36,11 +36,13 @@ const CompanyForm = ({ company, onCancel }: CompanyFormProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isPending, setIsPending] = useState(false);
   const { data: session } = useSession();
-  const { addCompany } = useCompanyStore();
+  const { addCompany, updateCompany } = useCompanyStore();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof createCompanySchema>>({
     resolver: zodResolver(createCompanySchema),
     defaultValues: {
+      id: company?.id ?? undefined,
       name: company?.name ?? "",
       description: company?.description ?? "",
       logoUrl: company?.logoUrl ?? undefined,
@@ -60,32 +62,44 @@ const CompanyForm = ({ company, onCancel }: CompanyFormProps) => {
       return;
     }
 
-    let imageUrl = null;
-    if (data.logoUrl && data.logoUrl instanceof File) {
-      const url = await uploadImage(data.logoUrl, {
-        name: data.name,
-      });
-      imageUrl = url;
+    try {
+      let imageUrl = company?.logoUrl ?? null;
+      if (data.logoUrl && data.logoUrl instanceof File) {
+        const url = await uploadImage(data.logoUrl, {
+          name: data.name,
+        });
+        imageUrl = url;
+      }
+
+      const companyResult = await upsertCompany(
+        {
+          id: company?.id,
+          name: data.name,
+          description: data.description ?? null,
+          logoUrl: imageUrl,
+          phone: data.phone ?? null,
+          instagram: data.instagram ?? null,
+          facebook: data.facebook ?? null,
+        },
+        session?.user.id
+      );
+
+      if (company?.id) {
+        updateCompany({ ...companyResult, promotions: [] });
+        toast.success("Empresa atualizada com sucesso");
+        router.refresh();
+      } else {
+        addCompany({ ...companyResult, promotions: [] });
+        toast.success("Empresa criada com sucesso");
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error(error);
+      toast.error("Erro ao criar ou atualizar empresa: " + error.message);
+    } finally {
+      setIsPending(false);
+      onCancel();
     }
-
-    const company = await createCompany(
-      {
-        name: data.name,
-        description: data.description ?? null,
-        logoUrl: imageUrl,
-        phone: data.phone ?? null,
-        instagram: data.instagram ?? null,
-        facebook: data.facebook ?? null,
-      },
-      session?.user.id
-    );
-
-    addCompany({ ...company, promotions: [] });
-
-    toast.success("Empresa criada com sucesso");
-
-    setIsPending(false);
-    onCancel();
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

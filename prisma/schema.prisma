@@ -160,3 +160,23 @@ model Stamp {
 
   @@map("stamp")
 }
+
+enum CarimbouPlanType {
+  FREE
+  BASIC
+  ADVANCED
+  CUSTOM
+}
+
+model CarimbouPlan {
+  id String @id @default(cuid()) @map("id")
+  name String
+  stripeId String
+  type CarimbouPlanType
+  allowedCompanies Int @default(1) @map("allowed_companies")
+  allowedStamps Int @default(1500) @map("allowed_stamps")
+  allowedPromotions Int @default(2) @map("allowed_promotions")
+
+  @@map("carimbou_plan")
+}
+

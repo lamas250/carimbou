@@ -72,7 +72,7 @@ export function ParticipatePromotion({
       <div className="w-full max-w-md">
         <Card className="border-2 shadow-lg">
           <CardHeader className="pb-2 text-center">
-            <div className="flex justify-center mb-2">
+            <div className="flex justify-center mb-2 min-w-18 min-h-18">
               <Image
                 src={promotion.company.logoUrl || ""}
                 alt={promotion.name}
@@ -91,7 +91,7 @@ export function ParticipatePromotion({
             </div>
             <div className="flex flex-row items-center justify-start gap-2 px-4 mt-8">
               {promotion.imageUrl && (
-                <div className="flex justify-center mb-2">
+                <div className="flex justify-center mb-2 min-w-18 min-h-18">
                   <Image
                     src={promotion.imageUrl}
                     alt={promotion.name}

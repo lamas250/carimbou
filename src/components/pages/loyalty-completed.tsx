@@ -86,7 +86,7 @@ function LoyaltyCard({
           </Badge>
         )}
         <div className="flex items-center gap-3">
-          <div className="h-12 w-12">
+          <div className="h-12 w-12 min-h-12 min-w-12">
             {card.promotion.imageUrl ? (
               <Image
                 src={card.promotion.imageUrl}

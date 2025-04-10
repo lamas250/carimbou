@@ -1,14 +1,15 @@
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Promotion, UserPromotion } from "@prisma/client";
+import { Company, Promotion, UserPromotion } from "@prisma/client";
 import { Calendar, ScrollText, Users, TrendingUp } from "lucide-react";
+import EditPromotionDialog from "./edit-promotion-dialog";
 
 export default function PromotionDetails({
   promotion,
   userPromotions,
 }: {
-  promotion: Promotion;
+  promotion: Promotion & { company: Company };
   userPromotions: {
     total: number;
     active: number;
@@ -25,6 +26,10 @@ export default function PromotionDetails({
   return (
     <Card>
       <CardContent className="space-y-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-lg font-bold">Detalhes da promoção</h1>
+          <EditPromotionDialog promotion={promotion} />
+        </div>
         <div className="space-y-2">
           <div className="flex justify-between items-center">
             <span className="text-sm font-medium">Carimbos necessários:</span>

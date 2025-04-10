@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const createPromotionSchema = z.object({
+  id: z.string().optional(),
   name: z.string().min(1, { message: "Nome é obrigatório" }),
   description: z.string().optional(),
   image: z

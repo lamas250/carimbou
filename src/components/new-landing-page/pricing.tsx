@@ -33,7 +33,7 @@ export default function Pricing() {
       currency: "R$",
       features: [
         { text: "Criação de até 2 programas de fidelidade.", included: true },
-        { text: "Limite de 1000 carimbos por mês.", included: true },
+        { text: "Limite de 1500 carimbos por mês.", included: true },
         { text: "Uma única empresa por conta.", included: true },
         { text: "Relatórios básicos de uso.", included: true },
       ],
@@ -54,7 +54,7 @@ export default function Pricing() {
       currency: "R$",
       features: [
         { text: "Pode criar programas de fidelidade ilimitados.", included: true },
-        { text: "Limite de 5000 carimbos por mês.", included: true },
+        { text: "Limite de 6000 carimbos por mês.", included: true },
         { text: "Limite de 5 empresas por conta.", included: true },
         { text: "Personalização com logo e cores da marca.", included: true },
         { text: "Relatórios detalhados com insights sobre clientes fiéis.", included: true },

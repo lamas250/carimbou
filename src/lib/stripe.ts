@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export async function fetchSubscriptionByEmail(email: string) {
   const customer = await stripe.customers.list({
@@ -22,4 +22,10 @@ export async function fetchSubscriptionByEmail(email: string) {
   const subscription = customerData.subscriptions.data[0];
 
   return subscription;
+}
+
+export async function checkPlanType(email: string) {
+  const subscription = await fetchSubscriptionByEmail(email);
+  console.log("subscription", subscription);
+  return subscription?.items.data[0].plan.nickname;
 }

@@ -39,7 +39,7 @@ export default function FlyerComponent({ promotion, promotionId }: DigitalFlyerP
       <Card className="max-w-md overflow-hidden border-2 shadow-lg p-0 mt-8 min-w-[300px]">
         <div className="bg-gradient-to-br from-primary/90 to-primary/70 text-white p-6">
           <div className="flex items-center gap-4">
-            <div className=" rounded-md shadow-md">
+            <div className=" rounded-md shadow-md min-w-18 min-h-18">
               <Image
                 src={promotion.company.logoUrl || "/placeholder.svg"}
                 alt={`${promotion.company.name} logo`}
@@ -64,7 +64,7 @@ export default function FlyerComponent({ promotion, promotionId }: DigitalFlyerP
           <div className="flex justify-center">
             {qrCodeUrl && (
               <div className="flex flex-col items-center">
-                <div className="border-2 border-primary p-1 rounded-lg">
+                <div className="border-2 border-primary p-1 rounded-lg min-w-20 min-h-20">
                   <Image
                     src={qrCodeUrl || "/placeholder.svg"}
                     alt="QR Code para a promoção"

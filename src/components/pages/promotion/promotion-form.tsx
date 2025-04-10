@@ -1,10 +1,12 @@
+"use client";
+
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CompanyType } from "@/features/companies/types";
-import { createPromotion } from "@/features/promotions/actions/create-promotion";
+import { upsertPromotion } from "@/features/promotions/actions/create-promotion";
 import { usePromotionStore } from "@/store/promotions";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,29 +25,33 @@ import Image from "next/image";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ImageIcon, ChevronDown, ChevronUp } from "lucide-react";
 import { uploadImage } from "@/actions/upload-image";
-
+import { Promotion, Company } from "@prisma/client";
+import { useRouter } from "next/navigation";
 type PromotionFormProps = {
-  company: CompanyType;
+  company: Company;
   onCancel?: () => void;
+  promotion?: Promotion;
 };
 
-const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
-  const { addPromotion } = usePromotionStore();
+const PromotionForm = ({ company, onCancel, promotion }: PromotionFormProps) => {
+  const { addPromotion, updatePromotion } = usePromotionStore();
   const [isPending, setIsPending] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof createPromotionSchema>>({
     resolver: zodResolver(createPromotionSchema),
     defaultValues: {
+      id: promotion?.id ?? undefined,
       companyId: company.id,
-      name: "",
-      description: "",
-      requiredStamps: "0",
-      reward: "",
-      image: undefined,
-      cardDuration: "0",
-      rule: "",
+      name: promotion?.name ?? "",
+      description: promotion?.description ?? "",
+      requiredStamps: promotion?.requiredStamps.toString() ?? "0",
+      reward: promotion?.reward ?? "",
+      image: promotion?.imageUrl ?? undefined,
+      cardDuration: promotion?.cardDuration?.toString() ?? "0",
+      rule: promotion?.rule ?? "",
     },
   });
   const { handleSubmit } = form;
@@ -56,7 +62,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
     setIsPending(true);
 
     try {
-      let imageUrl = null;
+      let imageUrl = promotion?.imageUrl ?? null;
       if (promotion.image && promotion.image instanceof File) {
         const url = await uploadImage(promotion.image, {
           name: promotion.name,
@@ -65,25 +71,35 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
       }
       const { image, ...data } = promotion;
 
-      const result = await createPromotion({
+      const result = await upsertPromotion({
         ...data,
         imageUrl: imageUrl ?? undefined,
       });
-      addPromotion(result);
 
-      toast.success("Promoção adicionada com sucesso", {
-        description: `${promotion.name} foi adicionada com sucesso.`,
-        duration: 3000,
-      });
-    } catch (error) {
+      if (promotion?.id) {
+        updatePromotion(result);
+        toast.success("Promoção atualizada com sucesso", {
+          description: `${promotion.name} foi atualizada com sucesso.`,
+          duration: 3000,
+        });
+      } else {
+        addPromotion(result);
+        toast.success("Promoção adicionada com sucesso", {
+          description: `${promotion.name} foi adicionada com sucesso.`,
+          duration: 3000,
+        });
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       toast.error("Erro ao adicionar promoção", {
-        description: "Ocorreu um erro ao adicionar a promoção. Por favor, tente novamente.",
+        description: error.message,
         duration: 3000,
       });
     } finally {
       form.reset();
       onCancel?.();
       setIsPending(false);
+      router.refresh();
     }
   };
 
@@ -307,7 +323,7 @@ const PromotionForm = ({ company, onCancel }: PromotionFormProps) => {
               </Button>
             )}
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Criando..." : "Criar"} Promoção
+              {promotion ? "Atualizar" : "Criar"} Promoção
             </Button>
           </div>
         </form>

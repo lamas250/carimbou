@@ -170,7 +170,7 @@ export default function Home() {
                   <Button
                     size="lg"
                     variant="secondary"
-                    className="bg-white text-red-600 hover:bg-gray-100"
+                    className="bg-white text-red-600 hover:bg-gray-100 w-full"
                   >
                     Começar agora
                   </Button>

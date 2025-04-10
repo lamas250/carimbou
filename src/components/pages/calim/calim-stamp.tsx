@@ -167,7 +167,7 @@ export function CalimStamp({ stampData, progressCount, userPromotionId }: CalimS
       <div className="w-full max-w-md">
         <Card className="border-2 shadow-lg">
           <CardHeader className="pb-2 text-center">
-            <div className="flex justify-center mb-2">
+            <div className="flex justify-center mb-2 min-h-24 min-w-24">
               <Image
                 src={stampData.promotion.imageUrl || stampData.promotion.company.logoUrl || ""}
                 alt={stampData.promotion.name}

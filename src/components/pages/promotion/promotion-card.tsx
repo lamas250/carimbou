@@ -47,7 +47,7 @@ export function PromotionCard({
                 <Fullscreen className="h-10 w-10 text-muted-foreground/80" />
               </div>
             ) : (
-              <div className="h-12 w-12">
+              <div className="h-14 w-14 min-h-14 min-w-14">
                 {promotion.imageUrl ? (
                   <Image
                     src={promotion.imageUrl}

@@ -42,7 +42,7 @@ const CompanyList = () => {
         >
           <div className="flex items-center gap-3">
             {company.logoUrl ? (
-              <div className="w-10 h-10 rounded bg-muted flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded bg-muted flex items-center justify-center overflow-hidden min-w-10 min-h-10">
                 <Image
                   src={company.logoUrl}
                   alt={`${company.name} logo`}
@@ -52,7 +52,7 @@ const CompanyList = () => {
                 />
               </div>
             ) : (
-              <div className="w-10 h-10 rounded bg-muted flex items-center justify-center">
+              <div className="w-10 h-10 rounded bg-muted flex items-center justify-center min-w-10 min-h-10">
                 <Store className="h-6 w-6 text-muted-foreground/80" />
               </div>
             )}

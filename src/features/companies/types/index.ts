@@ -2,6 +2,7 @@ import { Company, Promotion } from "@prisma/client";
 import { z } from "zod";
 
 export const createCompanySchema = z.object({
+  id: z.string().optional(),
   name: z.string().min(1, { message: "Nome é obrigatório" }),
   description: z.string().optional(),
   logoUrl: z

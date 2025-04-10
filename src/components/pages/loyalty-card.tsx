@@ -60,7 +60,7 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
                   <Fullscreen className="h-10 w-10 text-muted-foreground/80" />
                 </div>
               ) : (
-                <div className="h-12 w-12">
+                <div className="h-14 w-14 min-h-14 min-w-14">
                   {card.promotion.imageUrl ? (
                     <Image
                       src={card.promotion.imageUrl}
@@ -102,8 +102,8 @@ const LoyaltyCard = ({ card, user }: LoyaltyCardProps) => {
               isCardCompleted && !card.isClaimed
                 ? "border-emerald-500"
                 : card.isClaimed
-                ? "border-secondary"
-                : ""
+                  ? "border-secondary"
+                  : ""
             } relative`}
           >
             {isCardCompleted && !card.isClaimed && (

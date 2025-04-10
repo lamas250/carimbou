@@ -76,7 +76,7 @@ const CompanyDetails = ({ company }: CompanyDetailsProps) => {
           <div>
             <h4 className="text-sm font-medium text-muted-foreground mb-2">Logo da Empresa</h4>
             {company.logoUrl ? (
-              <div className="w-24 h-24 border rounded-md overflow-hidden">
+              <div className="w-24 h-24 border rounded-md overflow-hidden min-w-18 min-h-18">
                 <Image
                   src={company.logoUrl}
                   alt={`${company.name} logo`}

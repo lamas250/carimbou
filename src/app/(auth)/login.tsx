@@ -249,8 +249,8 @@ export function Login({
                       provider: "google",
                       fetchOptions: {
                         onSuccess: (data) => {
-                          toast.success("Login realizado com sucesso");
-                          router.push(redirectValue || "/home");
+                          // toast.success("Login realizado com sucesso");
+                          // router.push(redirectValue || "/home");
                         },
                         onError: (error) => {
                           toast.error(error.error.code);

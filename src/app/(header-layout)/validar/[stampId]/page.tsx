@@ -41,6 +41,35 @@ export default async function ValidateStampPage({ params }: ValidateStampPagePro
     },
   });
 
+  const isMember = await prisma.companyUser.findFirst({
+    where: {
+      userId: session.user.id,
+      companyId: stamp?.userPromotion?.promotion?.companyId,
+    },
+  });
+
+  if (!isMember) {
+    return (
+      <div className="h-[80vh] flex flex-col items-center justify-center bg-gradient-to-b from-background to-muted/50 p-4">
+        <div className="w-full max-w-md">
+          <Card className="border-2 shadow-lg">
+            <CardHeader>
+              <CardTitle>Você não é membro dessa empresa!</CardTitle>
+              <CardDescription>Por favor, tente novamente.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link href="/empresas">
+                <Button className="w-full py-6 mt-4" variant="outline">
+                  Minhas empresas
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
   const userProgress = await prisma.stamp.count({
     where: {
       userPromotionId: stamp?.userPromotionId,
