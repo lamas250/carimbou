@@ -10,6 +10,8 @@ import {
   ChefHat,
   Dog,
   IceCreamBowl,
+  Truck,
+  Beer,
 } from "lucide-react";
 
 const BusinessTypes = () => {
@@ -37,7 +39,7 @@ const BusinessTypes = () => {
 
           <div className="flex flex-col items-center bg-white shadow-md p-4 rounded-lg hover:bg-gray-100 transition-colors border-1 border-primary">
             <Shirt size={40} className="text-primary mb-3" />
-            <h3 className="font-medium">Lojas de Roupa</h3>
+            <h3 className="font-medium">Lojas de Roupas</h3>
           </div>
 
           <div className="flex flex-col items-center bg-white shadow-md p-4 rounded-lg hover:bg-gray-100 transition-colors border-1 border-primary">
@@ -52,17 +54,17 @@ const BusinessTypes = () => {
 
           <div className="flex flex-col items-center bg-white shadow-md p-4 rounded-lg hover:bg-gray-100 transition-colors border-1 border-primary">
             <IceCream size={40} className="text-primary mb-3" />
-            <h3 className="font-medium">Sorveteria</h3>
+            <h3 className="font-medium">Sorveterias e Açaiterias</h3>
           </div>
 
           <div className="flex flex-col items-center bg-white shadow-md p-4 rounded-lg hover:bg-gray-100 transition-colors border-1 border-primary">
             <Dog size={40} className="text-primary mb-3" />
-            <h3 className="font-medium">Pet Shop</h3>
+            <h3 className="font-medium">Pet Shops</h3>
           </div>
 
           <div className="flex flex-col items-center bg-white shadow-md p-4 rounded-lg hover:bg-gray-100 transition-colors border-1 border-primary">
-            <IceCreamBowl size={40} className="text-primary mb-3" />
-            <h3 className="font-medium">Açaiterias</h3>
+            <Beer size={40} className="text-primary mb-3" />
+            <h3 className="font-medium">Choperias e Food Trucks</h3>
           </div>
         </div>
 
