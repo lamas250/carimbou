@@ -32,13 +32,12 @@ export default function Pricing() {
       },
       currency: "R$",
       features: [
-        { text: "Criação de até 2 programas de fidelidade.", included: true },
         { text: "Limite de 1500 carimbos por mês.", included: true },
         { text: "Uma única empresa por conta.", included: true },
         { text: "Relatórios básicos de uso.", included: true },
       ],
       limitations: ["Sem personalização de design ou marca."],
-      buttonText: "Começar agora",
+      buttonText: "Fidelize seus clientes hoje",
       buttonVariant: "outline" as const,
     },
     {
@@ -53,7 +52,7 @@ export default function Pricing() {
       },
       currency: "R$",
       features: [
-        { text: "Pode criar programas de fidelidade ilimitados.", included: true },
+        { text: "Programas de fidelidade ilimitados.", included: true },
         { text: "Limite de 6000 carimbos por mês.", included: true },
         { text: "Limite de 5 empresas por conta.", included: true },
         { text: "Personalização com logo e cores da marca.", included: true },
@@ -80,7 +79,7 @@ export default function Pricing() {
       features: [
         { text: "Quantidade de QR Codes personalizada.", included: true },
         { text: "Personalização com logo e cores da marca.", included: true },
-        { text: "Até 10 empresas por conta.", included: true },
+        { text: "Empresas por conta ilimitadas.", included: true },
         { text: "Suporte prioritário.", included: true },
       ],
       // highlighted: true,
@@ -254,7 +253,12 @@ export default function Pricing() {
                 </CardContent>
 
                 <CardFooter className="pt-6">
-                  <PaymentButton tier={tier} billingCycle={billingCycle} />
+                  {!tier.isCustom && <PaymentButton tier={tier} billingCycle={billingCycle} />}
+                  {tier.isCustom && (
+                    <Link href="mailto:contato@carimbou.com" className="w-full">
+                      <Button className="w-full">Fale conosco</Button>
+                    </Link>
+                  )}
                 </CardFooter>
               </Card>
             );

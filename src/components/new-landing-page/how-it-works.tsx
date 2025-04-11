@@ -37,7 +37,7 @@ export function HowItWorks() {
             Como funciona
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Três passos simples para transformar sua experiência de fidelidade
+            Tudo se resume em três passos simples para transformar sua experiência de fidelidade
           </p>
         </div>
 
@@ -54,7 +54,8 @@ export function HowItWorks() {
             </div>
             <h3 className="mt-6 text-xl font-bold text-gray-900">Experiência do Cliente</h3>
             <p className="mt-2 text-gray-600">
-              Contabilize os carimbos de seu cartão de fidelidade digital e resgate sua recompensa.
+              O cliente escaneia o QR Code da sua promoção e recebe instantaneamente um cartão
+              fidelidade digital no celular.
             </p>
           </motion.div>
 
@@ -62,9 +63,10 @@ export function HowItWorks() {
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
               <QrCode className="h-8 w-8 text-red-600" />
             </div>
-            <h3 className="mt-6 text-xl font-bold text-gray-900">Aprovado pelo colaborador</h3>
+            <h3 className="mt-6 text-xl font-bold text-gray-900">Aprovação do Carimbo</h3>
             <p className="mt-2 text-gray-600">
-              O colaborador gera um QR code, que é escaneado pelo cliente para coletar o carimbo.
+              A cada compra, o cliente gera um QR Code único que o colaborador escaneia para
+              registrar o carimbo de forma segura.
             </p>
           </motion.div>
 
@@ -72,10 +74,10 @@ export function HowItWorks() {
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
               <Gift className="h-8 w-8 text-red-600" />
             </div>
-            <h3 className="mt-6 text-xl font-bold text-gray-900">Resgate sua recompensa</h3>
+            <h3 className="mt-6 text-xl font-bold text-gray-900">Resgate da Recompensa</h3>
             <p className="mt-2 text-gray-600">
-              Depois de coletar o número necessário de carimbos, resgate sua recompensa com apenas
-              um clique.
+              Ao completar os carimbos, o cliente resgata sua recompensa com um simples escaneamento
+              do QR Code pelo colaborador.
             </p>
           </motion.div>
         </motion.div>

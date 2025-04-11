@@ -6,10 +6,11 @@ import { Faq } from "@/components/new-landing-page/faq";
 import { Benefits } from "@/components/new-landing-page/benefits";
 import { Footer } from "@/components/new-landing-page/footer";
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Clock } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import Pricing from "@/components/new-landing-page/pricing";
 import Link from "next/link";
+import BusinessTypes from "@/components/new-landing-page/para-quem";
 
 export default function Home() {
   return (
@@ -37,9 +38,9 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 0.3 }}
                   id="heading"
-                  className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl lg:text-6xl"
+                  className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl lg:text-7xl"
                 >
-                  Cartão Fidelidade Digital <span className="text-red-600">Simples e Elegante</span>
+                  Chega de perder clientes! <span className="text-red-600">Fidelize</span>
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0, y: -20 }}
@@ -48,13 +49,13 @@ export default function Home() {
                   id="subtitle"
                   className="max-w-lg text-lg text-gray-600 md:text-xl"
                 >
-                  Transformando cartões de fidelidade tradicionais em uma experiência digital
-                  perfeita. Colete carimbos e resgate sua recompensa com apenas alguns cliques.
+                  Fidelize de verdade com um cartão digital moderno. Comece agora seu programa de
+                  fidelidade digital e veja seus clientes voltando mais vezes e gastando mais.
                 </motion.p>
                 <div className="flex flex-col space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Link href="/#pricing">
                     <Button size="lg" className="bg-red-600 hover:bg-red-700">
-                      Começar agora
+                      Teste grátis por 7 dias
                       <ChevronRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
@@ -64,18 +65,8 @@ export default function Home() {
                 </div>
                 <div className="flex items-center space-x-4 text-sm text-gray-500">
                   <div className="flex items-center">
-                    <svg
-                      className="mr-1 h-4 w-4 text-red-500"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Configure seu programa de fidelidade em 5 minutos
+                    <Clock className="mr-2 h-4 w-4" />
+                    Acesse gratuitamente e crie sua promoção em 5 minutos.
                   </div>
                 </div>
               </div>
@@ -123,15 +114,15 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
               <div className="flex flex-col items-center justify-center text-center">
                 <span className="text-3xl font-bold text-red-600 md:text-4xl">+40</span>
-                <span className="mt-2 text-sm text-gray-600">Empresas</span>
+                <span className="mt-2 text-sm text-gray-600">Empresas atendidas</span>
               </div>
               <div className="flex flex-col items-center justify-center text-center">
-                <span className="text-3xl font-bold text-red-600 md:text-4xl">+2.000</span>
-                <span className="mt-2 text-sm text-gray-600">Usuários</span>
+                <span className="text-3xl font-bold text-red-600 md:text-4xl">+900</span>
+                <span className="mt-2 text-sm text-gray-600">Clientes atendidos</span>
               </div>
               <div className="flex flex-col items-center justify-center text-center">
                 <span className="text-3xl font-bold text-red-600 md:text-4xl">+10.000</span>
-                <span className="mt-2 text-sm text-gray-600">Carimbos coletados</span>
+                <span className="mt-2 text-sm text-gray-600">Carimbos aplicados</span>
               </div>
               <div className="flex flex-col items-center justify-center text-center">
                 <span className="text-3xl font-bold text-red-600 md:text-4xl">100%</span>
@@ -140,6 +131,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <BusinessTypes />
 
         {/* Como funciona */}
         <HowItWorks />
@@ -183,7 +176,7 @@ export default function Home() {
                     variant="outline"
                     className="border-white text-white bg-red-600 hover:bg-red-700 w-full"
                     onClick={() => {
-                      window.open("mailto:igor@carimbou.com", "_blank");
+                      window.open("mailto:contato@carimbou.com", "_blank");
                     }}
                   >
                     Falar com um consultor

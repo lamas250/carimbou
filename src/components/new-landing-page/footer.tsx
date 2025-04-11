@@ -27,14 +27,18 @@ export function Footer() {
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="#" className="text-gray-400 transition-colors hover:text-white">
+              <Link
+                href="https://www.instagram.com/carimboubr"
+                target="_blank"
+                className="text-gray-400 transition-colors hover:text-white"
+              >
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="text-gray-400 transition-colors hover:text-white">
+              {/* <Link href="#" className="text-gray-400 transition-colors hover:text-white">
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
-              </Link>
+              </Link> */}
               <Link href="#" className="text-gray-400 transition-colors hover:text-white">
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
