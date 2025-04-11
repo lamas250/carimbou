@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, Instagram, Facebook, Printer, Share, Share2 } from "lucide-react";
+import { Phone, Instagram, Facebook, Printer, Share, Share2, Store } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -39,15 +39,21 @@ export default function FlyerComponent({ promotion, promotionId }: DigitalFlyerP
       <Card className="max-w-md overflow-hidden border-2 shadow-lg p-0 mt-8 min-w-[300px]">
         <div className="bg-gradient-to-br from-primary/90 to-primary/70 text-white p-6">
           <div className="flex items-center gap-4">
-            <div className=" rounded-md shadow-md min-w-18 min-h-18">
-              <Image
-                src={promotion.company.logoUrl || "/placeholder.svg"}
-                alt={`${promotion.company.name} logo`}
-                width={80}
-                height={80}
-                className="rounded-md"
-              />
-            </div>
+            {promotion.company.logoUrl ? (
+              <div className=" rounded-md shadow-md min-w-18 min-h-18">
+                <Image
+                  src={promotion.company.logoUrl || "/placeholder.svg"}
+                  alt={`${promotion.company.name} logo`}
+                  width={80}
+                  height={80}
+                  className="rounded-md"
+                />
+              </div>
+            ) : (
+              <div className="rounded-md shadow-md min-w-18 min-h-18 flex items-center justify-center bg-muted">
+                <Store className="w-10 h-10 text-muted-foreground" />
+              </div>
+            )}
             <div>
               <h1 className="text-2xl font-bold">{promotion.company.name}</h1>
               <p className="text-sm opacity-90">{promotion.company.description}</p>

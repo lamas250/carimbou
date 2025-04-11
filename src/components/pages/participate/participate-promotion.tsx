@@ -16,6 +16,7 @@ import {
   Share2,
   Stamp as StampIcon,
   Star,
+  Store,
   Trophy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -72,14 +73,22 @@ export function ParticipatePromotion({
       <div className="w-full max-w-md">
         <Card className="border-2 shadow-lg">
           <CardHeader className="pb-2 text-center">
-            <div className="flex justify-center mb-2 min-w-18 min-h-18">
-              <Image
-                src={promotion.company.logoUrl || ""}
-                alt={promotion.name}
-                className="rounded-sm shadow-md"
-                width={80}
-                height={80}
-              />
+            <div className="flex items-center justify-center gap-2">
+              {promotion.company.logoUrl ? (
+                <div className="flex justify-center mb-2 min-w-18 min-h-18">
+                  <Image
+                    src={promotion.company.logoUrl || ""}
+                    alt={promotion.name}
+                    className="rounded-sm shadow-md"
+                    width={80}
+                    height={80}
+                  />
+                </div>
+              ) : (
+                <div className="rounded-md shadow-md min-w-18 min-h-18 flex items-center justify-center bg-muted">
+                  <Store className="w-10 h-10 text-muted-foreground" />
+                </div>
+              )}
             </div>
             <CardTitle className="text-2xl">{promotion.company.name}</CardTitle>
             <CardDescription>{promotion.company.description}</CardDescription>

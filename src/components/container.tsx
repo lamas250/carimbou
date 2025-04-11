@@ -36,7 +36,7 @@ const Container: React.FC<ContainerProps> = ({
                   />
                 </div>
               ) : (
-                <div className="w-14 h-14 rounded bg-primary/5 flex items-center justify-center min-w-14 min-h-14">
+                <div className="w-14 h-14 rounded bg-secondary/5 flex items-center justify-center min-w-14 min-h-14">
                   {image}
                 </div>
               ))}

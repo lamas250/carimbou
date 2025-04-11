@@ -27,15 +27,11 @@ const CompanyPage = ({
     }
   }, [promotions, setPromotions]);
 
-  const handleUpdateCompany = (company: Company) => {
-    console.log(company);
-  };
-
   return (
     <div className="min-h-screen pb-16">
       <div className="py-2 sm:py-4">
         <>
-          <CompanyDetails company={company} onUpdate={handleUpdateCompany} />
+          <CompanyDetails company={company} />
 
           <div className="space-y-6 mt-4">
             <div className="flex items-center justify-between">

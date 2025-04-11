@@ -165,26 +165,30 @@ export default function Home() {
                 Comece a digitalizar os carimbos de seu cartão de fidelidade hoje e simplifique seu
                 programa de retenção de clientes.
               </p>
-              <div className="mt-8 flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                <Link href="/#pricing">
+              <div className="mt-8 flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 w-full">
+                <div className="w-full">
+                  <Link href="/#pricing">
+                    <Button
+                      size="lg"
+                      variant="secondary"
+                      className="bg-white text-red-600 hover:bg-gray-100 w-full"
+                    >
+                      Começar agora
+                    </Button>
+                  </Link>
+                </div>
+                <div className="w-full">
                   <Button
                     size="lg"
-                    variant="secondary"
-                    className="bg-white text-red-600 hover:bg-gray-100 w-full"
+                    variant="outline"
+                    className="border-white text-white bg-red-600 hover:bg-red-700 w-full"
+                    onClick={() => {
+                      window.open("mailto:igor@carimbou.com", "_blank");
+                    }}
                   >
-                    Começar agora
+                    Falar com um consultor
                   </Button>
-                </Link>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white bg-red-600 hover:bg-red-700"
-                  onClick={() => {
-                    window.open("mailto:igor@carimbou.com", "_blank");
-                  }}
-                >
-                  Falar com um consultor
-                </Button>
+                </div>
               </div>
             </div>
           </div>

@@ -9,7 +9,6 @@ import CompanyEditDialog from "./company-edit-dialog";
 
 type CompanyDetailsProps = {
   company: Company;
-  onUpdate: (company: Company) => void;
 };
 
 const CompanyDetails = ({ company }: CompanyDetailsProps) => {

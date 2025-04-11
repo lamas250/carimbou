@@ -19,6 +19,7 @@ import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 
 import { redeemCard } from "@/features/companies/actions/redeem-card-action";
+import { Store } from "lucide-react";
 interface RedeemCardProps {
   userId: string;
   userPromotion: UserPromotion & {
@@ -118,14 +119,22 @@ export function RedeemCard({ userId, userPromotion }: RedeemCardProps) {
       <div className="w-full max-w-md">
         <Card className="border-2 shadow-lg border border-emerald-500">
           <CardHeader className="pb-2 text-center">
-            <div className="flex justify-center mb-2">
-              <Image
-                src={promotion.imageUrl || promotion.company.logoUrl || ""}
-                alt={promotion.name}
-                className="rounded-sm shadow-md"
-                width={80}
-                height={80}
-              />
+            <div className="flex items-center justify-center gap-2">
+              {promotion.company.logoUrl ? (
+                <div className="flex justify-center mb-2">
+                  <Image
+                    src={promotion.imageUrl || promotion.company.logoUrl || ""}
+                    alt={promotion.name}
+                    className="rounded-sm shadow-md"
+                    width={80}
+                    height={80}
+                  />
+                </div>
+              ) : (
+                <div className="flex justify-center mb-2 min-w-16 min-h-16 bg-muted rounded-md flex items-center justify-center">
+                  <Store className="w-10 h-10 text-muted-foreground" />
+                </div>
+              )}
             </div>
             {/* <CardTitle className="text-2xl">{promotionData.company.name}</CardTitle> */}
             <CardTitle className="text-2xl">{promotion.company.name}</CardTitle>
