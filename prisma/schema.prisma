@@ -26,6 +26,7 @@ model User {
   isAnonymous    Boolean?
   companyUsers   CompanyUser[]
   userPromotions UserPromotion[]
+  isAdmin        Boolean?
 
   @@unique([email])
   @@map("user")

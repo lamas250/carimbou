@@ -27,8 +27,9 @@ export const upsertPromotion = async (data: CreatePromotionType) => {
   const user = session?.user;
 
   if (!user) throw new Error("Usuário não encontrado");
+  const userDb = await prisma.user.findUnique({ where: { id: user.id } });
 
-  if (process.env.NODE_ENV === "production") {
+  if (!userDb?.isAdmin) {
     const customer = await stripe.customers.list({ email: user?.email || "", limit: 1 });
 
     if (!customer.data.length) throw new Error("Nenhum cliente encontrado");

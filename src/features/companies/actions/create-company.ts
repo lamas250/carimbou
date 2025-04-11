@@ -22,26 +22,31 @@ export const upsertCompany = async (company: CreateCompanyType, userId: string) 
     return result;
   }
   const user = await prisma.user.findUnique({ where: { id: userId } });
-  const customer = await stripe.customers.list({ email: user?.email || "", limit: 1 });
 
-  if (!customer.data.length) throw new Error("Nenhum cliente encontrado");
+  if (!user) throw new Error("Usuário não encontrado");
 
-  const subscriptions = await stripe.subscriptions.list({
-    customer: customer.data[0]?.id,
-    expand: ["data.items.data.plan"],
-  });
+  if (!user?.isAdmin) {
+    const customer = await stripe.customers.list({ email: user?.email || "", limit: 1 });
 
-  if (!subscriptions.data.length) throw new Error("Nenhuma assinatura encontrada");
+    if (!customer.data.length) throw new Error("Nenhum cliente encontrado");
 
-  const planId = subscriptions.data[0]?.items.data[0].plan.product;
-  const plan = await prisma.carimbouPlan.findFirst({ where: { stripeId: planId as string } });
+    const subscriptions = await stripe.subscriptions.list({
+      customer: customer.data[0]?.id,
+      expand: ["data.items.data.plan"],
+    });
 
-  if (!plan) throw new Error("Nenhum plano encontrado");
+    if (!subscriptions.data.length) throw new Error("Nenhuma assinatura encontrada");
 
-  const companies = await prisma.companyUser.findMany({ where: { userId } });
+    const planId = subscriptions.data[0]?.items.data[0].plan.product;
+    const plan = await prisma.carimbouPlan.findFirst({ where: { stripeId: planId as string } });
 
-  if (companies.length >= plan.allowedCompanies)
-    throw new Error("Você atingiu o limite de empresas");
+    if (!plan) throw new Error("Nenhum plano encontrado");
+
+    const companies = await prisma.companyUser.findMany({ where: { userId } });
+
+    if (companies.length >= plan.allowedCompanies)
+      throw new Error("Você atingiu o limite de empresas");
+  }
 
   const result = await prisma.company.create({ data: company });
   await prisma.companyUser.create({
